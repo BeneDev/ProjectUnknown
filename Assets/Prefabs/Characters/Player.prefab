@@ -113,6 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
+  backwardsSpeed: 8
   gunHolder: {fileID: 1793261868734130}
   collectItemRange: 1
 --- !u!212 &212177398166684962
