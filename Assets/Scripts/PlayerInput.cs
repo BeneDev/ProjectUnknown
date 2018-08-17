@@ -53,7 +53,7 @@ public class PlayerInput : MonoBehaviour, IInput
     {
         get
         {
-            if (Input.GetButtonDown("Shoot"))
+            if (Input.GetButton("Shoot"))
             {
                 return true;
             }
