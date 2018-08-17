@@ -148,6 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shotDelay: 0.1
   recoil: 0.2
+  chanceToMiss: 0.1
   bullet: {fileID: 1220532714752662, guid: d8ca463f1278d7b499d6cc990786c30c, type: 2}
   triggerColl: {fileID: 61464906715950792}
   muzzle: {fileID: 4501914391611034}

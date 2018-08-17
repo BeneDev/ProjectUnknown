@@ -24,6 +24,8 @@ public class GunManager : MonoBehaviour {
 
     [SerializeField] float recoil = 1f;
 
+    [Range(0, 1), SerializeField] float chanceToMiss = 0.1f; 
+
     [SerializeField] GameObject bullet;
 
     [SerializeField] BoxCollider2D triggerColl;
@@ -43,6 +45,7 @@ public class GunManager : MonoBehaviour {
         if(bullet && muzzle)
         {
             GameObject newBullet = Instantiate(bullet, muzzle.position, transform.rotation);
+            newBullet.GetComponent<BulletController>().CalculateAccuracy(chanceToMiss);
             newBullet.transform.localScale = owner.transform.localScale;
         }
     }

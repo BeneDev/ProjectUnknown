@@ -13,6 +13,8 @@ public class BulletController : MonoBehaviour {
     [SerializeField] float lifetime = 3f;
     float timeWhenShot;
 
+    Vector3 velocity;
+
     SpriteRenderer rend;
 
 	void Awake () {
@@ -22,11 +24,12 @@ public class BulletController : MonoBehaviour {
 	}
 	
 	void Update () {
-        transform.position += new Vector3(transform.localScale.x * speed * Time.deltaTime, 0f, 0f);
+        velocity = new Vector3(transform.localScale.x * speed * Time.deltaTime, velocity.y, 0f);
         if(Time.realtimeSinceStartup > timeWhenShot + lifetime)
         {
             Destroy(gameObject);
         }
+        transform.position += velocity;
 	}
 
     IEnumerator ChangeToBulletSprite()
@@ -36,5 +39,13 @@ public class BulletController : MonoBehaviour {
             yield return new WaitForEndOfFrame();
         }
         rend.sprite = bulletSprite;
+    }
+
+    public void CalculateAccuracy(float chanceToMiss)
+    {
+        if(Random.value <= chanceToMiss)
+        {
+            velocity.y = Random.Range(-chanceToMiss, chanceToMiss);
+        }
     }
 }

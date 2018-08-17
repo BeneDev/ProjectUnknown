@@ -116,6 +116,7 @@ MonoBehaviour:
   backwardsSpeed: 8
   gunHolder: {fileID: 1793261868734130}
   collectItemRange: 1
+  shakeDurWhenShotFired: 0.01
 --- !u!212 &212177398166684962
 SpriteRenderer:
   m_ObjectHideFlags: 1

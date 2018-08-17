@@ -16,11 +16,15 @@ public class PlayerController : MonoBehaviour {
     PlayerInput input;
     Animator anim;
 
+    CameraShake camShake;
+
     [SerializeField] GameObject gunHolder;
     GunManager equippedGun;
     float timeWhenLastShot;
 
     [SerializeField] float collectItemRange = 1f;
+
+    [SerializeField] float shakeDurWhenShotFired = 0.2f;
 
     #endregion
 
@@ -29,6 +33,7 @@ public class PlayerController : MonoBehaviour {
     void Awake () {
         input = GetComponent<PlayerInput>();
         anim = GetComponent<Animator>();
+        camShake = Camera.main.GetComponent<CameraShake>();
 	}
 	
 	void Update ()
@@ -55,6 +60,8 @@ public class PlayerController : MonoBehaviour {
                 OnShotFired();
                 timeWhenLastShot = Time.realtimeSinceStartup;
                 velocity.x += -transform.localScale.x * equippedGun.Recoil;
+                camShake.shakeAmount = equippedGun.Recoil;
+                camShake.shakeDuration = shakeDurWhenShotFired;
             }
         }
         transform.position += velocity;
