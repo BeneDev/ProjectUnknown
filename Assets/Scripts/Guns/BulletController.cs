@@ -47,6 +47,15 @@ public class BulletController : MonoBehaviour {
         transform.position += velocity;
 	}
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(rend.sprite != muzzleFlashSprite)
+        {
+            gameObject.SetActive(false);
+            GameManager.Instance.GetBulletImpact(transform.position, transform.position - collision.transform.position);
+        }
+    }
+
     IEnumerator ChangeToBulletSprite()
     {
         for (int i = 0; i < muzzleFrameCount; i++)

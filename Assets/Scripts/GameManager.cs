@@ -13,6 +13,12 @@ public class GameManager : Singleton<GameManager> {
     [SerializeField] GameObject shotgunBullet;
     Stack<GameObject> freeShotgunBullets = new Stack<GameObject>();
 
+    [SerializeField] Transform particleSystemParent;
+    [SerializeField] int maxParticles = 30;
+
+    [SerializeField] GameObject bulletImpact;
+    Stack<GameObject> freeBulletImpacts = new Stack<GameObject>();
+
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -28,6 +34,26 @@ public class GameManager : Singleton<GameManager> {
             newShotgunBullet.SetActive(false);
             freeShotgunBullets.Push(newShotgunBullet);
         }
+        for (int i = 0; i < maxParticles; i++)
+        {
+            GameObject newBulletImpact = Instantiate(bulletImpact, Vector3.zero, Quaternion.Euler(Vector3.zero), particleSystemParent);
+            freeBulletImpacts.Push(newBulletImpact);
+        }
+    }
+
+    public void GetBulletImpact(Vector3 pos, Vector3 upDir)
+    {
+        GameObject ps = freeBulletImpacts.Pop();
+        ps.transform.position = pos;
+        ps.transform.up = upDir;
+        ps.GetComponent<ParticleSystem>().Play();
+        StartCoroutine(GetBulletImpactBack(ps.GetComponent<ParticleSystem>().main, ps));
+    }
+
+    IEnumerator GetBulletImpactBack(ParticleSystem.MainModule main, GameObject ps)
+    {
+        yield return new WaitForSeconds(main.duration);
+        freeBulletImpacts.Push(ps);
     }
 
     public GameObject GetRifleBullet(Vector3 pos)
