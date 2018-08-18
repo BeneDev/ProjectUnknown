@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] float jumpHoldUpGain = 1f;
     Vector3 velocity;
     bool isGrounded = false;
-    bool isOnWall = false;
+    bool isAgainstWall = false;
     [SerializeField] float veloYLimit = 1f;
     [SerializeField] float gravity = 1f;
 
@@ -66,6 +66,7 @@ public class PlayerController : MonoBehaviour {
 	void FixedUpdate ()
     {
         UpdateRaycasts();
+        WallInWay();
         CheckGrounded();
         if(input.Horizontal > 0f && transform.localScale.x > 0 || input.Horizontal < 0f && transform.localScale.x < 0)
         {
@@ -128,7 +129,7 @@ public class PlayerController : MonoBehaviour {
         }
 
         // Checking for colliders to the sides
-        if (WallInWay())
+        if (isAgainstWall)
         {
             velocity.x = 0f;
         }
@@ -156,39 +157,39 @@ public class PlayerController : MonoBehaviour {
     /// <returns> True if there is a wall. False when there is none</returns>
     protected bool WallInWay()
     {
-        if (transform.localScale.x < 0)
+        if (raycasts.upperLeft || raycasts.lowerLeft)
         {
-            if (raycasts.upperLeft || raycasts.lowerLeft)
+            if(transform.localScale.x < 0)
             {
-                isOnWall = true;
-                if (raycasts.upperLeft.distance < 0.2f && raycasts.upperLeft)
-                {
-                    transform.position += Vector3.right * ((0.25f - (raycasts.upperLeft.distance)) / 5f);
-                }
-                else if (raycasts.lowerLeft.distance < 0.2f && raycasts.lowerLeft)
-                {
-                    transform.position += Vector3.right * ((0.25f - (raycasts.lowerLeft.distance)) / 5f);
-                }
-                return true;
+                isAgainstWall = true;
             }
+            if (raycasts.upperLeft.distance < 0.2f && raycasts.upperLeft)
+            {
+                transform.position += Vector3.right * ((0.25f - (raycasts.upperLeft.distance)) / 5f);
+            }
+            else if (raycasts.lowerLeft.distance < 0.2f && raycasts.lowerLeft)
+            {
+                transform.position += Vector3.right * ((0.25f - (raycasts.lowerLeft.distance)) / 5f);
+            }
+            return true;
         }
-        else if (transform.localScale.x > 0)
+        else if (raycasts.upperRight || raycasts.lowerRight)
         {
-            if (raycasts.upperRight || raycasts.lowerRight)
+            if (transform.localScale.x > 0)
             {
-                isOnWall = true;
-                if (raycasts.upperRight.distance < 0.2f && raycasts.upperRight)
-                {
-                    transform.position += Vector3.left * ((0.25f - (raycasts.upperRight.distance)) / 5f);
-                }
-                else if (raycasts.lowerRight.distance < 0.2f && raycasts.lowerRight)
-                {
-                    transform.position += Vector3.left * ((0.25f - (raycasts.lowerRight.distance)) / 5f);
-                }
-                return true;
+                isAgainstWall = true;
             }
+            if (raycasts.upperRight.distance < 0.2f && raycasts.upperRight)
+            {
+                transform.position += Vector3.left * ((0.25f - (raycasts.upperRight.distance)) / 5f);
+            }
+            else if (raycasts.lowerRight.distance < 0.2f && raycasts.lowerRight)
+            {
+                transform.position += Vector3.left * ((0.25f - (raycasts.lowerRight.distance)) / 5f);
+            }
+            return true;
         }
-        isOnWall = false;
+        isAgainstWall = false;
         return false;
     }
 
@@ -203,15 +204,15 @@ public class PlayerController : MonoBehaviour {
             isGrounded = true;
             if (raycasts.bottomLeft.distance < 0.2f)
             {
-                transform.position += Vector3.up * ((0.25f - (raycasts.bottomLeft.distance)) / 2f);
+                transform.position += Vector3.up * ((0.25f - (raycasts.bottomLeft.distance)) / 5f);
             }
             else if (raycasts.bottomRight.distance < 0.2f )
             {
-                transform.position += Vector3.up * ((0.25f - (raycasts.bottomRight.distance)) / 2f);
+                transform.position += Vector3.up * ((0.25f - (raycasts.bottomRight.distance)) / 5f);
             }
             else if(raycasts.bottomCenter.distance < 0.2f )
             {
-                transform.position += Vector3.up * ((0.25f - (raycasts.bottomRight.distance)) / 2f);
+                transform.position += Vector3.up * ((0.25f - (raycasts.bottomRight.distance)) / 5f);
             }
         }
         // Otherwise the player is not grounded
