@@ -1786,6 +1786,7 @@ Transform:
   - {fileID: 1642309396}
   - {fileID: 1402023091}
   - {fileID: 1308498985}
+  - {fileID: 1519859462}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1938,6 +1939,57 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4161107468087626, guid: b78c5a189510c274c89321492c16906d,
     type: 2}
   m_PrefabInternal: {fileID: 1424830736}
+--- !u!1001 &1519859461
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1261794114}
+    m_Modifications:
+    - target: {fileID: 4161107468087626, guid: b78c5a189510c274c89321492c16906d, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 4161107468087626, guid: b78c5a189510c274c89321492c16906d, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4161107468087626, guid: b78c5a189510c274c89321492c16906d, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4161107468087626, guid: b78c5a189510c274c89321492c16906d, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4161107468087626, guid: b78c5a189510c274c89321492c16906d, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4161107468087626, guid: b78c5a189510c274c89321492c16906d, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4161107468087626, guid: b78c5a189510c274c89321492c16906d, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4161107468087626, guid: b78c5a189510c274c89321492c16906d, type: 2}
+      propertyPath: m_RootOrder
+      value: 41
+      objectReference: {fileID: 0}
+    - target: {fileID: 1333748913449152, guid: b78c5a189510c274c89321492c16906d, type: 2}
+      propertyPath: m_Name
+      value: SimulationTile (41)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b78c5a189510c274c89321492c16906d, type: 2}
+  m_IsPrefabAsset: 0
+--- !u!4 &1519859462 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4161107468087626, guid: b78c5a189510c274c89321492c16906d,
+    type: 2}
+  m_PrefabInternal: {fileID: 1519859461}
 --- !u!1001 &1539732001
 Prefab:
   m_ObjectHideFlags: 0

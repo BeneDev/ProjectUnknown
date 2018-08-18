@@ -202,21 +202,21 @@ public class PlayerController : MonoBehaviour {
         if (raycasts.bottomLeft || raycasts.bottomRight || raycasts.bottomCenter)
         {
             isGrounded = true;
-            if (raycasts.bottomLeft.distance < 0.2f)
+            if (raycasts.bottomLeft.distance < 0.2f && raycasts.bottomLeft)
             {
                 transform.position += Vector3.up * ((0.25f - (raycasts.bottomLeft.distance)) / 5f);
             }
-            else if (raycasts.bottomRight.distance < 0.2f )
+            else if (raycasts.bottomRight.distance < 0.2f && raycasts.bottomRight)
             {
                 transform.position += Vector3.up * ((0.25f - (raycasts.bottomRight.distance)) / 5f);
             }
-            else if(raycasts.bottomCenter.distance < 0.2f )
+            else if(raycasts.bottomCenter.distance < 0.2f && raycasts.bottomCenter)
             {
                 transform.position += Vector3.up * ((0.25f - (raycasts.bottomRight.distance)) / 5f);
             }
         }
         // Otherwise the player is not grounded
-        else
+        else if(!raycasts.bottomLeft && !raycasts.bottomRight && !raycasts.bottomCenter)
         {
             isGrounded = false;
         }
@@ -239,11 +239,12 @@ public class PlayerController : MonoBehaviour {
         raycasts.top = Physics2D.Raycast(center + new Vector3(0f, extents.y, 0f), Vector2.up, 0.25f, layersToCollideWith);
     }
 
-    //private void OnDrawGizmos()
-    //{
-    //    Debug.DrawRay(colliderDefiningRaycasts.bounds.center + new Vector3(colliderDefiningRaycasts.bounds.extents.x, colliderDefiningRaycasts.bounds.extents.y, 0f), Vector2.right * 0.25f);
-    //    Debug.DrawRay(colliderDefiningRaycasts.bounds.center + new Vector3(colliderDefiningRaycasts.bounds.extents.x, -colliderDefiningRaycasts.bounds.extents.y, 0f), Vector2.right * 0.25f);
-    //}
+    private void OnDrawGizmos()
+    {
+        Debug.DrawRay(colliderDefiningRaycasts.bounds.center + new Vector3(colliderDefiningRaycasts.bounds.extents.x, -colliderDefiningRaycasts.bounds.extents.y, 0f), Vector2.down * 0.25f);
+        Debug.DrawRay(colliderDefiningRaycasts.bounds.center + new Vector3(-colliderDefiningRaycasts.bounds.extents.x, -colliderDefiningRaycasts.bounds.extents.y, 0f), Vector2.down * 0.25f);
+        Debug.DrawRay(colliderDefiningRaycasts.bounds.center + new Vector3(0f, -colliderDefiningRaycasts.bounds.extents.y, 0f), Vector2.down * 0.25f);
+    }
 
     private void CheckForGuns(Collider2D[] objects)
     {
