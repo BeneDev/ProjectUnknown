@@ -57,6 +57,8 @@ MonoBehaviour:
     type: 2}
   shotgunBullet: {fileID: 1608063512562770, guid: f4e17fd4a88796242a4f235c03367988,
     type: 2}
+  sniperBullet: {fileID: 1872776596106436, guid: 436f7db5a39e5e049a8ef97de6d0cabb,
+    type: 2}
   particleSystemParent: {fileID: 0}
   maxParticles: 30
   bulletImpact: {fileID: 1600300311135956, guid: 9f86500c270bef24a85aa0bf32f6527c,

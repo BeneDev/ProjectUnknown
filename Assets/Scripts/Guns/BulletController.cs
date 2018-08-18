@@ -57,7 +57,6 @@ public class BulletController : MonoBehaviour {
             if(collision.gameObject.tag == "Enemy")
             {
                 collision.gameObject.GetComponent<BaseEnemy>().TakeDamage(damage, collision.transform.position - transform.position);
-                print("hit");
             }
             gameObject.SetActive(false);
             GameManager.Instance.GetBulletImpact(transform.position, transform.position - collision.transform.position);

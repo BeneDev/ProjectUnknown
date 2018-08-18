@@ -13,6 +13,9 @@ public class GameManager : Singleton<GameManager> {
     [SerializeField] GameObject shotgunBullet;
     Stack<GameObject> freeShotgunBullets = new Stack<GameObject>();
 
+    [SerializeField] GameObject sniperBullet;
+    Stack<GameObject> freeSniperBullets = new Stack<GameObject>();
+
     [SerializeField] Transform particleSystemParent;
     [SerializeField] int maxParticles = 30;
 
@@ -29,10 +32,15 @@ public class GameManager : Singleton<GameManager> {
             newRifleBullet.SetActive(false);
             freeRifleBullets.Push(newRifleBullet);
 
-            // Instantiate Shotung Bullet
+            // Instantiate Shotgun Bullet
             GameObject newShotgunBullet = Instantiate(shotgunBullet, Vector3.zero, Quaternion.Euler(Vector3.zero), bulletParent);
             newShotgunBullet.SetActive(false);
             freeShotgunBullets.Push(newShotgunBullet);
+
+            // Instantiate Sniper Bullet
+            GameObject newSniperBullet = Instantiate(sniperBullet, Vector3.zero, Quaternion.Euler(Vector3.zero), bulletParent);
+            newSniperBullet.SetActive(false);
+            freeSniperBullets.Push(newSniperBullet);
         }
         for (int i = 0; i < maxParticles; i++)
         {
@@ -62,6 +70,15 @@ public class GameManager : Singleton<GameManager> {
         bull.transform.position = pos;
         bull.SetActive(true);
         StartCoroutine(GetBulletBackAfterSeconds(bull, freeRifleBullets, bull.GetComponent<BulletController>().Lifetime));
+        return bull;
+    }
+
+    public GameObject GetSniperBullet(Vector3 pos)
+    {
+        GameObject bull = freeSniperBullets.Pop();
+        bull.transform.position = pos;
+        bull.SetActive(true);
+        StartCoroutine(GetBulletBackAfterSeconds(bull, freeSniperBullets, bull.GetComponent<BulletController>().Lifetime));
         return bull;
     }
 
