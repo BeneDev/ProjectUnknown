@@ -26,6 +26,8 @@ public class GunManager : MonoBehaviour {
 
     [SerializeField] protected float recoil = 1f;
 
+    [SerializeField] protected int damage = 5;
+
     [Range(0, 100), SerializeField] protected int chanceToMiss = 10; 
 
     [SerializeField] protected GameObject bullet;
@@ -47,7 +49,7 @@ public class GunManager : MonoBehaviour {
         if(bullet && muzzle)
         {
             GameObject newBullet = GameManager.Instance.GetRifleBullet(muzzle.transform.position);
-            newBullet.GetComponent<BulletController>().CalculateAccuracy((float)(chanceToMiss / 100f));
+            newBullet.GetComponent<BulletController>().CalculateAccuracy((float)(chanceToMiss / 100f), damage);
             newBullet.transform.localScale = owner.transform.localScale;
         }
     }

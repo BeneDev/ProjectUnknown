@@ -239,12 +239,12 @@ public class PlayerController : MonoBehaviour {
         raycasts.top = Physics2D.Raycast(center + new Vector3(0f, extents.y, 0f), Vector2.up, 0.25f, layersToCollideWith);
     }
 
-    private void OnDrawGizmos()
-    {
-        Debug.DrawRay(colliderDefiningRaycasts.bounds.center + new Vector3(colliderDefiningRaycasts.bounds.extents.x, -colliderDefiningRaycasts.bounds.extents.y, 0f), Vector2.down * 0.25f);
-        Debug.DrawRay(colliderDefiningRaycasts.bounds.center + new Vector3(-colliderDefiningRaycasts.bounds.extents.x, -colliderDefiningRaycasts.bounds.extents.y, 0f), Vector2.down * 0.25f);
-        Debug.DrawRay(colliderDefiningRaycasts.bounds.center + new Vector3(0f, -colliderDefiningRaycasts.bounds.extents.y, 0f), Vector2.down * 0.25f);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Debug.DrawRay(colliderDefiningRaycasts.bounds.center + new Vector3(colliderDefiningRaycasts.bounds.extents.x, -colliderDefiningRaycasts.bounds.extents.y, 0f), Vector2.down * 0.25f);
+    //    Debug.DrawRay(colliderDefiningRaycasts.bounds.center + new Vector3(-colliderDefiningRaycasts.bounds.extents.x, -colliderDefiningRaycasts.bounds.extents.y, 0f), Vector2.down * 0.25f);
+    //    Debug.DrawRay(colliderDefiningRaycasts.bounds.center + new Vector3(0f, -colliderDefiningRaycasts.bounds.extents.y, 0f), Vector2.down * 0.25f);
+    //}
 
     private void CheckForGuns(Collider2D[] objects)
     {

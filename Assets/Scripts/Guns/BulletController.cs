@@ -17,6 +17,8 @@ public class BulletController : MonoBehaviour {
     [SerializeField] Sprite bulletSprite;
     Sprite muzzleFlashSprite;
 
+    int damage = 0;
+
     [SerializeField] int muzzleFrameCount = 10;
 
     [SerializeField] float lifetime = 3f;
@@ -40,6 +42,7 @@ public class BulletController : MonoBehaviour {
     private void OnDisable()
     {
         rend.sprite = muzzleFlashSprite;
+        damage = 0;
     }
 
     void Update () {
@@ -51,6 +54,11 @@ public class BulletController : MonoBehaviour {
     {
         if(rend.sprite != muzzleFlashSprite)
         {
+            if(collision.gameObject.tag == "Enemy")
+            {
+                collision.gameObject.GetComponent<BaseEnemy>().TakeDamage(damage, collision.transform.position - transform.position);
+                print("hit");
+            }
             gameObject.SetActive(false);
             GameManager.Instance.GetBulletImpact(transform.position, transform.position - collision.transform.position);
         }
@@ -65,8 +73,9 @@ public class BulletController : MonoBehaviour {
         rend.sprite = bulletSprite;
     }
 
-    public void CalculateAccuracy(float chanceToMiss)
+    public void CalculateAccuracy(float chanceToMiss, int dmg)
     {
+        damage = dmg;
         if(Random.value <= chanceToMiss)
         {
             velocity.y = Random.Range(-chanceToMiss * 0.25f, chanceToMiss * 0.25f);
