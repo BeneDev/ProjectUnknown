@@ -20,27 +20,29 @@ public class GunManager : MonoBehaviour {
         }
     }
 
-    [SerializeField] float shotDelay = 0.1f;
+    [SerializeField] protected float shotDelay = 0.1f;
 
-    [SerializeField] float recoil = 1f;
+    [SerializeField] protected int numberOfShots = 1;
 
-    [Range(0, 100), SerializeField] int chanceToMiss = 10; 
+    [SerializeField] protected float recoil = 1f;
 
-    [SerializeField] GameObject bullet;
+    [Range(0, 100), SerializeField] protected int chanceToMiss = 10; 
 
-    [SerializeField] BoxCollider2D triggerColl;
+    [SerializeField] protected GameObject bullet;
 
-    [SerializeField] Transform muzzle;
+    [SerializeField] protected BoxCollider2D triggerColl;
 
-    Rigidbody2D rb;
+    [SerializeField] protected Transform muzzle;
 
-    PlayerController owner;
+    protected Rigidbody2D rb;
 
-	void Awake () {
+    protected PlayerController owner;
+
+	protected virtual void Awake () {
         rb = GetComponent<Rigidbody2D>();
 	}
 
-    void Shoot()
+    protected virtual void Shoot()
     {
         if(bullet && muzzle)
         {

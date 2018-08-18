@@ -20,10 +20,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4540859102704828}
   - component: {fileID: 212735731430684922}
-  - component: {fileID: 114346838185367762}
   - component: {fileID: 61627981225803052}
   - component: {fileID: 68379158602912796}
   - component: {fileID: 50504196046443652}
+  - component: {fileID: 114863167134765362}
   m_Layer: 0
   m_Name: Shotgun
   m_TagString: Untagged
@@ -135,7 +135,7 @@ EdgeCollider2D:
   m_Points:
   - {x: -0.21547842, y: 0.082715034}
   - {x: 0.7752781, y: 0.1457274}
---- !u!114 &114346838185367762
+--- !u!114 &114863167134765362
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,13 +143,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1293195845175930}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5dc32887af1d99468bd0f58ea91703b, type: 3}
+  m_Script: {fileID: 11500000, guid: fe09ac343bad08844b7a67a9189831ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   shotDelay: 0.5
+  numberOfShots: 5
   recoil: 0.6
-  chanceToMiss: 1
-  bullet: {fileID: 0}
+  chanceToMiss: 70
+  bullet: {fileID: 1608063512562770, guid: f4e17fd4a88796242a4f235c03367988, type: 2}
   triggerColl: {fileID: 61627981225803052}
   muzzle: {fileID: 4746577389262318}
 --- !u!212 &212735731430684922

@@ -35,10 +35,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4230009650131068}
   - component: {fileID: 212443872404864546}
-  - component: {fileID: 114942512978942098}
   - component: {fileID: 61464906715950792}
   - component: {fileID: 68103154877022454}
   - component: {fileID: 50991173399984574}
+  - component: {fileID: 114366863818382138}
   m_Layer: 0
   m_Name: FAMAS
   m_TagString: Untagged
@@ -135,7 +135,7 @@ EdgeCollider2D:
   m_Points:
   - {x: -0.20739174, y: 0.10484612}
   - {x: 0.9570341, y: 0.19943953}
---- !u!114 &114942512978942098
+--- !u!114 &114366863818382138
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,13 +143,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1794069534898452}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5dc32887af1d99468bd0f58ea91703b, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d01760a5dffd0344967a244b401278c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   shotDelay: 0.1
+  numberOfShots: 1
   recoil: 0.2
-  chanceToMiss: 0.1
-  bullet: {fileID: 1220532714752662, guid: d8ca463f1278d7b499d6cc990786c30c, type: 2}
+  chanceToMiss: 20
+  bullet: {fileID: 1465972609187306, guid: 764fe43abf1fc714584b95c831bbc29c, type: 2}
   triggerColl: {fileID: 61464906715950792}
   muzzle: {fileID: 4501914391611034}
 --- !u!212 &212443872404864546
