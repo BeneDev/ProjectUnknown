@@ -17,7 +17,7 @@ public class CameraController : MonoBehaviour {
         offset = transform.position - player.transform.position;
 	}
 	
-	void Update () {
+	void FixedUpdate () {
         offset = new Vector3(player.transform.localScale.x * xOffset, offset.y, offset.z);
         targetPosition = player.transform.position + offset;
 		transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, camDelay);

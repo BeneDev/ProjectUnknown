@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour {
         // Apply gravity
         if (!isGrounded)
         {
-            velocity += new Vector3(0, -gravity * Time.fixedDeltaTime);
+            velocity.y += -gravity * Time.fixedDeltaTime;
         }
         CheckForValidVelocity();
         if (input.Jump == 1 && isGrounded)
@@ -126,19 +126,19 @@ public class PlayerController : MonoBehaviour {
         }
 
         // Make sure, velocity in y axis does not get over limit
-        if (velocity.y >= 0 && velocity.y > veloYLimit)
-        {
-            velocity.y = veloYLimit;
-        }
+        //if (velocity.y >= 0 && velocity.y > veloYLimit)
+        //{
+        //    velocity.y = veloYLimit;
+        //}
         if (velocity.y <= 0 && velocity.y < -veloYLimit)
         {
-            velocity.y = -veloYLimit;
+            velocity.y = -veloYLimit * Time.fixedDeltaTime;
         }
 
         // Check if something is above the player and let him bounce down again relative to the force he went up with
         if (raycasts.top && velocity.y > 0)
         {
-            velocity.y = -velocity.y / 2;
+            velocity.y = (-velocity.y / 2) * Time.fixedDeltaTime;
         }
     }
 
@@ -193,7 +193,6 @@ public class PlayerController : MonoBehaviour {
         if (raycasts.bottomLeft || raycasts.bottomRight || raycasts.bottomCenter)
         {
             isGrounded = true;
-            velocity.y = 0f;
             if (raycasts.bottomLeft.distance < 0.2f)
             {
                 transform.position += Vector3.up * ((0.25f - (raycasts.bottomLeft.distance)) / 5f);
