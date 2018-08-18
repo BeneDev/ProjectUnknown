@@ -140,7 +140,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colliderDefiningRaycasts: {fileID: 61347851065816610}
   speed: 15
-  backwardsSpeed: 8
+  speedWhileShooting: 10
+  backwardsSpeed: 6
   jumpForce: 18
   jumpHoldUpGain: 0.35
   veloYLimit: 1

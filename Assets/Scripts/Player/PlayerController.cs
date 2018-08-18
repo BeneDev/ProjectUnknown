@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour {
 
 
     [SerializeField] float speed = 1f;
+    [SerializeField] float speedWhileShooting = 1f;
     [SerializeField] float backwardsSpeed = 1f;
     [SerializeField] float jumpForce = 1f;
     [SerializeField] float jumpHoldUpGain = 1f;
@@ -68,7 +69,14 @@ public class PlayerController : MonoBehaviour {
         CheckGrounded();
         if(input.Horizontal > 0f && transform.localScale.x > 0 || input.Horizontal < 0f && transform.localScale.x < 0)
         {
-            velocity.x = input.Horizontal * speed * Time.fixedDeltaTime;
+            if(!input.Shoot)
+            {
+                velocity.x = input.Horizontal * speed * Time.fixedDeltaTime;
+            }
+            else
+            {
+                velocity.x = input.Horizontal * speedWhileShooting * Time.fixedDeltaTime;
+            }
         }
         else
         {
@@ -195,15 +203,15 @@ public class PlayerController : MonoBehaviour {
             isGrounded = true;
             if (raycasts.bottomLeft.distance < 0.2f)
             {
-                transform.position += Vector3.up * ((0.25f - (raycasts.bottomLeft.distance)) / 5f);
+                transform.position += Vector3.up * ((0.25f - (raycasts.bottomLeft.distance)) / 2f);
             }
             else if (raycasts.bottomRight.distance < 0.2f)
             {
-                transform.position += Vector3.up * ((0.25f - (raycasts.bottomRight.distance)) / 5f);
+                transform.position += Vector3.up * ((0.25f - (raycasts.bottomRight.distance)) / 2f);
             }
             else if(raycasts.bottomCenter.distance < 0.2f)
             {
-                transform.position += Vector3.up * ((0.25f - (raycasts.bottomRight.distance)) / 5f);
+                transform.position += Vector3.up * ((0.25f - (raycasts.bottomRight.distance)) / 2f);
             }
         }
         // Otherwise the player is not grounded
