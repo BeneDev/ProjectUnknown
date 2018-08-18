@@ -205,11 +205,11 @@ public class PlayerController : MonoBehaviour {
             {
                 transform.position += Vector3.up * ((0.25f - (raycasts.bottomLeft.distance)) / 2f);
             }
-            else if (raycasts.bottomRight.distance < 0.2f)
+            else if (raycasts.bottomRight.distance < 0.2f )
             {
                 transform.position += Vector3.up * ((0.25f - (raycasts.bottomRight.distance)) / 2f);
             }
-            else if(raycasts.bottomCenter.distance < 0.2f)
+            else if(raycasts.bottomCenter.distance < 0.2f )
             {
                 transform.position += Vector3.up * ((0.25f - (raycasts.bottomRight.distance)) / 2f);
             }
@@ -271,10 +271,12 @@ public class PlayerController : MonoBehaviour {
         if (input.Horizontal < 0f && transform.localScale.x > 0)
         {
             transform.localScale = new Vector3(-1f, 1f, 1f);
+            transform.position += new Vector3(-1f, 0f, 0f);
         }
         else if (input.Horizontal > 0f && transform.localScale.x < 0)
         {
             transform.localScale = new Vector3(1f, 1f, 1f);
+            transform.position += new Vector3(1f, 0f, 0f);
         }
     }
 
