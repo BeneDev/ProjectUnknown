@@ -77,7 +77,7 @@ public class BulletController : MonoBehaviour {
         damage = dmg;
         if(Random.value <= chanceToMiss)
         {
-            velocity.y = Random.Range(-chanceToMiss * 0.25f, chanceToMiss * 0.25f);
+            velocity.y = Random.Range(-chanceToMiss * 0.25f, chanceToMiss * 0.15f);
         }
     }
 }
