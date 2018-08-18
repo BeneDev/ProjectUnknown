@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4161107468087626}
   - component: {fileID: 212778392716352374}
   - component: {fileID: 61684695920799324}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SimulationTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
