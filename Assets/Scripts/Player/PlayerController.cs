@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour {
     {
         public RaycastHit2D bottomLeft;
         public RaycastHit2D bottomRight;
+        public RaycastHit2D bottomCenter;
         public RaycastHit2D upperLeft;
         public RaycastHit2D lowerLeft;
         public RaycastHit2D upperRight;
@@ -152,13 +153,13 @@ public class PlayerController : MonoBehaviour {
             if (raycasts.upperLeft || raycasts.lowerLeft)
             {
                 isOnWall = true;
-                if (raycasts.upperLeft.distance < 0.45f)
+                if (raycasts.upperLeft.distance < 0.2f && raycasts.upperLeft)
                 {
-                    transform.position += Vector3.right * ((0.45f - (raycasts.upperLeft.distance)) / 5f);
+                    transform.position += Vector3.right * ((0.25f - (raycasts.upperLeft.distance)) / 5f);
                 }
-                else if (raycasts.lowerLeft.distance < 0.45f)
+                else if (raycasts.lowerLeft.distance < 0.2f && raycasts.lowerLeft)
                 {
-                    transform.position += Vector3.right * ((0.45f - (raycasts.lowerLeft.distance)) / 5f);
+                    transform.position += Vector3.right * ((0.25f - (raycasts.lowerLeft.distance)) / 5f);
                 }
                 return true;
             }
@@ -168,11 +169,11 @@ public class PlayerController : MonoBehaviour {
             if (raycasts.upperRight || raycasts.lowerRight)
             {
                 isOnWall = true;
-                if (raycasts.upperRight.distance < 0.2f)
+                if (raycasts.upperRight.distance < 0.2f && raycasts.upperRight)
                 {
                     transform.position += Vector3.left * ((0.25f - (raycasts.upperRight.distance)) / 5f);
                 }
-                else if (raycasts.lowerRight.distance < 0.2f)
+                else if (raycasts.lowerRight.distance < 0.2f && raycasts.lowerRight)
                 {
                     transform.position += Vector3.left * ((0.25f - (raycasts.lowerRight.distance)) / 5f);
                 }
@@ -189,7 +190,7 @@ public class PlayerController : MonoBehaviour {
     protected virtual void CheckGrounded()
     {
         // When the bottom raycasts hit ground
-        if (raycasts.bottomLeft || raycasts.bottomRight)
+        if (raycasts.bottomLeft || raycasts.bottomRight || raycasts.bottomCenter)
         {
             isGrounded = true;
             velocity.y = 0f;
@@ -198,6 +199,10 @@ public class PlayerController : MonoBehaviour {
                 transform.position += Vector3.up * ((0.25f - (raycasts.bottomLeft.distance)) / 5f);
             }
             else if (raycasts.bottomRight.distance < 0.2f)
+            {
+                transform.position += Vector3.up * ((0.25f - (raycasts.bottomRight.distance)) / 5f);
+            }
+            else if(raycasts.bottomCenter.distance < 0.2f)
             {
                 transform.position += Vector3.up * ((0.25f - (raycasts.bottomRight.distance)) / 5f);
             }
@@ -213,8 +218,9 @@ public class PlayerController : MonoBehaviour {
     {
         Vector3 extents = colliderDefiningRaycasts.bounds.extents;
         Vector3 center = colliderDefiningRaycasts.bounds.center;
-        raycasts.bottomRight = Physics2D.Raycast(center + new Vector3(extents.x, -extents.y, 0f), Vector2.down, 0.25f, layersToCollideWith);
-        raycasts.bottomLeft = Physics2D.Raycast(center + new Vector3(-extents.x, -extents.y, 0f), Vector2.down, 0.25f, layersToCollideWith);
+        raycasts.bottomRight = Physics2D.Raycast(center + new Vector3(extents.x, -extents.y * 0.95f, 0f), Vector2.down, 0.25f, layersToCollideWith);
+        raycasts.bottomLeft = Physics2D.Raycast(center + new Vector3(-extents.x, -extents.y * 0.95f, 0f), Vector2.down, 0.25f, layersToCollideWith);
+        raycasts.bottomCenter = Physics2D.Raycast(center + new Vector3(0f, -extents.y, 0f), Vector2.down, 0.25f, layersToCollideWith);
 
         raycasts.upperRight = Physics2D.Raycast(center + new Vector3(extents.x, extents.y, 0f), Vector2.right, 0.25f, layersToCollideWith);
         raycasts.lowerRight = Physics2D.Raycast(center + new Vector3(extents.x, -extents.y, 0f), Vector2.right, 0.25f, layersToCollideWith);
@@ -227,7 +233,8 @@ public class PlayerController : MonoBehaviour {
 
     //private void OnDrawGizmos()
     //{
-    //    Debug.DrawRay(colliderDefiningRaycasts.bounds.center + new Vector3(colliderDefiningRaycasts.bounds.extents.x, -colliderDefiningRaycasts.bounds.extents.y, 0f), Vector2.down * 0.75f);
+    //    Debug.DrawRay(colliderDefiningRaycasts.bounds.center + new Vector3(colliderDefiningRaycasts.bounds.extents.x, colliderDefiningRaycasts.bounds.extents.y, 0f), Vector2.right * 0.25f);
+    //    Debug.DrawRay(colliderDefiningRaycasts.bounds.center + new Vector3(colliderDefiningRaycasts.bounds.extents.x, -colliderDefiningRaycasts.bounds.extents.y, 0f), Vector2.right * 0.25f);
     //}
 
     private void CheckForGuns(Collider2D[] objects)
