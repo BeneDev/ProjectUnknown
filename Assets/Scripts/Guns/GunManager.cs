@@ -46,7 +46,7 @@ public class GunManager : MonoBehaviour {
     {
         if(bullet && muzzle)
         {
-            GameObject newBullet = Instantiate(bullet, muzzle.position, transform.rotation);
+            GameObject newBullet = GameManager.Instance.GetRifleBullet(muzzle.transform.position);
             newBullet.GetComponent<BulletController>().CalculateAccuracy((float)(chanceToMiss / 100f));
             newBullet.transform.localScale = owner.transform.localScale;
         }
@@ -60,6 +60,7 @@ public class GunManager : MonoBehaviour {
         rb.angularVelocity = 0f;
         rb.velocity = Vector2.zero;
         transform.localScale = player.transform.localScale;
+        transform.localPosition = Vector3.zero;
         triggerColl.enabled = false;
         owner = player;
     }

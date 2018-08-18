@@ -4,9 +4,18 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour {
 
+    public float Lifetime
+    {
+        get
+        {
+            return lifetime;
+        }
+    }
+
     [SerializeField] float speed = 1f;
 
     [SerializeField] Sprite bulletSprite;
+    Sprite muzzleFlashSprite;
 
     [SerializeField] int muzzleFrameCount = 10;
 
@@ -19,16 +28,22 @@ public class BulletController : MonoBehaviour {
 
 	void Awake () {
         rend = GetComponent<SpriteRenderer>();
+        muzzleFlashSprite = rend.sprite;
+	}
+
+    private void OnEnable()
+    {
         StartCoroutine(ChangeToBulletSprite());
         timeWhenShot = Time.realtimeSinceStartup;
-	}
-	
-	void Update () {
+    }
+
+    private void OnDisable()
+    {
+        rend.sprite = muzzleFlashSprite;
+    }
+
+    void Update () {
         velocity = new Vector3(transform.localScale.x * speed * Time.deltaTime, velocity.y, 0f);
-        if(Time.realtimeSinceStartup > timeWhenShot + lifetime)
-        {
-            Destroy(gameObject);
-        }
         transform.position += velocity;
 	}
 

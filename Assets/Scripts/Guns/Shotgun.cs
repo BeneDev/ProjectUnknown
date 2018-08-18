@@ -10,7 +10,7 @@ public class Shotgun : GunManager {
         {
             for (int i = 0; i < numberOfShots; i++)
             {
-                GameObject newBullet = Instantiate(bullet, muzzle.position, transform.rotation);
+                GameObject newBullet = GameManager.Instance.GetShotgunBullet(muzzle.transform.position);
                 newBullet.GetComponent<BulletController>().CalculateAccuracy((float)(chanceToMiss / 100f));
                 newBullet.transform.localScale = owner.transform.localScale;
             }
