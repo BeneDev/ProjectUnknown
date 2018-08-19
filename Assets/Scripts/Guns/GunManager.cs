@@ -20,6 +20,10 @@ public class GunManager : MonoBehaviour {
         }
     }
 
+    [SerializeField] protected Sprite shootingSprite;
+    [SerializeField] protected int framesToShowShootingSprite = 3;
+    protected Sprite standardSprite;
+
     [SerializeField] protected float shotDelay = 0.1f;
 
     [SerializeField] protected int numberOfShots = 1;
@@ -38,10 +42,14 @@ public class GunManager : MonoBehaviour {
 
     protected Rigidbody2D rb;
 
-    protected PlayerController owner;
+    protected SpriteRenderer rend;
+
+    protected GameObject owner;
 
 	protected virtual void Awake () {
         rb = GetComponent<Rigidbody2D>();
+        rend = GetComponent<SpriteRenderer>();
+        standardSprite = rend.sprite;
 	}
 
     protected virtual void Shoot()
@@ -49,28 +57,45 @@ public class GunManager : MonoBehaviour {
         if(bullet && muzzle)
         {
             GameObject newBullet = GameManager.Instance.GetRifleBullet(muzzle.transform.position);
-            newBullet.GetComponent<BulletController>().CalculateAccuracy((float)(chanceToMiss / 100f), damage);
+            newBullet.GetComponent<BulletController>().CalculateAccuracy((float)(chanceToMiss / 100f), damage, owner);
             newBullet.transform.localScale = owner.transform.localScale;
+            StartCoroutine(ChangeSpriteToShooting());
         }
     }
 
-    public void Equip(PlayerController player)
+    protected IEnumerator ChangeSpriteToShooting()
     {
-        player.OnShotFired += Shoot;
+        rend.sprite = shootingSprite;
+        for (int i = 0; i < framesToShowShootingSprite; i++)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        rend.sprite = standardSprite;
+    }
+
+    public void Equip(GameObject ownedBy)
+    {
+        if(ownedBy.tag == "Player")
+        {
+            ownedBy.GetComponent<PlayerController>().OnShotFired += Shoot;
+        }
         rb.bodyType = RigidbodyType2D.Kinematic;
         transform.rotation = Quaternion.Euler(Vector3.zero);
         rb.angularVelocity = 0f;
         rb.velocity = Vector2.zero;
-        transform.localScale = player.transform.localScale;
+        transform.localScale = ownedBy.transform.localScale;
         transform.localPosition = Vector3.zero;
         triggerColl.enabled = false;
-        owner = player;
+        owner = ownedBy;
     }
 
     public void Unequip()
     {
         transform.parent = null;
-        owner.OnShotFired -= Shoot;
+        if(owner.tag == "Player")
+        {
+            owner.GetComponent<PlayerController>().OnShotFired -= Shoot;
+        }
         rb.bodyType = RigidbodyType2D.Dynamic;
         triggerColl.enabled = true;
         owner = null;

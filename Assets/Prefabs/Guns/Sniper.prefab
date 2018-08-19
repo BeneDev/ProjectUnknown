@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4588713968563994}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 68023776203872574}
   - component: {fileID: 50571234712780444}
   - component: {fileID: 114710298518929502}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sniper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ BoxCollider2D:
   m_Offset: {x: 0.34445786, y: 0.12119329}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.3595556, y: 0.5106667}
+    pivot: {x: 0.3186667, y: 0.508889}
     oldSize: {x: 2, y: 2}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
@@ -146,6 +146,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47750bc315f1ade4fa5cc675cd6b440b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootingSprite: {fileID: 21300002, guid: ae6ccadcf7e94784593def0cc5210b69, type: 3}
+  framesToShowShootingSprite: 3
   shotDelay: 1.5
   numberOfShots: 1
   recoil: 0.7

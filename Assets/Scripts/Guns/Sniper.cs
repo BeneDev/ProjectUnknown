@@ -9,8 +9,9 @@ public class Sniper : GunManager {
         if (bullet && muzzle)
         {
             GameObject newBullet = GameManager.Instance.GetSniperBullet(muzzle.transform.position);
-            newBullet.GetComponent<BulletController>().CalculateAccuracy((float)(chanceToMiss / 100f), damage);
+            newBullet.GetComponent<BulletController>().CalculateAccuracy((float)(chanceToMiss / 100f), damage, owner);
             newBullet.transform.localScale = owner.transform.localScale;
+            StartCoroutine(ChangeSpriteToShooting());
         }
     }
 }

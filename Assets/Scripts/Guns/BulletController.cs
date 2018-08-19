@@ -14,34 +14,22 @@ public class BulletController : MonoBehaviour {
 
     [SerializeField] float speed = 1f;
 
-    [SerializeField] Sprite bulletSprite;
-    Sprite muzzleFlashSprite;
-
     int damage = 0;
 
-    [SerializeField] int muzzleFrameCount = 10;
+    GameObject owner;
 
     [SerializeField] float lifetime = 3f;
     float timeWhenShot;
 
     Vector3 velocity;
 
-    SpriteRenderer rend;
-
-	void Awake () {
-        rend = GetComponent<SpriteRenderer>();
-        muzzleFlashSprite = rend.sprite;
-	}
-
     private void OnEnable()
     {
-        StartCoroutine(ChangeToBulletSprite());
         timeWhenShot = Time.realtimeSinceStartup;
     }
 
     private void OnDisable()
     {
-        rend.sprite = muzzleFlashSprite;
         damage = 0;
     }
 
@@ -52,28 +40,18 @@ public class BulletController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(rend.sprite != muzzleFlashSprite)
+        if(collision.gameObject == owner) { return; }
+        if (collision.gameObject.tag == "Enemy")
         {
-            if(collision.gameObject.tag == "Enemy")
-            {
-                collision.gameObject.GetComponent<BaseEnemy>().TakeDamage(damage, collision.transform.position - transform.position);
-            }
-            gameObject.SetActive(false);
-            GameManager.Instance.GetBulletImpact(transform.position, transform.position - collision.transform.position);
+            collision.gameObject.GetComponent<BaseEnemy>().TakeDamage(damage, collision.transform.position - transform.position);
         }
+        gameObject.SetActive(false);
+        GameManager.Instance.GetBulletImpact(transform.position, transform.position - collision.transform.position);
     }
 
-    IEnumerator ChangeToBulletSprite()
+    public void CalculateAccuracy(float chanceToMiss, int dmg, GameObject creator)
     {
-        for (int i = 0; i < muzzleFrameCount; i++)
-        {
-            yield return new WaitForEndOfFrame();
-        }
-        rend.sprite = bulletSprite;
-    }
-
-    public void CalculateAccuracy(float chanceToMiss, int dmg)
-    {
+        owner = creator;
         damage = dmg;
         if(Random.value <= chanceToMiss)
         {

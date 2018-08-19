@@ -258,7 +258,7 @@ public class PlayerController : MonoBehaviour {
                 {
                     equippedGun.Unequip();
                 }
-                gun.gameObject.GetComponent<GunManager>().Equip(GetComponent<PlayerController>());
+                gun.gameObject.GetComponent<GunManager>().Equip(gameObject);
                 gun.gameObject.transform.parent = gunHolder.transform;
                 gun.transform.localPosition = Vector3.zero;
                 equippedGun = gun.gameObject.GetComponent<GunManager>();

@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 68379158602912796}
   - component: {fileID: 50504196046443652}
   - component: {fileID: 114863167134765362}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4746577389262318}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,6 +146,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe09ac343bad08844b7a67a9189831ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootingSprite: {fileID: 21300000, guid: b802c96472217254ca38b40b27047c4f, type: 3}
+  framesToShowShootingSprite: 3
   shotDelay: 0.5
   numberOfShots: 5
   recoil: 0.6

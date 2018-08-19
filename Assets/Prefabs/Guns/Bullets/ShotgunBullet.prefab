@@ -78,7 +78,7 @@ BoxCollider2D:
   m_Offset: {x: -0.18048286, y: 0.001766324}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.8611111, y: 0.5}
     oldSize: {x: 0.5, y: 0.5}
     newSize: {x: 0.5, y: 0.5}
     adaptiveTilingThreshold: 0.5
@@ -100,8 +100,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 25
-  bulletSprite: {fileID: 21300000, guid: b3fdf639c0505e04c9dabc916271dad9, type: 3}
-  muzzleFrameCount: 2
   lifetime: 3
 --- !u!212 &212512165898050004
 SpriteRenderer:
@@ -138,7 +136,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7bb505a0ae238af47bbb0e255ff81a54, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b3fdf639c0505e04c9dabc916271dad9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
