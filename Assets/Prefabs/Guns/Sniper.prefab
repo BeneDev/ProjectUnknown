@@ -67,7 +67,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1015802007464694}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.624, y: 0.205, z: 0}
+  m_LocalPosition: {x: 1.182, y: 0.205, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4065374337206728}
@@ -152,8 +152,8 @@ MonoBehaviour:
   numberOfShots: 1
   recoil: 0.7
   damage: 10
+  critChance: 0.05
   chanceToMiss: 5
-  bullet: {fileID: 1872776596106436, guid: 436f7db5a39e5e049a8ef97de6d0cabb, type: 2}
   triggerColl: {fileID: 61556901800945208}
   muzzle: {fileID: 4588713968563994}
 --- !u!212 &212606234856944924

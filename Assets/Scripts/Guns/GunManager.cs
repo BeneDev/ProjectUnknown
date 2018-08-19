@@ -35,9 +35,7 @@ public class GunManager : MonoBehaviour {
     [Range(0, 1), SerializeField] protected float critChance = 0.05f;
     protected const float critMultiplier = 1.5f;
 
-    [Range(0, 100), SerializeField] protected int chanceToMiss = 10; 
-
-    [SerializeField] protected GameObject bullet;
+    [Range(0, 100), SerializeField] protected int chanceToMiss = 10;
 
     [SerializeField] protected BoxCollider2D triggerColl;
 
@@ -57,7 +55,7 @@ public class GunManager : MonoBehaviour {
 
     protected virtual void Shoot()
     {
-        if(bullet && muzzle)
+        if(muzzle)
         {
             GameObject newBullet = GameManager.Instance.GetRifleBullet(muzzle.transform.position);
             if(Random.value > critChance)

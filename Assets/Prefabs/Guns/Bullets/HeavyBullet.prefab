@@ -9,78 +9,48 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1794069534898452}
+  m_RootGameObject: {fileID: 1608063512562770}
   m_IsPrefabAsset: 1
---- !u!1 &1412851905124872
+--- !u!1 &1608063512562770
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4501914391611034}
-  m_Layer: 10
-  m_Name: Muzzle
+  - component: {fileID: 4173048643079034}
+  - component: {fileID: 212512165898050004}
+  - component: {fileID: 114393139472488688}
+  - component: {fileID: 61175930236893204}
+  - component: {fileID: 50486811106006548}
+  m_Layer: 8
+  m_Name: HeavyBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1794069534898452
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4230009650131068}
-  - component: {fileID: 212443872404864546}
-  - component: {fileID: 61464906715950792}
-  - component: {fileID: 68103154877022454}
-  - component: {fileID: 50991173399984574}
-  - component: {fileID: 114366863818382138}
-  m_Layer: 10
-  m_Name: FAMAS
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4230009650131068
+--- !u!4 &4173048643079034
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1794069534898452}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.1519775, y: -1.1655576, z: -1.140625}
+  m_GameObject: {fileID: 1608063512562770}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.699274, y: 2.489524, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4501914391611034}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4501914391611034
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1412851905124872}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.929, y: 0.205, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4230009650131068}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50991173399984574
+--- !u!50 &50486811106006548
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1794069534898452}
-  m_BodyType: 0
+  m_GameObject: {fileID: 1608063512562770}
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -93,75 +63,50 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &61464906715950792
+--- !u!61 &61175930236893204
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1794069534898452}
+  m_GameObject: {fileID: 1608063512562770}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.34445786, y: 0.12119329}
+  m_Offset: {x: -0.2416668, y: 0.001766324}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.33229625, y: 0.5027562}
-    oldSize: {x: 2, y: 2}
-    newSize: {x: 2, y: 2}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.5, y: 0.5}
+    newSize: {x: 0.08, y: 0.08}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.8370919, y: 1.2397642}
+  m_Size: {x: 0.49376678, y: 0.3763535}
   m_EdgeRadius: 0
---- !u!68 &68103154877022454
-EdgeCollider2D:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1794069534898452}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -0.20739174, y: 0.10484612}
-  - {x: 0.9570341, y: 0.19943953}
---- !u!114 &114366863818382138
+--- !u!114 &114393139472488688
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1794069534898452}
+  m_GameObject: {fileID: 1608063512562770}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d01760a5dffd0344967a244b401278c, type: 3}
+  m_Script: {fileID: 11500000, guid: 5c9ddd672b2ebfe40833eb856f333a00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingSprite: {fileID: 21300002, guid: b802c96472217254ca38b40b27047c4f, type: 3}
-  framesToShowShootingSprite: 3
-  shotDelay: 0.15
-  numberOfShots: 1
-  recoil: 0.2
-  damage: 1
-  critChance: 0.05
-  chanceToMiss: 20
-  triggerColl: {fileID: 61464906715950792}
-  muzzle: {fileID: 4501914391611034}
---- !u!212 &212443872404864546
+  speed: 25
+  lifetime: 3
+--- !u!212 &212512165898050004
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1794069534898452}
+  m_GameObject: {fileID: 1608063512562770}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -190,13 +135,13 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 21300002, guid: fded3994a67d0ea4786fc619b8073086, type: 3}
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 6b39e7e97d8104b4dba85e85d1ce2fbe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2, y: 2}
+  m_Size: {x: 0.08, y: 0.08}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

@@ -52,10 +52,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletParent: {fileID: 0}
-  bulletInstantiationCount: 100
+  bulletInstantiationCount: 150
   rifleBullet: {fileID: 1465972609187306, guid: 764fe43abf1fc714584b95c831bbc29c,
     type: 2}
-  shotgunBullet: {fileID: 1608063512562770, guid: f4e17fd4a88796242a4f235c03367988,
+  heavyBullet: {fileID: 1608063512562770, guid: 5b707c6deacfc924eb36c2087611919e,
     type: 2}
   sniperBullet: {fileID: 1872776596106436, guid: 436f7db5a39e5e049a8ef97de6d0cabb,
     type: 2}

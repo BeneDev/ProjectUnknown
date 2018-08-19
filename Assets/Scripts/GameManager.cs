@@ -10,8 +10,8 @@ public class GameManager : Singleton<GameManager> {
     [SerializeField] GameObject rifleBullet;
     Stack<GameObject> freeRifleBullets = new Stack<GameObject>();
 
-    [SerializeField] GameObject shotgunBullet;
-    Stack<GameObject> freeShotgunBullets = new Stack<GameObject>();
+    [SerializeField] GameObject heavyBullet;
+    Stack<GameObject> freeHeavyBullets = new Stack<GameObject>();
 
     [SerializeField] GameObject sniperBullet;
     Stack<GameObject> freeSniperBullets = new Stack<GameObject>();
@@ -33,9 +33,9 @@ public class GameManager : Singleton<GameManager> {
             freeRifleBullets.Push(newRifleBullet);
 
             // Instantiate Shotgun Bullet
-            GameObject newShotgunBullet = Instantiate(shotgunBullet, Vector3.zero, Quaternion.Euler(Vector3.zero), bulletParent);
+            GameObject newShotgunBullet = Instantiate(heavyBullet, Vector3.zero, Quaternion.Euler(Vector3.zero), bulletParent);
             newShotgunBullet.SetActive(false);
-            freeShotgunBullets.Push(newShotgunBullet);
+            freeHeavyBullets.Push(newShotgunBullet);
 
             // Instantiate Sniper Bullet
             GameObject newSniperBullet = Instantiate(sniperBullet, Vector3.zero, Quaternion.Euler(Vector3.zero), bulletParent);
@@ -90,12 +90,12 @@ public class GameManager : Singleton<GameManager> {
         return bull;
     }
 
-    public GameObject GetShotgunBullet(Vector3 pos)
+    public GameObject GetHeavyBullet(Vector3 pos)
     {
-        GameObject bull = freeShotgunBullets.Pop();
+        GameObject bull = freeHeavyBullets.Pop();
         bull.transform.position = pos;
         bull.SetActive(true);
-        StartCoroutine(GetBulletBackAfterSeconds(bull, freeShotgunBullets, bull.GetComponent<BulletController>().Lifetime));
+        StartCoroutine(GetBulletBackAfterSeconds(bull, freeHeavyBullets, bull.GetComponent<BulletController>().Lifetime));
         return bull;
     }
 
