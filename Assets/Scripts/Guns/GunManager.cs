@@ -32,6 +32,9 @@ public class GunManager : MonoBehaviour {
 
     [SerializeField] protected int damage = 5;
 
+    [Range(0, 1), SerializeField] protected float critChance = 0.05f;
+    protected const float critMultiplier = 1.5f;
+
     [Range(0, 100), SerializeField] protected int chanceToMiss = 10; 
 
     [SerializeField] protected GameObject bullet;
@@ -57,7 +60,14 @@ public class GunManager : MonoBehaviour {
         if(bullet && muzzle)
         {
             GameObject newBullet = GameManager.Instance.GetRifleBullet(muzzle.transform.position);
-            newBullet.GetComponent<BulletController>().CalculateAccuracy((float)(chanceToMiss / 100f), damage, owner);
+            if(Random.value > critChance)
+            {
+                newBullet.GetComponent<BulletController>().CalculateAccuracy((float)(chanceToMiss / 100f), damage, owner);
+            }
+            else
+            {
+                newBullet.GetComponent<BulletController>().CalculateAccuracy((float)(chanceToMiss / 100f), (int)((float)damage * critMultiplier), owner);
+            }
             newBullet.transform.localScale = owner.transform.localScale;
             StartCoroutine(ChangeSpriteToShooting());
         }

@@ -45,8 +45,8 @@ public class BulletController : MonoBehaviour {
         {
             collision.gameObject.GetComponent<BaseEnemy>().TakeDamage(damage, collision.transform.position - transform.position);
         }
+        GameManager.Instance.GetBulletImpact(transform.position, transform.position - collision.transform.position, damage);
         gameObject.SetActive(false);
-        GameManager.Instance.GetBulletImpact(transform.position, transform.position - collision.transform.position);
     }
 
     public void CalculateAccuracy(float chanceToMiss, int dmg, GameObject creator)

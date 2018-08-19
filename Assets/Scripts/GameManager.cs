@@ -49,9 +49,17 @@ public class GameManager : Singleton<GameManager> {
         }
     }
 
-    public void GetBulletImpact(Vector3 pos, Vector3 upDir)
+    public void GetBulletImpact(Vector3 pos, Vector3 upDir, int damage)
     {
         GameObject ps = freeBulletImpacts.Pop();
+        if(damage <= 10)
+        {
+            ps.transform.localScale = new Vector3(0.9f + (damage * 0.1f), 0.9f + (damage * 0.1f), 0.9f + (damage * 0.1f));
+        }
+        else
+        {
+            ps.transform.localScale = new Vector3(2f, 2f, 2f);
+        }
         ps.transform.position = pos;
         ps.transform.up = upDir;
         ps.GetComponent<ParticleSystem>().Play();
