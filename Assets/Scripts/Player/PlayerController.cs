@@ -5,6 +5,14 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerInput))]
 public class PlayerController : MonoBehaviour {
 
+    public bool IsShooting
+    {
+        get
+        {
+            return input.Shoot;
+        }
+    }
+
     #region Fields
 
     public event System.Action OnShotFired;

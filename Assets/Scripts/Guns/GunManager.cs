@@ -81,7 +81,7 @@ public class GunManager : MonoBehaviour {
         rend.sprite = standardSprite;
     }
 
-    public void Equip(GameObject ownedBy)
+    public virtual void Equip(GameObject ownedBy)
     {
         if(ownedBy.tag == "Player")
         {
