@@ -5,6 +5,7 @@ using UnityEngine;
 public class Flamethrower : GunManager {
 
     [SerializeField] ParticleSystem flames;
+    ParticleSystem.EmissionModule flamesEmission;
 
     [SerializeField] BoxCollider2D damagingTriggerVolume;
 
@@ -12,6 +13,13 @@ public class Flamethrower : GunManager {
 
     [SerializeField] float timeBetweenHits = 1f;
     float timeWhenLastHit = 0f;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        flamesEmission = flames.emission;
+        flamesEmission.enabled = false;
+    }
 
     public override void Equip(GameObject ownedBy)
     {
@@ -24,12 +32,16 @@ public class Flamethrower : GunManager {
 
     protected void Update()
     {
-        if (!flames.isPlaying) { return; }
+        if(owner)
+        {
+            flames.gameObject.transform.localScale = owner.transform.localScale;
+        }
+        if (!flamesEmission.enabled) { return; }
         if(ownerController)
         {
             if (!ownerController.IsShooting)
             {
-                flames.Stop();
+                flamesEmission.enabled = false;
             }
         }
     }
@@ -38,14 +50,10 @@ public class Flamethrower : GunManager {
     {
         if (flames)
         {
-            if(!flames.isPlaying)
+            if(!flamesEmission.enabled)
             {
-                flames.Play();
+                flamesEmission.enabled = true;
             }
-            //GameObject newBullet = GameManager.Instance.GetHeavyBullet(muzzle.transform.position);
-            //newBullet.GetComponent<BulletController>().CalculateAccuracy((float)(chanceToMiss / 100f), damage, owner);
-            //newBullet.transform.localScale = owner.transform.localScale;
-            //StartCoroutine(ChangeSpriteToShooting());
         }
     }
 
@@ -53,7 +61,7 @@ public class Flamethrower : GunManager {
     {
         if (flames)
         {
-            if (flames.isPlaying)
+            if (flamesEmission.enabled)
             {
                 if (collision.gameObject.tag == "Enemy" && Time.realtimeSinceStartup > timeWhenLastHit + timeBetweenHits)
                 {
