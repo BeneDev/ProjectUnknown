@@ -115,6 +115,10 @@ public class PlayerController : MonoBehaviour {
             {
                 velocity.x = input.Horizontal * backwardsSpeed * Time.fixedDeltaTime;
             }
+            else
+            {
+                velocity.x = 0f;
+            }
             ChangeDirection();
             // Check for guns on the ground to pick up
             if (input.Interact)
