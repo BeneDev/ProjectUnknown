@@ -187,7 +187,7 @@ public class PlayerController : MonoBehaviour {
             }
             if (velocity.y < 0 && hittingRay.distance < 0.2f)
             {
-                transform.position += Vector3.up * ((0.25f - (hittingRay.distance)) / 5f);
+                transform.position += Vector3.up * ((0.25f - (hittingRay.distance)));
             }
         }
 
