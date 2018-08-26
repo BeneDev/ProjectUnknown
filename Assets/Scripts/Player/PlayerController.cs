@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour {
     enum PlayerState
     {
         free,
-        knockedBack,
+        blocked,
         dodging
     }
     PlayerState state = PlayerState.free;
@@ -54,6 +54,11 @@ public class PlayerController : MonoBehaviour {
     bool isAgainstWall = false;
     [SerializeField] float veloYLimit = 1f;
     [SerializeField] float gravity = 1f;
+
+    [SerializeField] float dodgePower = 5f;
+    [SerializeField] float upwardsDodgePower = 5f;
+    float appliedUpwardsDodgePower;
+    [SerializeField] float dodgeCooldown = 0.3f;
 
     PlayerInput input;
     Animator anim;
@@ -88,50 +93,68 @@ public class PlayerController : MonoBehaviour {
         UpdateRaycasts();
         WallInWay();
         CheckGrounded();
-        // Set the speed for moving the character, depending on how the player wants to move
-        if(input.Horizontal > 0f && transform.localScale.x > 0 || input.Horizontal < 0f && transform.localScale.x < 0)
+        if(state == PlayerState.free)
         {
-            if(!input.Shoot)
+            // Set the speed for moving the character, depending on how the player wants to move
+            if (input.Horizontal > 0f && transform.localScale.x > 0 || input.Horizontal < 0f && transform.localScale.x < 0)
             {
-                velocity.x = input.Horizontal * speed * Time.fixedDeltaTime;
+                if (!input.Shoot)
+                {
+                    velocity.x = input.Horizontal * speed * Time.fixedDeltaTime;
+                }
+                else
+                {
+                    velocity.x = input.Horizontal * speedWhileShooting * Time.fixedDeltaTime;
+                }
             }
             else
             {
-                velocity.x = input.Horizontal * speedWhileShooting * Time.fixedDeltaTime;
+                velocity.x = input.Horizontal * backwardsSpeed * Time.fixedDeltaTime;
             }
-        }
-        else
-        {
-            velocity.x = input.Horizontal * backwardsSpeed * Time.fixedDeltaTime;
-        }
-        ChangeDirection();
-        // Check for guns on the ground to pick up
-        if(input.Interact)
-        {
-            Collider2D[] objects = Physics2D.OverlapBoxAll(transform.position, Vector2.one * collectItemRange, 0f);
-            CheckForGuns(objects);
-        }
-        // Shoot
-        if (input.Shoot && equippedGun)
-        {
-            if(Time.realtimeSinceStartup >= timeWhenLastShot + equippedGun.ShotDelay)
+            ChangeDirection();
+            // Check for guns on the ground to pick up
+            if (input.Interact)
             {
-                InitiateShoot();
+                Collider2D[] objects = Physics2D.OverlapBoxAll(transform.position, Vector2.one * collectItemRange, 0f);
+                CheckForGuns(objects);
             }
+            // Shoot
+            if (input.Shoot && equippedGun)
+            {
+                if (Time.realtimeSinceStartup >= timeWhenLastShot + equippedGun.ShotDelay)
+                {
+                    InitiateShoot();
+                }
+            }
+            if(input.Dodge)
+            {
+                state = PlayerState.dodging;
+                anim.SetTrigger("Dodge");
+                appliedUpwardsDodgePower = upwardsDodgePower;
+            }
+        }
+        if(state == PlayerState.dodging)
+        {
+            velocity.x = transform.localScale.x * dodgePower * Time.fixedDeltaTime;
+            velocity.y += appliedUpwardsDodgePower * Time.fixedDeltaTime;
+            appliedUpwardsDodgePower *= 0.7f;
         }
         // Apply gravity
         if (!isGrounded)
         {
             velocity.y += -gravity * Time.fixedDeltaTime;
         }
-        // Check for jumps
-        if (input.Jump == 1 && isGrounded)
+        if(state == PlayerState.free)
         {
-            velocity.y += jumpForce * Time.fixedDeltaTime;
-        }
-        if(input.Jump == 2 && !isGrounded)
-        {
-            velocity.y += jumpHoldUpGain * Time.fixedDeltaTime;
+            // Check for jumps
+            if (input.Jump == 1 && isGrounded)
+            {
+                velocity.y += jumpForce * Time.fixedDeltaTime;
+            }
+            if (input.Jump == 2 && !isGrounded)
+            {
+                velocity.y += jumpHoldUpGain * Time.fixedDeltaTime;
+            }
         }
         CheckForValidVelocity();
         // Apply the velocity
@@ -183,6 +206,28 @@ public class PlayerController : MonoBehaviour {
         {
             velocity.y = (-velocity.y / 2) * Time.fixedDeltaTime;
         }
+    }
+
+    public void EndDodge()
+    {
+        StartCoroutine(SlowDodgeDown(dodgeCooldown));
+        state = PlayerState.blocked;
+    }
+
+    IEnumerator SlowDodgeDown(float seconds)
+    {
+        float maxVelo = velocity.x;
+        for(float t = 0; t < seconds; t += Time.deltaTime)
+        {
+            velocity.x = maxVelo * (1 - (t / seconds));
+            yield return new WaitForEndOfFrame();
+        }
+        for (float t = 0; t < seconds * 0.25f; t += Time.deltaTime)
+        {
+            velocity.x = input.Horizontal * (speed * 0.5f) * Time.fixedDeltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        state = PlayerState.free;
     }
 
     /// <summary>
