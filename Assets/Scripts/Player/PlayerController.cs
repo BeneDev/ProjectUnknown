@@ -134,10 +134,22 @@ public class PlayerController : MonoBehaviour {
     /// </summary>
     protected void CheckForValidVelocity()
     {
-        // Check for ground under the player
-        if (isGrounded && velocity.y < 0)
+        if(CheckGrounded() != null)
         {
-            velocity.y = 0;
+            RaycastHit2D hittingRay = (RaycastHit2D)CheckGrounded();
+            // Check for ground under the player
+            if (hittingRay.distance < 0.3f && hittingRay.distance > 0.2f)
+            {
+                velocity.y = 0;
+            }
+            if (velocity.y < 0)
+            {
+                velocity.y *= 0.5f;
+            }
+            if (velocity.y < 0 && hittingRay.distance < 0.2f)
+            {
+                transform.position += Vector3.up * ((0.25f - (hittingRay.distance)) / 5f);
+            }
         }
 
         // Checking for colliders to the sides
@@ -145,12 +157,8 @@ public class PlayerController : MonoBehaviour {
         {
             velocity.x = 0f;
         }
-
-        // Make sure, velocity in y axis does not get over limit
-        //if (velocity.y >= 0 && velocity.y > veloYLimit)
-        //{
-        //    velocity.y = veloYLimit;
-        //}
+        
+        // Make sure, the y velocity stays in the velocity limit
         if (velocity.y <= 0 && velocity.y < -veloYLimit)
         {
             velocity.y = -veloYLimit * Time.fixedDeltaTime;
@@ -208,40 +216,44 @@ public class PlayerController : MonoBehaviour {
     /// <summary>
     /// Checks if the player is on the ground or not
     /// </summary>
-    protected virtual void CheckGrounded()
+    protected virtual RaycastHit2D? CheckGrounded()
     {
         // When the bottom raycasts hit ground
-        if (raycasts.bottomLeft || raycasts.bottomRight || raycasts.bottomCenter)
+        if (raycasts.bottomLeft)
         {
             isGrounded = true;
-            if (raycasts.bottomLeft.distance < 0.2f && raycasts.bottomLeft)
-            {
-                transform.position += Vector3.up * ((0.25f - (raycasts.bottomLeft.distance)) / 5f);
-            }
-            else if (raycasts.bottomRight.distance < 0.2f && raycasts.bottomRight)
-            {
-                transform.position += Vector3.up * ((0.25f - (raycasts.bottomRight.distance)) / 5f);
-            }
-            else if(raycasts.bottomCenter.distance < 0.2f && raycasts.bottomCenter)
-            {
-                transform.position += Vector3.up * ((0.25f - (raycasts.bottomRight.distance)) / 5f);
-            }
+            anim.SetBool("Grounded", isGrounded);
+            return raycasts.bottomLeft;
+        }
+        else if(raycasts.bottomRight)
+        {
+            isGrounded = true;
+            anim.SetBool("Grounded", isGrounded);
+            return raycasts.bottomRight;
+        }
+        else if(raycasts.bottomCenter)
+        {
+            isGrounded = true;
+            anim.SetBool("Grounded", isGrounded);
+            return raycasts.bottomCenter;
         }
         // Otherwise the player is not grounded
-        else if(!raycasts.bottomLeft && !raycasts.bottomRight && !raycasts.bottomCenter)
-        {
-            isGrounded = false;
-        }
+        //else if(!raycasts.bottomLeft && !raycasts.bottomRight && !raycasts.bottomCenter)
+        //{
+        //    isGrounded = false;
+        //}
+        isGrounded = false;
         anim.SetBool("Grounded", isGrounded);
+        return null;
     }
 
     void UpdateRaycasts()
     {
         Vector3 extents = colliderDefiningRaycasts.bounds.extents;
         Vector3 center = colliderDefiningRaycasts.bounds.center;
-        raycasts.bottomRight = Physics2D.Raycast(center + new Vector3(extents.x, -extents.y * 0.95f, 0f), Vector2.down, 0.25f, layersToCollideWith);
-        raycasts.bottomLeft = Physics2D.Raycast(center + new Vector3(-extents.x, -extents.y * 0.95f, 0f), Vector2.down, 0.25f, layersToCollideWith);
-        raycasts.bottomCenter = Physics2D.Raycast(center + new Vector3(0f, -extents.y, 0f), Vector2.down, 0.25f, layersToCollideWith);
+        raycasts.bottomRight = Physics2D.Raycast(center + new Vector3(extents.x, -extents.y * 0.95f, 0f), Vector2.down, 0.5f, layersToCollideWith);
+        raycasts.bottomLeft = Physics2D.Raycast(center + new Vector3(-extents.x, -extents.y * 0.95f, 0f), Vector2.down, 0.5f, layersToCollideWith);
+        raycasts.bottomCenter = Physics2D.Raycast(center + new Vector3(0f, -extents.y, 0f), Vector2.down, 0.5f, layersToCollideWith);
 
         raycasts.upperRight = Physics2D.Raycast(center + new Vector3(extents.x, extents.y, 0f), Vector2.right, 0.25f, layersToCollideWith);
         raycasts.lowerRight = Physics2D.Raycast(center + new Vector3(extents.x, -extents.y, 0f), Vector2.right, 0.25f, layersToCollideWith);

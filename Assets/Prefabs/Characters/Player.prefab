@@ -85,7 +85,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.24610567, y: 0.93847346}
+  m_Offset: {x: -0.24610567, y: 0.97799087}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -96,7 +96,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.1610034, y: 1.7874541}
+  m_Size: {x: 1.1610034, y: 1.7084193}
   m_EdgeRadius: 0
 --- !u!95 &95622881288089452
 Animator:
@@ -139,14 +139,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colliderDefiningRaycasts: {fileID: 61347851065816610}
-  speed: 15
-  speedWhileShooting: 10
-  backwardsSpeed: 6
+  speed: 12
+  speedWhileShooting: 8
+  backwardsSpeed: 4
   jumpForce: 18
   jumpHoldUpGain: 0.35
   veloYLimit: 1
   gravity: 1.3
   gunHolder: {fileID: 1793261868734130}
+  gunDrag: 5
   collectItemRange: 1
   shakeDurWhenShotFired: 0.01
 --- !u!212 &212177398166684962

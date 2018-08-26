@@ -82,7 +82,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.2735849, g: 0.2735849, b: 0.2735849, a: 0}
+  m_BackGroundColor: {r: 0.13207549, g: 0.13207549, b: 0.13207549, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bddbd5ddc12e1b04aae0a84cd4bec745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camDelay: 0.3
+  camDelay: 0.25
   xOffset: 8
 --- !u!114 &114546321702477744
 MonoBehaviour:

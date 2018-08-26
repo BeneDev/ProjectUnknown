@@ -1172,25 +1172,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 114799452095430698, guid: 9a8d3ad766adb4e43ae5ccd9956c88a9,
-        type: 2}
-      propertyPath: speed
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 114799452095430698, guid: 9a8d3ad766adb4e43ae5ccd9956c88a9,
-        type: 2}
-      propertyPath: speedWhileShooting
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 114799452095430698, guid: 9a8d3ad766adb4e43ae5ccd9956c88a9,
-        type: 2}
-      propertyPath: backwardsSpeed
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4901299360366954, guid: 9a8d3ad766adb4e43ae5ccd9956c88a9, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0.996
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a8d3ad766adb4e43ae5ccd9956c88a9, type: 2}
   m_IsPrefabAsset: 0
@@ -1334,21 +1315,6 @@ Prefab:
     - target: {fileID: 4801665366193904, guid: 57a2d67c6c85bc84d88cc9c737a52481, type: 2}
       propertyPath: m_RootOrder
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 20976603359241322, guid: 57a2d67c6c85bc84d88cc9c737a52481,
-        type: 2}
-      propertyPath: m_BackGroundColor.r
-      value: 0.13207549
-      objectReference: {fileID: 0}
-    - target: {fileID: 20976603359241322, guid: 57a2d67c6c85bc84d88cc9c737a52481,
-        type: 2}
-      propertyPath: m_BackGroundColor.g
-      value: 0.13207549
-      objectReference: {fileID: 0}
-    - target: {fileID: 20976603359241322, guid: 57a2d67c6c85bc84d88cc9c737a52481,
-        type: 2}
-      propertyPath: m_BackGroundColor.b
-      value: 0.13207549
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57a2d67c6c85bc84d88cc9c737a52481, type: 2}
