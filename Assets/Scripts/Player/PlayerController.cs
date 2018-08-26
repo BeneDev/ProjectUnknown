@@ -96,7 +96,11 @@ public class PlayerController : MonoBehaviour {
         if(state == PlayerState.free)
         {
             // Set the speed for moving the character, depending on how the player wants to move
-            if (input.Horizontal > 0f && transform.localScale.x > 0 || input.Horizontal < 0f && transform.localScale.x < 0)
+            if(!equippedGun)
+            {
+                velocity.x = input.Horizontal * speed * Time.fixedDeltaTime;
+            }
+            else if (input.Horizontal > 0f && transform.localScale.x > 0 || input.Horizontal < 0f && transform.localScale.x < 0)
             {
                 if (!input.Shoot)
                 {
@@ -107,7 +111,7 @@ public class PlayerController : MonoBehaviour {
                     velocity.x = input.Horizontal * speedWhileShooting * Time.fixedDeltaTime;
                 }
             }
-            else
+            else if(equippedGun && input.Shoot)
             {
                 velocity.x = input.Horizontal * backwardsSpeed * Time.fixedDeltaTime;
             }
@@ -130,14 +134,12 @@ public class PlayerController : MonoBehaviour {
             {
                 state = PlayerState.dodging;
                 anim.SetTrigger("Dodge");
-                appliedUpwardsDodgePower = upwardsDodgePower;
+                velocity.y = upwardsDodgePower * Time.fixedDeltaTime;
             }
         }
         if(state == PlayerState.dodging)
         {
             velocity.x = transform.localScale.x * dodgePower * Time.fixedDeltaTime;
-            velocity.y += appliedUpwardsDodgePower * Time.fixedDeltaTime;
-            appliedUpwardsDodgePower *= 0.7f;
         }
         // Apply gravity
         if (!isGrounded)
@@ -355,7 +357,7 @@ public class PlayerController : MonoBehaviour {
 
     private void ChangeDirection()
     {
-        if(input.Shoot) { return; }
+        if(input.Shoot && equippedGun) { return; }
         if (input.Horizontal < 0f && transform.localScale.x > 0)
         {
             transform.localScale = new Vector3(-1f, 1f, 1f);
