@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour {
     CameraShake camShake;
 
     [SerializeField] GameObject gunHolder;
+    [SerializeField] float gunDrag = 5f;
     GunManager equippedGun;
     float timeWhenLastShot;
 
@@ -120,6 +121,7 @@ public class PlayerController : MonoBehaviour {
         {
             velocity.y += jumpHoldUpGain * Time.fixedDeltaTime;
         }
+        anim.SetFloat("YVelo", velocity.y);
         transform.position += velocity;
     }
 
@@ -230,6 +232,7 @@ public class PlayerController : MonoBehaviour {
         {
             isGrounded = false;
         }
+        anim.SetBool("Grounded", isGrounded);
     }
 
     void UpdateRaycasts()
