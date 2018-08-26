@@ -142,8 +142,8 @@ MonoBehaviour:
   speed: 12
   speedWhileShooting: 8
   backwardsSpeed: 4
-  jumpForce: 18
-  jumpHoldUpGain: 0.35
+  jumpForce: 19
+  jumpHoldUpGain: 0.4
   veloYLimit: 1
   gravity: 1.3
   gunHolder: {fileID: 1793261868734130}

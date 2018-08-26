@@ -28,12 +28,21 @@ public class PlayerController : MonoBehaviour {
         public RaycastHit2D bottomCenter;
         public RaycastHit2D upperLeft;
         public RaycastHit2D lowerLeft;
+        public RaycastHit2D centerLeft;
         public RaycastHit2D upperRight;
         public RaycastHit2D lowerRight;
+        public RaycastHit2D centerRight;
         public RaycastHit2D top;
     }
     PlayerRaycasts raycasts; // Stores the actual information of the raycasts to calculate physics
 
+    enum PlayerState
+    {
+        free,
+        knockedBack,
+        dodging
+    }
+    PlayerState state = PlayerState.free;
 
     [SerializeField] float speed = 1f;
     [SerializeField] float speedWhileShooting = 1f;
@@ -79,6 +88,7 @@ public class PlayerController : MonoBehaviour {
         UpdateRaycasts();
         WallInWay();
         CheckGrounded();
+        // Set the speed for moving the character, depending on how the player wants to move
         if(input.Horizontal > 0f && transform.localScale.x > 0 || input.Horizontal < 0f && transform.localScale.x < 0)
         {
             if(!input.Shoot)
@@ -95,11 +105,13 @@ public class PlayerController : MonoBehaviour {
             velocity.x = input.Horizontal * backwardsSpeed * Time.fixedDeltaTime;
         }
         ChangeDirection();
+        // Check for guns on the ground to pick up
         if(input.Interact)
         {
             Collider2D[] objects = Physics2D.OverlapBoxAll(transform.position, Vector2.one * collectItemRange, 0f);
             CheckForGuns(objects);
         }
+        // Shoot
         if (input.Shoot && equippedGun)
         {
             if(Time.realtimeSinceStartup >= timeWhenLastShot + equippedGun.ShotDelay)
@@ -112,7 +124,7 @@ public class PlayerController : MonoBehaviour {
         {
             velocity.y += -gravity * Time.fixedDeltaTime;
         }
-        CheckForValidVelocity();
+        // Check for jumps
         if (input.Jump == 1 && isGrounded)
         {
             velocity.y += jumpForce * Time.fixedDeltaTime;
@@ -121,6 +133,8 @@ public class PlayerController : MonoBehaviour {
         {
             velocity.y += jumpHoldUpGain * Time.fixedDeltaTime;
         }
+        CheckForValidVelocity();
+        // Apply the velocity
         anim.SetFloat("YVelo", velocity.y);
         transform.position += velocity;
     }
@@ -138,7 +152,7 @@ public class PlayerController : MonoBehaviour {
         {
             RaycastHit2D hittingRay = (RaycastHit2D)CheckGrounded();
             // Check for ground under the player
-            if (hittingRay.distance < 0.3f && hittingRay.distance > 0.2f)
+            if (velocity.y < 0f && hittingRay.distance < 0.3f && hittingRay.distance > 0.2f)
             {
                 velocity.y = 0;
             }
@@ -257,9 +271,11 @@ public class PlayerController : MonoBehaviour {
 
         raycasts.upperRight = Physics2D.Raycast(center + new Vector3(extents.x, extents.y, 0f), Vector2.right, 0.25f, layersToCollideWith);
         raycasts.lowerRight = Physics2D.Raycast(center + new Vector3(extents.x, -extents.y, 0f), Vector2.right, 0.25f, layersToCollideWith);
+        raycasts.centerRight = Physics2D.Raycast(center + new Vector3(extents.x, 0f, 0f), Vector2.right, 0.25f, layersToCollideWith);
 
         raycasts.upperLeft = Physics2D.Raycast(center + new Vector3(-extents.x, extents.y, 0f), Vector2.left, 0.25f, layersToCollideWith);
         raycasts.lowerLeft = Physics2D.Raycast(center + new Vector3(-extents.x, -extents.y, 0f), Vector2.left, 0.25f, layersToCollideWith);
+        raycasts.centerLeft = Physics2D.Raycast(center + new Vector3(-extents.x, 0f, 0f), Vector2.left, 0.25f, layersToCollideWith);
 
         raycasts.top = Physics2D.Raycast(center + new Vector3(0f, extents.y, 0f), Vector2.up, 0.25f, layersToCollideWith);
     }
