@@ -140,21 +140,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colliderDefiningRaycasts: {fileID: 61347851065816610}
   health: 10
-  speed: 24
-  speedWhileShooting: 12
-  backwardsSpeed: 8
-  jumpForce: 30
-  jumpHoldUpGain: 0.75
+  speed: 15
+  speedWhileShooting: 8
+  backwardsSpeed: 6
+  jumpForce: 25
+  jumpHoldUpGain: 0.8
   veloYLimit: 1
-  gravity: 2.2
-  dodgePower: 50
-  upwardsDodgePower: 15
+  gravity: 2
+  dodgePower: 35
+  upwardsDodgePower: 12
   dodgeCooldown: 0.2
   gunHolder: {fileID: 1793261868734130}
   gunDrag: 5
   collectItemRange: 1
   shakeDurWhenShotFired: 0.01
   freezeFrameDuration: 0.07
+  flashDuration: 1
+  flashUpColor: {r: 1, g: 1, b: 1, a: 0.19607843}
 --- !u!212 &212177398166684962
 SpriteRenderer:
   m_ObjectHideFlags: 1

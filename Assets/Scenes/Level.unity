@@ -1268,31 +1268,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 114799452095430698, guid: 9a8d3ad766adb4e43ae5ccd9956c88a9,
-        type: 2}
-      propertyPath: flashUpColor.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114799452095430698, guid: 9a8d3ad766adb4e43ae5ccd9956c88a9,
-        type: 2}
-      propertyPath: flashUpColor.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114799452095430698, guid: 9a8d3ad766adb4e43ae5ccd9956c88a9,
-        type: 2}
-      propertyPath: flashUpColor.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114799452095430698, guid: 9a8d3ad766adb4e43ae5ccd9956c88a9,
-        type: 2}
-      propertyPath: flashUpColor.a
-      value: 0.19607843
-      objectReference: {fileID: 0}
-    - target: {fileID: 114799452095430698, guid: 9a8d3ad766adb4e43ae5ccd9956c88a9,
-        type: 2}
-      propertyPath: flashDuration
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a8d3ad766adb4e43ae5ccd9956c88a9, type: 2}
   m_IsPrefabAsset: 0

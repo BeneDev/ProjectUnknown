@@ -153,7 +153,7 @@ MonoBehaviour:
   recoil: 0.7
   damage: 30
   knockbackStrength: 400
-  knockbackDuration: 0.3
+  knockbackDuration: 0.4
   critChance: 0.05
   chanceToMiss: 5
   triggerColl: {fileID: 61556901800945208}
