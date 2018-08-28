@@ -133,6 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camDelay: 0.25
   xOffset: 3
+  leaveFightModeTimer: 2
 --- !u!114 &114546321702477744
 MonoBehaviour:
   m_ObjectHideFlags: 1

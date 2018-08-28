@@ -9,6 +9,15 @@ public class PlayerController : MonoBehaviour {
     {
         get
         {
+            if(!input.Shoot && OnLetGoOfFire != null && !letGoFired)
+            {
+                OnLetGoOfFire(Time.realtimeSinceStartup);
+                letGoFired = true;
+            }
+            else if(input.Shoot)
+            {
+                letGoFired = false;
+            }
             return input.Shoot;
         }
     }
@@ -18,6 +27,8 @@ public class PlayerController : MonoBehaviour {
     #region Fields
 
     public event System.Action OnShotFired;
+
+    public event System.Action<float> OnLetGoOfFire;
 
     [SerializeField] BoxCollider2D colliderDefiningRaycasts;
 
@@ -78,6 +89,8 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] float shakeDurWhenShotFired = 0.2f;
 
     LayerMask layersToCollideWith;
+
+    bool letGoFired = false;
 
     #endregion
 
@@ -161,10 +174,7 @@ public class PlayerController : MonoBehaviour {
         if(state == PlayerState.free)
         {
             // Check for jumps
-            //if(input.Jump == 1 && !stillHasToJump)
-            //{
-            //    StartCoroutine(KeepJumpForFrames(30));
-            //}
+            
             if (input.Jump == 1 && isGrounded)
             {
                 velocity.y += jumpForce * Time.deltaTime;
@@ -225,7 +235,7 @@ public class PlayerController : MonoBehaviour {
         // Make sure, the y velocity stays in the velocity limit
         if (velocity.y <= 0 && velocity.y < -veloYLimit)
         {
-            velocity.y = -veloYLimit * Time.fixedDeltaTime;
+            velocity.y = -veloYLimit;
         }
 
         // Check if something is above the player and let him bounce down again relative to the force he went up with

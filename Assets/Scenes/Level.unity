@@ -951,6 +951,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 3000
+  flashDuration: 0.06
+  flashUpColor: {r: 0.8301887, g: 0.8301887, b: 0.8301887, a: 1}
 --- !u!212 &710434178
 SpriteRenderer:
   m_ObjectHideFlags: 0
