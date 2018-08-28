@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpiderEnemy : BaseEnemy {
+public class Slime : BaseEnemy {
 
-    
+	
 
 }
