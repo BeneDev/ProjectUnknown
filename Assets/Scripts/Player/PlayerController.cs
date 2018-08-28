@@ -22,8 +22,6 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-
-
     #region Fields
 
     public event System.Action OnShotFired;
@@ -56,6 +54,8 @@ public class PlayerController : MonoBehaviour {
         dodging
     }
     PlayerState state = PlayerState.free;
+
+    [SerializeField] int health = 10;
 
     [SerializeField] float speed = 1f;
     [SerializeField] float speedWhileShooting = 1f;
@@ -108,33 +108,36 @@ public class PlayerController : MonoBehaviour {
     {
         UpdateRaycasts();
         CheckForValidVelocity();
+        WallInWay();
+        CheckGrounded();
+        // Apply the velocity
+        anim.SetFloat("YVelo", velocity.y);
+        transform.position += velocity;
     }
 
     void Update ()
     {
-        WallInWay();
-        CheckGrounded();
         if(state == PlayerState.free)
         {
             // Set the speed for moving the character, depending on how the player wants to move
             if(!equippedGun)
             {
-                velocity.x = input.Horizontal * speed * Time.deltaTime;
+                velocity.x = input.Horizontal * speed * Time.fixedDeltaTime;
             }
             else if (input.Horizontal > 0f && transform.localScale.x > 0 || input.Horizontal < 0f && transform.localScale.x < 0)
             {
                 if (!input.Shoot)
                 {
-                    velocity.x = input.Horizontal * speed * Time.deltaTime;
+                    velocity.x = input.Horizontal * speed * Time.fixedDeltaTime;
                 }
                 else
                 {
-                    velocity.x = input.Horizontal * speedWhileShooting * Time.deltaTime;
+                    velocity.x = input.Horizontal * speedWhileShooting * Time.fixedDeltaTime;
                 }
             }
             else if(equippedGun && input.Shoot)
             {
-                velocity.x = input.Horizontal * backwardsSpeed * Time.deltaTime;
+                velocity.x = input.Horizontal * backwardsSpeed * Time.fixedDeltaTime;
             }
             else
             {
@@ -159,17 +162,17 @@ public class PlayerController : MonoBehaviour {
             {
                 state = PlayerState.dodging;
                 anim.SetTrigger("Dodge");
-                velocity.y = upwardsDodgePower * Time.deltaTime;
+                velocity.y = upwardsDodgePower * Time.fixedDeltaTime;
             }
         }
         if(state == PlayerState.dodging)
         {
-            velocity.x = transform.localScale.x * dodgePower * Time.deltaTime;
+            velocity.x = transform.localScale.x * dodgePower * Time.fixedDeltaTime;
         }
         // Apply gravity
         if (!isGrounded)
         {
-            velocity.y += -gravity * Time.deltaTime;
+            velocity.y += -gravity * Time.fixedDeltaTime;
         }
         if(state == PlayerState.free)
         {
@@ -177,16 +180,13 @@ public class PlayerController : MonoBehaviour {
             
             if (input.Jump == 1 && isGrounded)
             {
-                velocity.y += jumpForce * Time.deltaTime;
+                velocity.y += jumpForce * Time.fixedDeltaTime;
             }
             if (input.Jump == 2 && !isGrounded)
             {
-                velocity.y += jumpHoldUpGain * Time.deltaTime;
+                velocity.y += jumpHoldUpGain * Time.fixedDeltaTime;
             }
         }
-        // Apply the velocity
-        anim.SetFloat("YVelo", velocity.y);
-        transform.position += velocity;
     }
 
     #endregion
@@ -257,12 +257,12 @@ public class PlayerController : MonoBehaviour {
     IEnumerator SlowDodgeDown(float seconds)
     {
         float maxVelo = velocity.x;
-        for(float t = 0; t < seconds; t += Time.deltaTime)
+        for(float t = 0; t < seconds; t += Time.fixedDeltaTime)
         {
             velocity.x = maxVelo * (1 - (t / seconds));
             yield return new WaitForEndOfFrame();
         }
-        for (float t = 0; t < seconds * 0.25f; t += Time.deltaTime)
+        for (float t = 0; t < seconds * 0.25f; t += Time.fixedDeltaTime)
         {
             velocity.x = input.Horizontal * (speed * 0.5f) * Time.fixedDeltaTime;
             yield return new WaitForEndOfFrame();
@@ -426,6 +426,22 @@ public class PlayerController : MonoBehaviour {
         velocity.x += -transform.localScale.x * equippedGun.Recoil;
         camShake.shakeAmount = equippedGun.Recoil;
         camShake.shakeDuration = shakeDurWhenShotFired;
+    }
+
+    public void TakeDamage(int dmg, Vector3 knockback)
+    {
+        health -= dmg;
+        velocity += knockback * Time.fixedDeltaTime;
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        print("died");
+        //Destroy(gameObject);
     }
 
     #endregion

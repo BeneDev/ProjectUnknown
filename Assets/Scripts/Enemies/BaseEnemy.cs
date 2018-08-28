@@ -6,6 +6,8 @@ public class BaseEnemy : MonoBehaviour {
 
     [SerializeField] protected int maxHealth = 5;
     protected int health;
+    [SerializeField] int attack = 3;
+    [SerializeField] float knockBackStrength = 1f;
 
     //[SerializeField] float freezeFrameDuration = 0.1f;
 
@@ -74,5 +76,13 @@ public class BaseEnemy : MonoBehaviour {
     {
         //player.GainExp(expToGive);
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            collision.GetComponent<PlayerController>().TakeDamage(attack, (collision.transform.position - transform.position).normalized * knockBackStrength);
+        }
     }
 }

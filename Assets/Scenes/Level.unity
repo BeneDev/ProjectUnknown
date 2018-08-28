@@ -932,6 +932,7 @@ GameObject:
   - component: {fileID: 710434178}
   - component: {fileID: 710434177}
   - component: {fileID: 710434180}
+  - component: {fileID: 710434182}
   m_Layer: 11
   m_Name: DebugEnemy
   m_TagString: Enemy
@@ -951,6 +952,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 3000
+  attack: 3
+  knockBackStrength: 63.03
   flashDuration: 0.06
   flashUpColor: {r: 0.8301887, g: 0.8301887, b: 0.8301887, a: 1}
 --- !u!212 &710434178
@@ -1006,7 +1009,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 710434176}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.17, y: 1, z: 0}
+  m_LocalPosition: {x: -5.2, y: 6.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1024,7 +1027,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.09686422, y: 0.09686422}
+  m_Offset: {x: 0.08545208, y: 0.06262827}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1035,8 +1038,28 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.8062716, y: 1.8062716}
+  m_Size: {x: 1.6465015, y: 1.5552034}
   m_EdgeRadius: 0
+--- !u!50 &710434182
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 710434176}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 2
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1001 &732800196
 Prefab:
   m_ObjectHideFlags: 0
@@ -1316,6 +1339,11 @@ Prefab:
     - target: {fileID: 4486304639309684, guid: 9a8d3ad766adb4e43ae5ccd9956c88a9, type: 2}
       propertyPath: m_RootOrder
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 61347851065816610, guid: 9a8d3ad766adb4e43ae5ccd9956c88a9,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a8d3ad766adb4e43ae5ccd9956c88a9, type: 2}
