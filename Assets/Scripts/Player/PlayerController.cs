@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour {
         public RaycastHit2D lowerRight;
         public RaycastHit2D centerRight;
         public RaycastHit2D top;
+        public RaycastHit2D topRight;
+        public RaycastHit2D topLeft;
     }
     PlayerRaycasts raycasts; // Stores the actual information of the raycasts to calculate physics
 
@@ -49,6 +51,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] float backwardsSpeed = 1f;
     [SerializeField] float jumpForce = 1f;
     [SerializeField] float jumpHoldUpGain = 1f;
+    bool stillHasToJump = false;
     Vector3 velocity;
     bool isGrounded = false;
     bool isAgainstWall = false;
@@ -153,9 +156,14 @@ public class PlayerController : MonoBehaviour {
         if(state == PlayerState.free)
         {
             // Check for jumps
-            if (input.Jump == 1 && isGrounded)
+            if(input.Jump == 1)
+            {
+                StartCoroutine(KeepJumpForFrames(30));
+            }
+            if (input.Jump == 1 && isGrounded || stillHasToJump && isGrounded)
             {
                 velocity.y += jumpForce * Time.fixedDeltaTime;
+                stillHasToJump = false;
             }
             if (input.Jump == 2 && !isGrounded)
             {
@@ -171,6 +179,16 @@ public class PlayerController : MonoBehaviour {
     #endregion
 
     #region Helper Methods
+
+    IEnumerator KeepJumpForFrames(int framecount)
+    {
+        stillHasToJump = true;
+        for (int i = 0; i < framecount; i++)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        stillHasToJump = false;
+    }
 
     /// <summary>
     /// Make sure the velocity does not violate the laws of physics in this game
@@ -208,9 +226,12 @@ public class PlayerController : MonoBehaviour {
         }
 
         // Check if something is above the player and let him bounce down again relative to the force he went up with
-        if (raycasts.top && velocity.y > 0)
+        if(velocity.y > 0)
         {
-            velocity.y = (-velocity.y / 2) * Time.fixedDeltaTime;
+            if (raycasts.top || raycasts.topRight || raycasts.topLeft)
+            {
+                velocity.y = (-velocity.y / 2) * Time.fixedDeltaTime;
+            }
         }
     }
 
@@ -256,6 +277,10 @@ public class PlayerController : MonoBehaviour {
             {
                 transform.position += Vector3.right * ((0.25f - (raycasts.lowerLeft.distance)) / 5f);
             }
+            else if (raycasts.centerLeft.distance < 0.2f && raycasts.lowerLeft)
+            {
+                transform.position += Vector3.right * ((0.25f - (raycasts.centerLeft.distance)) / 5f);
+            }
             return true;
         }
         else if (raycasts.upperRight || raycasts.lowerRight)
@@ -271,6 +296,10 @@ public class PlayerController : MonoBehaviour {
             else if (raycasts.lowerRight.distance < 0.2f && raycasts.lowerRight)
             {
                 transform.position += Vector3.left * ((0.25f - (raycasts.lowerRight.distance)) / 5f);
+            }
+            else if (raycasts.centerRight.distance < 0.2f && raycasts.lowerRight)
+            {
+                transform.position += Vector3.left * ((0.25f - (raycasts.centerRight.distance)) / 5f);
             }
             return true;
         }
@@ -329,6 +358,8 @@ public class PlayerController : MonoBehaviour {
         raycasts.centerLeft = Physics2D.Raycast(center + new Vector3(-extents.x, 0f, 0f), Vector2.left, 0.25f, layersToCollideWith);
 
         raycasts.top = Physics2D.Raycast(center + new Vector3(0f, extents.y, 0f), Vector2.up, 0.25f, layersToCollideWith);
+        raycasts.topRight = Physics2D.Raycast(center + new Vector3(extents.x, extents.y, 0f), Vector2.up, 0.25f, layersToCollideWith);
+        raycasts.topLeft = Physics2D.Raycast(center + new Vector3(-extents.x, extents.y, 0f), Vector2.up, 0.25f, layersToCollideWith);
     }
 
     //private void OnDrawGizmos()

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour {
 
-    GameObject player;
+    PlayerController player;
     Vector3 targetPosition;
     Vector3 offset;
 
@@ -13,12 +13,19 @@ public class CameraController : MonoBehaviour {
     [SerializeField] float xOffset = 2f;
     
 	void Awake () {
-		player = GameObject.FindGameObjectWithTag("Player");
+		player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         offset = transform.position - player.transform.position;
 	}
 	
 	void FixedUpdate () {
-        offset = new Vector3(player.transform.localScale.x * xOffset, offset.y, offset.z);
+        if(player.IsShooting)
+        {
+            offset = new Vector3(player.transform.localScale.x * xOffset * 4f, offset.y, offset.z);
+        }
+        else
+        {
+            offset = new Vector3(player.transform.localScale.x * xOffset, offset.y, offset.z);
+        }
         targetPosition = player.transform.position + offset;
 		transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, camDelay);
 	}

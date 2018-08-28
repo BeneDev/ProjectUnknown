@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camDelay: 0.25
-  xOffset: 8
+  xOffset: 3
 --- !u!114 &114546321702477744
 MonoBehaviour:
   m_ObjectHideFlags: 1
