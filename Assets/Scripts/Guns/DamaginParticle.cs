@@ -5,14 +5,17 @@ using UnityEngine;
 public class DamaginParticle : MonoBehaviour {
 
     int damage;
+    float knockbackDuration;
 
     private void Awake()
     {
-        damage = GetComponentInParent<GunManager>().Damage;
+        GunManager gunMan = GetComponentInParent<GunManager>();
+        damage = gunMan.Damage;
+        knockbackDuration = gunMan.KnockBackDuration;
     }
 
     private void OnParticleCollision(GameObject other)
     {
-        other.GetComponent<BaseEnemy>().TakeDamage(damage, other.transform.position - transform.position);
+        other.GetComponent<BaseEnemy>().TakeDamage(damage, other.transform.position - transform.position, knockbackDuration);
     }
 }

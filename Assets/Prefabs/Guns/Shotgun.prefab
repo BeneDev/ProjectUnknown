@@ -152,6 +152,8 @@ MonoBehaviour:
   numberOfShots: 5
   recoil: 0.6
   damage: 7
+  knockbackStrength: 200
+  knockbackDuration: 0.1
   critChance: 0.05
   chanceToMiss: 70
   triggerColl: {fileID: 61627981225803052}

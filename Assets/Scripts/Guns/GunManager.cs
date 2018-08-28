@@ -28,6 +28,14 @@ public class GunManager : MonoBehaviour {
         }
     }
 
+    public float KnockBackDuration
+    {
+        get
+        {
+            return knockbackDuration;
+        }
+    }
+
     [SerializeField] protected Sprite shootingSprite;
     [SerializeField] protected int framesToShowShootingSprite = 3;
     protected Sprite standardSprite;
@@ -39,6 +47,9 @@ public class GunManager : MonoBehaviour {
     [SerializeField] protected float recoil = 1f;
 
     [SerializeField] protected int damage = 5;
+
+    [SerializeField] protected float knockbackStrength = 10f;
+    [SerializeField] protected float knockbackDuration = 0.5f;
 
     [Range(0, 1), SerializeField] protected float critChance = 0.05f;
     protected const float critMultiplier = 1.5f;
@@ -68,11 +79,11 @@ public class GunManager : MonoBehaviour {
             GameObject newBullet = GameManager.Instance.GetRifleBullet(muzzle.transform.position);
             if(Random.value > critChance)
             {
-                newBullet.GetComponent<BulletController>().CalculateAccuracy((float)(chanceToMiss / 100f), damage, owner);
+                newBullet.GetComponent<BulletController>().SetupBullet((float)(chanceToMiss / 100f), damage, owner, knockbackStrength, knockbackDuration);
             }
             else
             {
-                newBullet.GetComponent<BulletController>().CalculateAccuracy((float)(chanceToMiss / 100f), (int)((float)damage * critMultiplier), owner);
+                newBullet.GetComponent<BulletController>().SetupBullet((float)(chanceToMiss / 100f), (int)((float)damage * critMultiplier), owner, knockbackStrength, knockbackDuration);
             }
             newBullet.transform.localScale = owner.transform.localScale;
             StartCoroutine(ChangeSpriteToShooting());

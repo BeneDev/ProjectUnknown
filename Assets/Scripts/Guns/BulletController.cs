@@ -21,6 +21,9 @@ public class BulletController : MonoBehaviour {
     [SerializeField] float lifetime = 3f;
     float timeWhenShot;
 
+    float knockbackDuration;
+    float knockbackStrength;
+
     Vector3 velocity;
 
     private void OnEnable()
@@ -43,16 +46,18 @@ public class BulletController : MonoBehaviour {
         if(collision.gameObject == owner) { return; }
         if (collision.gameObject.tag == "Enemy")
         {
-            collision.gameObject.GetComponent<BaseEnemy>().TakeDamage(damage, collision.transform.position - transform.position);
+            collision.gameObject.GetComponent<BaseEnemy>().TakeDamage(damage, (collision.transform.position - transform.position).normalized * knockbackStrength, knockbackDuration);
         }
         GameManager.Instance.GetBulletImpact(transform.position, transform.position - collision.transform.position, damage);
         gameObject.SetActive(false);
     }
 
-    public void CalculateAccuracy(float chanceToMiss, int dmg, GameObject creator)
+    public void SetupBullet(float chanceToMiss, int dmg, GameObject creator, float knockbackStr, float knockbackDur)
     {
         owner = creator;
         damage = dmg;
+        knockbackDuration = knockbackDur;
+        knockbackStrength = knockbackStr;
         if(Random.value <= chanceToMiss)
         {
             velocity.y = Random.Range(-chanceToMiss * 0.25f, chanceToMiss * 0.1f);
