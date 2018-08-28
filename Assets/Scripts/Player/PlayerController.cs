@@ -88,9 +88,21 @@ public class PlayerController : MonoBehaviour {
 
     [SerializeField] float shakeDurWhenShotFired = 0.2f;
 
+    [SerializeField] float freezeFrameDuration = 0.1f;
+
     LayerMask layersToCollideWith;
 
     bool letGoFired = false;
+
+    [SerializeField] float flashDuration = 0.1f;
+    private Shader shaderGUItext;
+    private Shader shaderSpritesDefault;
+
+    [SerializeField] Color flashUpColor;
+
+    bool isInvincible = false;
+
+    SpriteRenderer rend;
 
     #endregion
 
@@ -102,7 +114,10 @@ public class PlayerController : MonoBehaviour {
         camShake = Camera.main.GetComponent<CameraShake>();
         int layer = LayerMask.NameToLayer("SolidObjects");
         layersToCollideWith = 1 << layer;
-	}
+        rend = GetComponent<SpriteRenderer>();
+        shaderGUItext = Shader.Find("GUI/Text Shader");
+        shaderSpritesDefault = Shader.Find("Sprites/Default");
+    }
 
     private void FixedUpdate()
     {
@@ -284,15 +299,15 @@ public class PlayerController : MonoBehaviour {
             }
             if (raycasts.upperLeft.distance < 0.2f && raycasts.upperLeft)
             {
-                transform.position += Vector3.right * ((0.25f - (raycasts.upperLeft.distance)) / 5f);
+                transform.position += Vector3.right * ((0.25f - (raycasts.upperLeft.distance)));
             }
             else if (raycasts.lowerLeft.distance < 0.2f && raycasts.lowerLeft)
             {
-                transform.position += Vector3.right * ((0.25f - (raycasts.lowerLeft.distance)) / 5f);
+                transform.position += Vector3.right * ((0.25f - (raycasts.lowerLeft.distance)));
             }
             else if (raycasts.centerLeft.distance < 0.2f && raycasts.lowerLeft)
             {
-                transform.position += Vector3.right * ((0.25f - (raycasts.centerLeft.distance)) / 5f);
+                transform.position += Vector3.right * ((0.25f - (raycasts.centerLeft.distance)));
             }
             return true;
         }
@@ -304,15 +319,15 @@ public class PlayerController : MonoBehaviour {
             }
             if (raycasts.upperRight.distance < 0.2f && raycasts.upperRight)
             {
-                transform.position += Vector3.left * ((0.25f - (raycasts.upperRight.distance)) / 5f);
+                transform.position += Vector3.left * ((0.25f - (raycasts.upperRight.distance)));
             }
             else if (raycasts.lowerRight.distance < 0.2f && raycasts.lowerRight)
             {
-                transform.position += Vector3.left * ((0.25f - (raycasts.lowerRight.distance)) / 5f);
+                transform.position += Vector3.left * ((0.25f - (raycasts.lowerRight.distance)));
             }
             else if (raycasts.centerRight.distance < 0.2f && raycasts.lowerRight)
             {
-                transform.position += Vector3.left * ((0.25f - (raycasts.centerRight.distance)) / 5f);
+                transform.position += Vector3.left * ((0.25f - (raycasts.centerRight.distance)));
             }
             return true;
         }
@@ -428,14 +443,66 @@ public class PlayerController : MonoBehaviour {
         camShake.shakeDuration = shakeDurWhenShotFired;
     }
 
-    public void TakeDamage(int dmg, Vector3 knockback)
+    public void TakeDamage(int dmg, Vector3 knockback, float knockBackDuration)
     {
-        health -= dmg;
-        velocity += knockback * Time.fixedDeltaTime;
-        if (health <= 0)
+        if(!isInvincible)
         {
-            Die();
+            health -= dmg;
+            // Flash up in white
+            rend.material.shader = shaderGUItext;
+            rend.color = Color.white;
+
+            velocity += knockback * Time.fixedDeltaTime;
+            FreezeFrames(freezeFrameDuration);
+            state = PlayerState.blocked;
+            StartCoroutine(SetBackToDefaultShader(flashDuration));
+            StartCoroutine(FreeAgainAfterSeconds(knockBackDuration));
+            if (health <= 0)
+            {
+                Die();
+            }
         }
+    }
+
+    /// <summary>
+    /// Make the Sprite show the normal colors again after a set amount of time
+    /// </summary>
+    /// <param name="sec"></param>
+    /// <returns></returns>
+    IEnumerator SetBackToDefaultShader(float sec)
+    {
+        isInvincible = true;
+        yield return new WaitForSeconds(sec * 0.2f);
+        // Let the enemy sprite flash up white
+        rend.material.shader = shaderSpritesDefault;
+
+        for (int i = 0; i < 2; i++)
+        {
+            // Flash between normal and transparent
+            rend.color = flashUpColor;
+            yield return new WaitForSeconds(sec * 0.1f);
+            rend.color = Color.white;
+            yield return new WaitForSeconds(sec * 0.1f);
+        }
+
+        isInvincible = false;
+    }
+
+    void FreezeFrames(float seconds)
+    {
+        Time.timeScale = 0f;
+        float freezeEndTime = Time.realtimeSinceStartup + seconds;
+        while (Time.realtimeSinceStartup < freezeEndTime)
+        {
+            // Do nothing
+        }
+        Time.timeScale = 1f;
+    }
+
+    IEnumerator FreeAgainAfterSeconds(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        state = PlayerState.free;
     }
 
     void Die()

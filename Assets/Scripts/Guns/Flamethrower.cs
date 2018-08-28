@@ -33,6 +33,7 @@ public class Flamethrower : GunManager {
         if(owner)
         {
             flames.gameObject.transform.localScale = owner.transform.localScale;
+            //TODO make flames go faster or slower depending on the player speed
         }
         if (!flamesEmission.enabled) { return; }
         if(ownerController)

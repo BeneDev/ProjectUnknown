@@ -139,6 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colliderDefiningRaycasts: {fileID: 61347851065816610}
+  health: 10
   speed: 24
   speedWhileShooting: 12
   backwardsSpeed: 8
@@ -153,6 +154,7 @@ MonoBehaviour:
   gunDrag: 5
   collectItemRange: 1
   shakeDurWhenShotFired: 0.01
+  freezeFrameDuration: 0.07
 --- !u!212 &212177398166684962
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -8,8 +8,7 @@ public class BaseEnemy : MonoBehaviour {
     protected int health;
     [SerializeField] int attack = 3;
     [SerializeField] float knockBackStrength = 1f;
-
-    //[SerializeField] float freezeFrameDuration = 0.1f;
+    [SerializeField] float knockBackDuration = 0.2f;
 
     [SerializeField] float flashDuration = 0.1f;
     private Shader shaderGUItext;
@@ -18,8 +17,6 @@ public class BaseEnemy : MonoBehaviour {
     [SerializeField] Color flashUpColor;
 
     SpriteRenderer rend;
-
-    //bool isFreezing;
 
     protected virtual void Awake()
     {
@@ -32,11 +29,6 @@ public class BaseEnemy : MonoBehaviour {
     public void TakeDamage(int damage, Vector3 knockBackDir)
     {
         StartCoroutine(SetBackToDefaultShader(flashDuration));
-        //if(!isFreezing)
-        //{
-        //    isFreezing = true;
-        //    FreezeFrames(freezeFrameDuration);
-        //}
         health -= damage;
         if(health <= 0)
         {
@@ -61,28 +53,17 @@ public class BaseEnemy : MonoBehaviour {
         rend.color = Color.white;
     }
 
-    //void FreezeFrames(float seconds)
-    //{
-    //    Time.timeScale = 0f;
-    //    float freezeEndTime = Time.realtimeSinceStartup + seconds;
-    //    while (Time.realtimeSinceStartup < freezeEndTime)
-    //    {
-    //        // Do nothing
-    //    }
-    //    Time.timeScale = 1f;
-    //}
-
     protected virtual void Die()
     {
         //player.GainExp(expToGive);
         Destroy(gameObject);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Player")
         {
-            collision.GetComponent<PlayerController>().TakeDamage(attack, (collision.transform.position - transform.position).normalized * knockBackStrength);
+            collision.GetComponent<PlayerController>().TakeDamage(attack, (collision.transform.position - transform.position).normalized * knockBackStrength, knockBackDuration);
         }
     }
 }
