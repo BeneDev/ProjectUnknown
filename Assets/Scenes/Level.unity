@@ -950,7 +950,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c3bcf865ce67a740ab5225f12c5546b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 30
+  maxHealth: 3000
 --- !u!212 &710434178
 SpriteRenderer:
   m_ObjectHideFlags: 0
