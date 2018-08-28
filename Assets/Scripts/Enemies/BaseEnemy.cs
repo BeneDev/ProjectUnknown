@@ -64,12 +64,10 @@ public class BaseEnemy : MonoBehaviour {
     {
         if(transform.localScale.x < 0f && raycasts.right)
         {
-            print("turn left");
             transform.localScale = new Vector3(1f, 1f, 1f);
         }
         else if(transform.localScale.x > 0f && raycasts.left)
         {
-            print("turn right");
             transform.localScale = new Vector3(-1f, 1f, 1f);
         }
         transform.position += new Vector3(-transform.localScale.x * speed * Time.deltaTime, rb.velocity.y);

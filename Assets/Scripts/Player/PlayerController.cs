@@ -104,6 +104,10 @@ public class PlayerController : MonoBehaviour {
 
     SpriteRenderer rend;
 
+    [SerializeField] LayerMask gunLayer;
+
+    Collider2D gunInReach;
+
     #endregion
 
     #region Unity Messages
@@ -160,10 +164,10 @@ public class PlayerController : MonoBehaviour {
             }
             ChangeDirection();
             // Check for guns on the ground to pick up
+            gunInReach = Physics2D.OverlapBox(transform.position, Vector2.one * collectItemRange, 0f, gunLayer);
             if (input.Interact)
             {
-                Collider2D[] objects = Physics2D.OverlapBoxAll(transform.position, Vector2.one * collectItemRange, 0f);
-                CheckForGuns(objects);
+                GrabGun(gunInReach);
             }
             // Shoot
             if (input.Shoot && equippedGun)
@@ -397,24 +401,19 @@ public class PlayerController : MonoBehaviour {
     //    Debug.DrawRay(colliderDefiningRaycasts.bounds.center + new Vector3(0f, -colliderDefiningRaycasts.bounds.extents.y, 0f), Vector2.down * 0.25f);
     //}
 
-    private void CheckForGuns(Collider2D[] objects)
+    private void GrabGun(Collider2D gun)
     {
-        foreach (Collider2D gun in objects)
+        if(gun != null)
         {
-            // If there is a gun
-            if (gun.gameObject.GetComponent<GunManager>())
+            // Collect the gun
+            if (equippedGun)
             {
-                // Collect the gun
-                if (equippedGun)
-                {
-                    equippedGun.Unequip();
-                }
-                gun.gameObject.GetComponent<GunManager>().Equip(gameObject);
-                gun.gameObject.transform.parent = gunHolder.transform;
-                gun.transform.localPosition = Vector3.zero;
-                equippedGun = gun.gameObject.GetComponent<GunManager>();
-                break;
+                equippedGun.Unequip();
             }
+            gun.gameObject.GetComponent<GunManager>().Equip(gameObject);
+            gun.gameObject.transform.parent = gunHolder.transform;
+            gun.transform.localPosition = Vector3.zero;
+            equippedGun = gun.gameObject.GetComponent<GunManager>();
         }
     }
 

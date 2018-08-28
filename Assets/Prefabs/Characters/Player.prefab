@@ -157,6 +157,9 @@ MonoBehaviour:
   freezeFrameDuration: 0.07
   flashDuration: 1
   flashUpColor: {r: 1, g: 1, b: 1, a: 0.19607843}
+  gunLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!212 &212177398166684962
 SpriteRenderer:
   m_ObjectHideFlags: 1
