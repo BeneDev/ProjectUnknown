@@ -90,10 +90,15 @@ public class PlayerController : MonoBehaviour {
         int layer = LayerMask.NameToLayer("SolidObjects");
         layersToCollideWith = 1 << layer;
 	}
-	
-	void FixedUpdate ()
+
+    private void FixedUpdate()
     {
         UpdateRaycasts();
+        CheckForValidVelocity();
+    }
+
+    void Update ()
+    {
         WallInWay();
         CheckGrounded();
         if(state == PlayerState.free)
@@ -101,22 +106,22 @@ public class PlayerController : MonoBehaviour {
             // Set the speed for moving the character, depending on how the player wants to move
             if(!equippedGun)
             {
-                velocity.x = input.Horizontal * speed * Time.fixedDeltaTime;
+                velocity.x = input.Horizontal * speed * Time.deltaTime;
             }
             else if (input.Horizontal > 0f && transform.localScale.x > 0 || input.Horizontal < 0f && transform.localScale.x < 0)
             {
                 if (!input.Shoot)
                 {
-                    velocity.x = input.Horizontal * speed * Time.fixedDeltaTime;
+                    velocity.x = input.Horizontal * speed * Time.deltaTime;
                 }
                 else
                 {
-                    velocity.x = input.Horizontal * speedWhileShooting * Time.fixedDeltaTime;
+                    velocity.x = input.Horizontal * speedWhileShooting * Time.deltaTime;
                 }
             }
             else if(equippedGun && input.Shoot)
             {
-                velocity.x = input.Horizontal * backwardsSpeed * Time.fixedDeltaTime;
+                velocity.x = input.Horizontal * backwardsSpeed * Time.deltaTime;
             }
             else
             {
@@ -141,36 +146,34 @@ public class PlayerController : MonoBehaviour {
             {
                 state = PlayerState.dodging;
                 anim.SetTrigger("Dodge");
-                velocity.y = upwardsDodgePower * Time.fixedDeltaTime;
+                velocity.y = upwardsDodgePower * Time.deltaTime;
             }
         }
         if(state == PlayerState.dodging)
         {
-            velocity.x = transform.localScale.x * dodgePower * Time.fixedDeltaTime;
+            velocity.x = transform.localScale.x * dodgePower * Time.deltaTime;
         }
         // Apply gravity
         if (!isGrounded)
         {
-            velocity.y += -gravity * Time.fixedDeltaTime;
+            velocity.y += -gravity * Time.deltaTime;
         }
         if(state == PlayerState.free)
         {
             // Check for jumps
-            if(input.Jump == 1)
+            //if(input.Jump == 1 && !stillHasToJump)
+            //{
+            //    StartCoroutine(KeepJumpForFrames(30));
+            //}
+            if (input.Jump == 1 && isGrounded)
             {
-                StartCoroutine(KeepJumpForFrames(30));
-            }
-            if (input.Jump == 1 && isGrounded || stillHasToJump && isGrounded)
-            {
-                velocity.y += jumpForce * Time.fixedDeltaTime;
-                stillHasToJump = false;
+                velocity.y += jumpForce * Time.deltaTime;
             }
             if (input.Jump == 2 && !isGrounded)
             {
-                velocity.y += jumpHoldUpGain * Time.fixedDeltaTime;
+                velocity.y += jumpHoldUpGain * Time.deltaTime;
             }
         }
-        CheckForValidVelocity();
         // Apply the velocity
         anim.SetFloat("YVelo", velocity.y);
         transform.position += velocity;
@@ -180,15 +183,15 @@ public class PlayerController : MonoBehaviour {
 
     #region Helper Methods
 
-    IEnumerator KeepJumpForFrames(int framecount)
-    {
-        stillHasToJump = true;
-        for (int i = 0; i < framecount; i++)
-        {
-            yield return new WaitForEndOfFrame();
-        }
-        stillHasToJump = false;
-    }
+    //IEnumerator KeepJumpForFrames(int framecount)
+    //{
+    //    stillHasToJump = true;
+    //    for (int i = 0; i < framecount; i++)
+    //    {
+    //        yield return new WaitForEndOfFrame();
+    //    }
+    //    stillHasToJump = false;
+    //}
 
     /// <summary>
     /// Make sure the velocity does not violate the laws of physics in this game

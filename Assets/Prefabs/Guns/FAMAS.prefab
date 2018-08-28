@@ -151,7 +151,7 @@ MonoBehaviour:
   shotDelay: 0.15
   numberOfShots: 1
   recoil: 0.2
-  damage: 1
+  damage: 3
   critChance: 0.05
   chanceToMiss: 20
   triggerColl: {fileID: 61464906715950792}

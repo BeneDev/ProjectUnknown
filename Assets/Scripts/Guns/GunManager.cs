@@ -20,6 +20,14 @@ public class GunManager : MonoBehaviour {
         }
     }
 
+    public int Damage
+    {
+        get
+        {
+            return damage;
+        }
+    }
+
     [SerializeField] protected Sprite shootingSprite;
     [SerializeField] protected int framesToShowShootingSprite = 3;
     protected Sprite standardSprite;

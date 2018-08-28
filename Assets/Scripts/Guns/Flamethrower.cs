@@ -7,12 +7,10 @@ public class Flamethrower : GunManager {
     [SerializeField] ParticleSystem flames;
     ParticleSystem.EmissionModule flamesEmission;
 
-    [SerializeField] BoxCollider2D damagingTriggerVolume;
-
     PlayerController ownerController;
 
-    [SerializeField] float timeBetweenHits = 1f;
-    float timeWhenLastHit = 0f;
+    //[SerializeField] float timeBetweenHits = 1f;
+    //float timeWhenLastHit = 0f;
 
     protected override void Awake()
     {
@@ -53,21 +51,6 @@ public class Flamethrower : GunManager {
             if(!flamesEmission.enabled)
             {
                 flamesEmission.enabled = true;
-            }
-        }
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (flames)
-        {
-            if (flamesEmission.enabled)
-            {
-                if (collision.gameObject.tag == "Enemy" && Time.realtimeSinceStartup > timeWhenLastHit + timeBetweenHits)
-                {
-                    collision.gameObject.GetComponent<BaseEnemy>().TakeDamage(damage, collision.transform.position - transform.position);
-                    timeWhenLastHit = Time.realtimeSinceStartup;
-                }
             }
         }
     }

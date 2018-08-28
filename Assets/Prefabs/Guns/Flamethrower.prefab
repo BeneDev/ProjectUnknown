@@ -19,7 +19,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4330750110839628}
-  - component: {fileID: 61225799407786768}
   m_Layer: 10
   m_Name: Muzzle
   m_TagString: Untagged
@@ -57,6 +56,7 @@ GameObject:
   - component: {fileID: 4172594205193240}
   - component: {fileID: 198305283438776950}
   - component: {fileID: 199718747091585486}
+  - component: {fileID: 114565914006132122}
   m_Layer: 0
   m_Name: StylizedFlame
   m_TagString: Untagged
@@ -125,31 +125,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &61225799407786768
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1504250515226650}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 4.0719223, y: -0.09280431}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.36666667, y: 0.51600015}
-    oldSize: {x: 2, y: 2}
-    newSize: {x: 2, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 7.710359, y: 2.921645}
-  m_EdgeRadius: 0
 --- !u!61 &61484703913063166
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -214,8 +189,17 @@ MonoBehaviour:
   triggerColl: {fileID: 61484703913063166}
   muzzle: {fileID: 4330750110839628}
   flames: {fileID: 198305283438776950}
-  damagingTriggerVolume: {fileID: 61225799407786768}
-  timeBetweenHits: 0.5
+--- !u!114 &114565914006132122
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1835314812627374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d6eb6eb16cb9984d836522b8cff062f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &198305283438776950
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -2274,7 +2258,7 @@ ParticleSystem:
         m_RotationOrder: 4
     inWorldSpace: 0
   InheritVelocityModule:
-    enabled: 1
+    enabled: 0
     m_Mode: 0
     m_Curve:
       serializedVersion: 2
@@ -3709,14 +3693,14 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     range: {x: 0, y: 1}
   CollisionModule:
-    enabled: 0
+    enabled: 1
     serializedVersion: 3
-    type: 0
-    collisionMode: 0
+    type: 1
+    collisionMode: 1
     colliderForce: 0
     multiplyColliderForceByParticleSize: 0
     multiplyColliderForceByParticleSpeed: 0
-    multiplyColliderForceByCollisionAngle: 1
+    multiplyColliderForceByCollisionAngle: 0
     plane0: {fileID: 0}
     plane1: {fileID: 0}
     plane2: {fileID: 0}
@@ -3779,7 +3763,7 @@ ParticleSystem:
     m_Bounce:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -3832,7 +3816,7 @@ ParticleSystem:
     m_EnergyLossOnCollision:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -3887,11 +3871,11 @@ ParticleSystem:
     radiusScale: 1
     collidesWith:
       serializedVersion: 2
-      m_Bits: 4294967295
-    maxCollisionShapes: 256
+      m_Bits: 2048
+    maxCollisionShapes: 100
     quality: 0
     voxelSize: 0.5
-    collisionMessages: 0
+    collisionMessages: 1
     collidesWithDynamic: 1
     interiorCollisions: 0
   TriggerModule:

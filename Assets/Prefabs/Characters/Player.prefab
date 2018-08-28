@@ -139,16 +139,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colliderDefiningRaycasts: {fileID: 61347851065816610}
-  speed: 20
-  speedWhileShooting: 8
-  backwardsSpeed: 4
-  jumpForce: 25
+  speed: 24
+  speedWhileShooting: 12
+  backwardsSpeed: 8
+  jumpForce: 30
   jumpHoldUpGain: 0.5
   veloYLimit: 1
-  gravity: 2
-  dodgePower: 45
-  upwardsDodgePower: 10
-  dodgeCooldown: 0.3
+  gravity: 2.2
+  dodgePower: 50
+  upwardsDodgePower: 15
+  dodgeCooldown: 0.2
   gunHolder: {fileID: 1793261868734130}
   gunDrag: 5
   collectItemRange: 1
