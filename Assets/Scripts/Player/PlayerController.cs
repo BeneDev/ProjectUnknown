@@ -152,29 +152,40 @@ public class PlayerController : MonoBehaviour {
             if(!equippedGun)
             {
                 velocity.x = input.Horizontal * speed * Time.fixedDeltaTime;
-                anim.speed = 1f;
             }
             else if (input.Horizontal > 0f && transform.localScale.x > 0 || input.Horizontal < 0f && transform.localScale.x < 0)
             {
                 if (!input.Shoot)
                 {
                     velocity.x = input.Horizontal * speed * Time.fixedDeltaTime;
-                    anim.speed = 1f;
                 }
                 else
                 {
                     velocity.x = input.Horizontal * speedWhileShooting * Time.fixedDeltaTime;
-                    anim.speed = 0.8f;
                 }
             }
             else if(equippedGun && input.Shoot)
             {
                 velocity.x = input.Horizontal * backwardsSpeed * Time.fixedDeltaTime;
-                anim.speed = 0.6f;
             }
             else
             {
                 velocity.x = 0f;
+            }
+            if(anim.GetCurrentAnimatorClipInfo(0).Length > 0)
+            {
+                if (anim.GetCurrentAnimatorClipInfo(0)[0].clip.name == "PlayerWalk")
+                {
+                    anim.speed =  0.5f + Mathf.Abs(velocity.x * 3.3333333f);
+                }
+                else
+                {
+                    anim.speed = 1f;
+                }
+            }
+            else
+            {
+                anim.speed = 1f;
             }
             ChangeDirection();
             // Check for guns on the ground to pick up
@@ -415,12 +426,12 @@ public class PlayerController : MonoBehaviour {
         raycasts.topLeft = Physics2D.Raycast(center + new Vector3(-extents.x, extents.y, 0f), Vector2.up, 0.25f, layersToCollideWith);
     }
 
-    private void OnDrawGizmos()
-    {
-        Debug.DrawRay(colliderDefiningRaycasts.bounds.center + new Vector3(-colliderDefiningRaycasts.bounds.extents.x, colliderDefiningRaycasts.bounds.extents.y, 0f), Vector2.left * 0.25f);
-        Debug.DrawRay(colliderDefiningRaycasts.bounds.center + new Vector3(-colliderDefiningRaycasts.bounds.extents.x, -colliderDefiningRaycasts.bounds.extents.y, 0f), Vector2.left * 0.25f);
-        Debug.DrawRay(colliderDefiningRaycasts.bounds.center + new Vector3(-colliderDefiningRaycasts.bounds.extents.x, 0f, 0f), Vector2.left * 0.25f);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Debug.DrawRay(colliderDefiningRaycasts.bounds.center + new Vector3(-colliderDefiningRaycasts.bounds.extents.x, colliderDefiningRaycasts.bounds.extents.y, 0f), Vector2.left * 0.25f);
+    //    Debug.DrawRay(colliderDefiningRaycasts.bounds.center + new Vector3(-colliderDefiningRaycasts.bounds.extents.x, -colliderDefiningRaycasts.bounds.extents.y, 0f), Vector2.left * 0.25f);
+    //    Debug.DrawRay(colliderDefiningRaycasts.bounds.center + new Vector3(-colliderDefiningRaycasts.bounds.extents.x, 0f, 0f), Vector2.left * 0.25f);
+    //}
 
     private void GrabGun(Collider2D gun)
     {
