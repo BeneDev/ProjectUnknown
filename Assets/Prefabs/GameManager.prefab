@@ -64,3 +64,4 @@ MonoBehaviour:
   bulletImpact: {fileID: 1600300311135956, guid: 9f86500c270bef24a85aa0bf32f6527c,
     type: 2}
   dustWave: {fileID: 1770651187451396, guid: 8986b6d0289ccb74d95a282dbeb5d19f, type: 2}
+  critImpact: {fileID: 1532874139412012, guid: 99e21dd1c6a66d64c95153e3fd356b69, type: 2}

@@ -25,6 +25,9 @@ public class GameManager : Singleton<GameManager> {
     [SerializeField] GameObject dustWave;
     Stack<GameObject> freeDustWaves = new Stack<GameObject>();
 
+    [SerializeField] GameObject critImpact;
+    Stack<GameObject> freeCritImpacts = new Stack<GameObject>();
+
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -52,6 +55,9 @@ public class GameManager : Singleton<GameManager> {
 
             GameObject newDustWave = Instantiate(dustWave, Vector3.zero, Quaternion.Euler(Vector3.zero), particleSystemParent);
             freeDustWaves.Push(newDustWave);
+
+            GameObject newCritImpact = Instantiate(critImpact, Vector3.zero, Quaternion.Euler(Vector3.zero), particleSystemParent);
+            freeCritImpacts.Push(newCritImpact);
         }
     }
 
@@ -78,6 +84,14 @@ public class GameManager : Singleton<GameManager> {
         ps.gameObject.transform.position = pos;
         ps.Play();
         StartCoroutine(GetParticleSystemBack(ps.main, ps.gameObject, freeDustWaves));
+    }
+
+    public void GetCritImpact(Vector3 pos)
+    {
+        ParticleSystem ps = freeCritImpacts.Pop().GetComponent<ParticleSystem>();
+        ps.gameObject.transform.position = pos;
+        ps.Play();
+        StartCoroutine(GetParticleSystemBack(ps.main, ps.gameObject, freeCritImpacts));
     }
 
     IEnumerator GetParticleSystemBack(ParticleSystem.MainModule main, GameObject ps, Stack<GameObject> stackToPush)

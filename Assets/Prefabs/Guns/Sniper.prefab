@@ -154,7 +154,7 @@ MonoBehaviour:
   damage: 30
   knockbackStrength: 400
   knockbackDuration: 0.4
-  critChance: 0.5
+  critChance: 0.35
   chanceToMiss: 5
   triggerColl: {fileID: 61556901800945208}
   muzzle: {fileID: 4588713968563994}
