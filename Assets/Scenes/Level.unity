@@ -1527,16 +1527,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 114799452095430698, guid: 9a8d3ad766adb4e43ae5ccd9956c88a9,
-        type: 2}
-      propertyPath: dustWave
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114799452095430698, guid: 9a8d3ad766adb4e43ae5ccd9956c88a9,
-        type: 2}
-      propertyPath: landDustWave
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a8d3ad766adb4e43ae5ccd9956c88a9, type: 2}
   m_IsPrefabAsset: 0

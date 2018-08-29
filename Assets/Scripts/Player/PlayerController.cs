@@ -223,10 +223,6 @@ public class PlayerController : MonoBehaviour {
                     InitiateShoot();
                 }
             }
-            else if(!input.Shoot)
-            {
-                gunHolder.transform.position = gunAnchor.position;
-            }
             if(input.Dodge)
             {
                 anim.speed = 1f;
@@ -258,6 +254,10 @@ public class PlayerController : MonoBehaviour {
             {
                 velocity.y += jumpHoldUpGain * Time.fixedDeltaTime;
             }
+        }
+        if (!input.Shoot)
+        {
+            gunHolder.transform.position = gunAnchor.position;
         }
     }
 
@@ -520,6 +520,7 @@ public class PlayerController : MonoBehaviour {
             velocity += knockback * Time.fixedDeltaTime;
             FreezeFrames(freezeFrameDuration);
             state = PlayerState.blocked;
+            anim.SetTrigger("KnockedBack");
             StartCoroutine(SetBackToDefaultShader(flashDuration));
             StartCoroutine(FreeAgainAfterSeconds(knockBackDuration));
             if (health <= 0)
@@ -567,6 +568,7 @@ public class PlayerController : MonoBehaviour {
     IEnumerator FreeAgainAfterSeconds(float seconds)
     {
         yield return new WaitForSeconds(seconds);
+        anim.SetTrigger("StandUp");
         state = PlayerState.free;
     }
 
