@@ -37,7 +37,7 @@ public class CameraController : MonoBehaviour {
         }
         else
         {
-            offset = new Vector3(player.transform.localScale.x * xOffset * 4f, offset.y, offset.z);
+            offset = new Vector3(player.transform.localScale.x * xOffset * 3f, offset.y, offset.z);
         }
         targetPosition = player.transform.position + offset;
 		transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, camDelay);

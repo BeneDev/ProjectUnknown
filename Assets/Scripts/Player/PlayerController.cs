@@ -80,6 +80,7 @@ public class PlayerController : MonoBehaviour {
     CameraShake camShake;
 
     [SerializeField] GameObject gunHolder;
+    [SerializeField] Transform gunAnchor;
     [SerializeField] float gunDrag = 5f;
     GunManager equippedGun;
     float timeWhenLastShot;
@@ -151,21 +152,25 @@ public class PlayerController : MonoBehaviour {
             if(!equippedGun)
             {
                 velocity.x = input.Horizontal * speed * Time.fixedDeltaTime;
+                anim.speed = 1f;
             }
             else if (input.Horizontal > 0f && transform.localScale.x > 0 || input.Horizontal < 0f && transform.localScale.x < 0)
             {
                 if (!input.Shoot)
                 {
                     velocity.x = input.Horizontal * speed * Time.fixedDeltaTime;
+                    anim.speed = 1f;
                 }
                 else
                 {
                     velocity.x = input.Horizontal * speedWhileShooting * Time.fixedDeltaTime;
+                    anim.speed = 0.8f;
                 }
             }
             else if(equippedGun && input.Shoot)
             {
                 velocity.x = input.Horizontal * backwardsSpeed * Time.fixedDeltaTime;
+                anim.speed = 0.6f;
             }
             else
             {
@@ -181,10 +186,15 @@ public class PlayerController : MonoBehaviour {
             // Shoot
             if (input.Shoot && equippedGun)
             {
+                gunHolder.transform.position = new Vector3(gunHolder.transform.position.x, gunAnchor.position.y);
                 if (Time.realtimeSinceStartup >= timeWhenLastShot + equippedGun.ShotDelay)
                 {
                     InitiateShoot();
                 }
+            }
+            else if(!input.Shoot)
+            {
+                gunHolder.transform.position = gunAnchor.position;
             }
             if(input.Dodge)
             {
@@ -235,7 +245,7 @@ public class PlayerController : MonoBehaviour {
     /// <summary>
     /// Make sure the velocity does not violate the laws of physics in this game
     /// </summary>
-    protected void CheckForValidVelocity()
+    void CheckForValidVelocity()
     {
         if(CheckGrounded() != null)
         {
@@ -304,7 +314,7 @@ public class PlayerController : MonoBehaviour {
     /// Checks if there are walls in the direction the player is facing
     /// </summary>
     /// <returns> True if there is a wall. False when there is none</returns>
-    protected bool WallInWay()
+    bool WallInWay()
     {
         if (raycasts.upperLeft || raycasts.lowerLeft)
         {
@@ -353,7 +363,7 @@ public class PlayerController : MonoBehaviour {
     /// <summary>
     /// Checks if the player is on the ground or not
     /// </summary>
-    protected virtual RaycastHit2D? CheckGrounded()
+    RaycastHit2D? CheckGrounded()
     {
         // When the bottom raycasts hit ground
         if (raycasts.bottomLeft)
@@ -443,10 +453,27 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    IEnumerator GunKickBack(float strength, float duration)
+    {
+        Vector3 initialPos = gunHolder.transform.localPosition;
+        for (float t = 0f; t < duration * 0.2f; t += Time.deltaTime)
+        {
+            gunHolder.transform.localPosition = new Vector3((initialPos.x - strength) * (t / (duration * 0.2f)), gunHolder.transform.localPosition.y);
+            yield return new WaitForEndOfFrame();
+        }
+        for (float t = 0f; t < duration * 0.8f; t += Time.deltaTime)
+        {
+            gunHolder.transform.localPosition = new Vector3((initialPos.x - strength) * (1 - (t / (duration * 0.8f))), gunHolder.transform.localPosition.y);
+            yield return new WaitForEndOfFrame();
+        }
+        gunHolder.transform.localPosition = initialPos;
+    }
+
     private void InitiateShoot()
     {
         anim.SetTrigger("ShotFired");
         OnShotFired();
+        StartCoroutine(GunKickBack(equippedGun.Recoil * 0.2f, equippedGun.Recoil * 0.3f));
         timeWhenLastShot = Time.realtimeSinceStartup;
         velocity.x += -transform.localScale.x * equippedGun.Recoil;
         camShake.shakeAmount = equippedGun.Recoil;
