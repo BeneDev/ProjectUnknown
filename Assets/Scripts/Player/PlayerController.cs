@@ -79,6 +79,12 @@ public class PlayerController : MonoBehaviour {
 
     CameraShake camShake;
 
+    [SerializeField] ParticleSystem dust;
+    ParticleSystem.EmissionModule dustEmission;
+
+    [SerializeField] ParticleSystem dustWave;
+    [SerializeField] ParticleSystem landDustWave;
+
     [SerializeField] GameObject gunHolder;
     [SerializeField] Transform gunAnchor;
     [SerializeField] float gunDrag = 5f;
@@ -120,6 +126,7 @@ public class PlayerController : MonoBehaviour {
         int layer = LayerMask.NameToLayer("SolidObjects");
         layersToCollideWith = 1 << layer;
         rend = GetComponent<SpriteRenderer>();
+        dustEmission = dust.emission;
         shaderGUItext = Shader.Find("GUI/Text Shader");
         shaderSpritesDefault = Shader.Find("Sprites/Default");
     }
@@ -146,6 +153,14 @@ public class PlayerController : MonoBehaviour {
 
     void Update ()
     {
+        if(isGrounded)
+        {
+            dustEmission.enabled = true;
+        }
+        else
+        {
+            dustEmission.enabled = false;
+        }
         if(state == PlayerState.free)
         {
             // Set the speed for moving the character, depending on how the player wants to move
@@ -236,6 +251,7 @@ public class PlayerController : MonoBehaviour {
             
             if (input.Jump == 1 && isGrounded)
             {
+                GameManager.Instance.GetDustWave(new Vector3(colliderDefiningRaycasts.bounds.center.x, colliderDefiningRaycasts.bounds.center.y - colliderDefiningRaycasts.bounds.extents.y));
                 velocity.y += jumpForce * Time.fixedDeltaTime;
             }
             if (input.Jump == 2 && !isGrounded)
@@ -249,15 +265,10 @@ public class PlayerController : MonoBehaviour {
 
     #region Helper Methods
 
-    //IEnumerator KeepJumpForFrames(int framecount)
-    //{
-    //    stillHasToJump = true;
-    //    for (int i = 0; i < framecount; i++)
-    //    {
-    //        yield return new WaitForEndOfFrame();
-    //    }
-    //    stillHasToJump = false;
-    //}
+    public void PlayDustWave()
+    {
+        GameManager.Instance.GetDustWave(new Vector3(colliderDefiningRaycasts.bounds.center.x + (transform.localScale.x * (colliderDefiningRaycasts.bounds.extents.x * 0.8f)), colliderDefiningRaycasts.bounds.center.y - colliderDefiningRaycasts.bounds.extents.y));
+    }
 
     /// <summary>
     /// Make sure the velocity does not violate the laws of physics in this game

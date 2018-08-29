@@ -22,6 +22,9 @@ public class GameManager : Singleton<GameManager> {
     [SerializeField] GameObject bulletImpact;
     Stack<GameObject> freeBulletImpacts = new Stack<GameObject>();
 
+    [SerializeField] GameObject dustWave;
+    Stack<GameObject> freeDustWaves = new Stack<GameObject>();
+
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -46,6 +49,9 @@ public class GameManager : Singleton<GameManager> {
         {
             GameObject newBulletImpact = Instantiate(bulletImpact, Vector3.zero, Quaternion.Euler(Vector3.zero), particleSystemParent);
             freeBulletImpacts.Push(newBulletImpact);
+
+            GameObject newDustWave = Instantiate(dustWave, Vector3.zero, Quaternion.Euler(Vector3.zero), particleSystemParent);
+            freeDustWaves.Push(newDustWave);
         }
     }
 
@@ -63,13 +69,21 @@ public class GameManager : Singleton<GameManager> {
         ps.transform.position = pos;
         ps.transform.up = upDir;
         ps.GetComponent<ParticleSystem>().Play();
-        StartCoroutine(GetBulletImpactBack(ps.GetComponent<ParticleSystem>().main, ps));
+        StartCoroutine(GetParticleSystemBack(ps.GetComponent<ParticleSystem>().main, ps, freeBulletImpacts));
     }
 
-    IEnumerator GetBulletImpactBack(ParticleSystem.MainModule main, GameObject ps)
+    public void GetDustWave(Vector3 pos)
+    {
+        ParticleSystem ps = freeDustWaves.Pop().GetComponent<ParticleSystem>();
+        ps.gameObject.transform.position = pos;
+        ps.Play();
+        StartCoroutine(GetParticleSystemBack(ps.main, ps.gameObject, freeDustWaves));
+    }
+
+    IEnumerator GetParticleSystemBack(ParticleSystem.MainModule main, GameObject ps, Stack<GameObject> stackToPush)
     {
         yield return new WaitForSeconds(main.duration);
-        freeBulletImpacts.Push(ps);
+        stackToPush.Push(ps);
     }
 
     public GameObject GetRifleBullet(Vector3 pos)
