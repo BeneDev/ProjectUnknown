@@ -214,6 +214,7 @@ public class PlayerController : MonoBehaviour {
             }
             if(input.Dodge)
             {
+                anim.speed = 1f;
                 state = PlayerState.dodging;
                 anim.SetTrigger("Dodge");
                 velocity.y = upwardsDodgePower * Time.fixedDeltaTime;
@@ -471,15 +472,15 @@ public class PlayerController : MonoBehaviour {
 
     IEnumerator GunKickBack(float strength, float duration)
     {
-        Vector3 initialPos = gunHolder.transform.localPosition;
+        Vector3 initialPos = gunAnchor.localPosition;
         for (float t = 0f; t < duration * 0.2f; t += Time.deltaTime)
         {
-            gunHolder.transform.localPosition = new Vector3((initialPos.x - strength) * (t / (duration * 0.2f)), gunHolder.transform.localPosition.y);
+            gunHolder.transform.localPosition = new Vector3((initialPos.x - strength) * (t / (duration * 0.2f)), gunAnchor.localPosition.y);
             yield return new WaitForEndOfFrame();
         }
         for (float t = 0f; t < duration * 0.8f; t += Time.deltaTime)
         {
-            gunHolder.transform.localPosition = new Vector3((initialPos.x - strength) * (1 - (t / (duration * 0.8f))), gunHolder.transform.localPosition.y);
+            gunHolder.transform.localPosition = new Vector3((initialPos.x - strength) * (1 - (t / (duration * 0.8f))), gunAnchor.localPosition.y);
             yield return new WaitForEndOfFrame();
         }
         gunHolder.transform.localPosition = initialPos;
