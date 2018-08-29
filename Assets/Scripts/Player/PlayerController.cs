@@ -151,25 +151,30 @@ public class PlayerController : MonoBehaviour {
             // Set the speed for moving the character, depending on how the player wants to move
             if(!equippedGun)
             {
+                anim.SetBool("Strafe", false);
                 velocity.x = input.Horizontal * speed * Time.fixedDeltaTime;
             }
             else if (input.Horizontal > 0f && transform.localScale.x > 0 || input.Horizontal < 0f && transform.localScale.x < 0)
             {
                 if (!input.Shoot)
                 {
+                    anim.SetBool("Strafe", false);
                     velocity.x = input.Horizontal * speed * Time.fixedDeltaTime;
                 }
                 else
                 {
+                    anim.SetBool("Strafe", false);
                     velocity.x = input.Horizontal * speedWhileShooting * Time.fixedDeltaTime;
                 }
             }
             else if(equippedGun && input.Shoot)
             {
+                anim.SetBool("Strafe", true);
                 velocity.x = input.Horizontal * backwardsSpeed * Time.fixedDeltaTime;
             }
             else
             {
+                anim.SetBool("Strafe", false);
                 velocity.x = 0f;
             }
             if(anim.GetCurrentAnimatorClipInfo(0).Length > 0)
