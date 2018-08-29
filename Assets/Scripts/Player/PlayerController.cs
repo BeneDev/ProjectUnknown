@@ -316,7 +316,7 @@ public class PlayerController : MonoBehaviour {
     /// <returns> True if there is a wall. False when there is none</returns>
     bool WallInWay()
     {
-        if (raycasts.upperLeft || raycasts.lowerLeft)
+        if (raycasts.upperLeft || raycasts.lowerLeft || raycasts.centerLeft)
         {
             if(transform.localScale.x < 0)
             {
@@ -330,13 +330,13 @@ public class PlayerController : MonoBehaviour {
             {
                 transform.position += Vector3.right * ((0.25f - (raycasts.lowerLeft.distance)));
             }
-            else if (raycasts.centerLeft.distance < 0.2f && raycasts.lowerLeft)
+            else if (raycasts.centerLeft.distance < 0.2f && raycasts.centerLeft)
             {
                 transform.position += Vector3.right * ((0.25f - (raycasts.centerLeft.distance)));
             }
             return true;
         }
-        else if (raycasts.upperRight || raycasts.lowerRight)
+        else if (raycasts.upperRight || raycasts.lowerRight || raycasts.centerRight)
         {
             if (transform.localScale.x > 0)
             {
@@ -350,7 +350,7 @@ public class PlayerController : MonoBehaviour {
             {
                 transform.position += Vector3.left * ((0.25f - (raycasts.lowerRight.distance)));
             }
-            else if (raycasts.centerRight.distance < 0.2f && raycasts.lowerRight)
+            else if (raycasts.centerRight.distance < 0.2f && raycasts.centerRight)
             {
                 transform.position += Vector3.left * ((0.25f - (raycasts.centerRight.distance)));
             }
@@ -415,12 +415,12 @@ public class PlayerController : MonoBehaviour {
         raycasts.topLeft = Physics2D.Raycast(center + new Vector3(-extents.x, extents.y, 0f), Vector2.up, 0.25f, layersToCollideWith);
     }
 
-    //private void OnDrawGizmos()
-    //{
-    //    Debug.DrawRay(colliderDefiningRaycasts.bounds.center + new Vector3(colliderDefiningRaycasts.bounds.extents.x, -colliderDefiningRaycasts.bounds.extents.y, 0f), Vector2.down * 0.25f);
-    //    Debug.DrawRay(colliderDefiningRaycasts.bounds.center + new Vector3(-colliderDefiningRaycasts.bounds.extents.x, -colliderDefiningRaycasts.bounds.extents.y, 0f), Vector2.down * 0.25f);
-    //    Debug.DrawRay(colliderDefiningRaycasts.bounds.center + new Vector3(0f, -colliderDefiningRaycasts.bounds.extents.y, 0f), Vector2.down * 0.25f);
-    //}
+    private void OnDrawGizmos()
+    {
+        Debug.DrawRay(colliderDefiningRaycasts.bounds.center + new Vector3(-colliderDefiningRaycasts.bounds.extents.x, colliderDefiningRaycasts.bounds.extents.y, 0f), Vector2.left * 0.25f);
+        Debug.DrawRay(colliderDefiningRaycasts.bounds.center + new Vector3(-colliderDefiningRaycasts.bounds.extents.x, -colliderDefiningRaycasts.bounds.extents.y, 0f), Vector2.left * 0.25f);
+        Debug.DrawRay(colliderDefiningRaycasts.bounds.center + new Vector3(-colliderDefiningRaycasts.bounds.extents.x, 0f, 0f), Vector2.left * 0.25f);
+    }
 
     private void GrabGun(Collider2D gun)
     {
