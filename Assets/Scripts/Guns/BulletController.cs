@@ -49,12 +49,12 @@ public class BulletController : MonoBehaviour {
         if (collision.gameObject.tag == "Enemy")
         {
             collision.gameObject.GetComponent<BaseEnemy>().TakeDamage(damage, (collision.transform.position - transform.position).normalized * knockbackStrength, knockbackDuration, isCritical);
+            if (isCritical)
+            {
+                GameManager.Instance.GetCritImpact(transform.position);
+            }
         }
         GameManager.Instance.GetBulletImpact(transform.position, transform.position - collision.transform.position, damage);
-        if(isCritical)
-        {
-            GameManager.Instance.GetCritImpact(transform.position);
-        }
         gameObject.SetActive(false);
     }
 
