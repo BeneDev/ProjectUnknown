@@ -52,7 +52,7 @@ public class GunManager : MonoBehaviour {
     [SerializeField] protected float knockbackDuration = 0.5f;
 
     [Range(0, 1), SerializeField] protected float critChance = 0.05f;
-    protected const float critMultiplier = 1.5f;
+    protected const float critMultiplier = 2f;
 
     [Range(0, 100), SerializeField] protected int chanceToMiss = 10;
 
@@ -83,7 +83,7 @@ public class GunManager : MonoBehaviour {
             }
             else
             {
-                newBullet.GetComponent<BulletController>().SetupBullet((float)(chanceToMiss / 100f), (int)((float)damage * critMultiplier), owner, knockbackStrength, knockbackDuration);
+                newBullet.GetComponent<BulletController>().SetupBullet((float)(chanceToMiss / 100f), (int)((float)damage * critMultiplier), owner, knockbackStrength, knockbackDuration, true);
             }
             newBullet.transform.localScale = owner.transform.localScale;
             StartCoroutine(ChangeSpriteToShooting());

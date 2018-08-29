@@ -89,22 +89,29 @@ public class BaseEnemy : MonoBehaviour {
 
     }
 
-    public void TakeDamage(int damage, Vector2 knockback, float knockedBackDur)
+    public void TakeDamage(int damage, Vector2 knockback, float knockedBackDur, bool isCrit = false)
     {
-        StartCoroutine(SetBackToDefaultShader(flashDuration));
+        StartCoroutine(SetBackToDefaultShader(flashDuration, isCrit));
         health -= damage;
         rb.velocity = new Vector2(knockback.x, 0f) * Time.deltaTime;
-        StartCoroutine(GetKnockedBackForSeconds(knockedBackDur));
+        StartCoroutine(GetKnockedBackForSeconds(knockedBackDur, isCrit));
         if(health <= 0)
         {
             Die();
         }
     }
 
-    IEnumerator GetKnockedBackForSeconds(float seconds)
+    IEnumerator GetKnockedBackForSeconds(float seconds, bool isCrit = false)
     {
         state = EnemyState.knockedBack;
-        yield return new WaitForSeconds(seconds);
+        if(!isCrit)
+        {
+            yield return new WaitForSeconds(seconds);
+        }
+        else
+        {
+            yield return new WaitForSeconds(seconds * 1.5f);
+        }
         state = EnemyState.patroling;
     }
 
@@ -113,11 +120,20 @@ public class BaseEnemy : MonoBehaviour {
     /// </summary>
     /// <param name="sec"></param>
     /// <returns></returns>
-    IEnumerator SetBackToDefaultShader(float sec)
+    IEnumerator SetBackToDefaultShader(float sec, bool isCrit)
     {
-        // Let the enemy sprite flash up white
-        rend.material.shader = shaderGUItext;
-        rend.color = flashUpColor;
+        if(!isCrit)
+        {
+            // Let the enemy sprite flash up white
+            rend.material.shader = shaderGUItext;
+            rend.color = flashUpColor;
+        }
+        else
+        {
+            // Let the enemy sprite flash up red
+            rend.material.shader = shaderGUItext;
+            rend.color = Color.red;
+        }
         // Wait
         yield return new WaitForSeconds(sec);
         // Set the enemy sprite to normal color again
