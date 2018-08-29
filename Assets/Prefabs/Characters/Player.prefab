@@ -147,8 +147,8 @@ MonoBehaviour:
   jumpHoldUpGain: 0.8
   veloYLimit: 1
   gravity: 2
-  dodgePower: 35
-  upwardsDodgePower: 12
+  dodgePower: 20
+  upwardsDodgePower: 10
   dodgeCooldown: 0.2
   gunHolder: {fileID: 1793261868734130}
   gunDrag: 5
@@ -195,7 +195,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ecd1251560635c24bb0477b7de354c12, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1e4c7c9adcb8096498673d53e6b7504a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

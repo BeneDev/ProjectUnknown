@@ -130,7 +130,16 @@ public class PlayerController : MonoBehaviour {
         WallInWay();
         CheckGrounded();
         // Apply the velocity
+        if(velocity.magnitude <= 0f)
+        {
+            anim.SetBool("Idle", true);
+        }
+        else
+        {
+            anim.SetBool("Idle", false);
+        }
         anim.SetFloat("YVelo", velocity.y);
+        anim.SetFloat("XVelo", velocity.x);
         transform.position += velocity;
     }
 
@@ -186,6 +195,7 @@ public class PlayerController : MonoBehaviour {
         }
         if(state == PlayerState.dodging)
         {
+            isInvincible = true;
             velocity.x = transform.localScale.x * dodgePower * Time.fixedDeltaTime;
         }
         // Apply gravity
@@ -281,6 +291,7 @@ public class PlayerController : MonoBehaviour {
             velocity.x = maxVelo * (1 - (t / seconds));
             yield return new WaitForEndOfFrame();
         }
+        isInvincible = false;
         for (float t = 0; t < seconds * 0.25f; t += Time.fixedDeltaTime)
         {
             velocity.x = input.Horizontal * (speed * 0.5f) * Time.fixedDeltaTime;
