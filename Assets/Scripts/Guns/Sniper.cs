@@ -6,6 +6,8 @@ public class Sniper : GunManager {
 
     [SerializeField] LayerMask hitLayer;
 
+    [SerializeField] Color aimRayColor;
+
     private void FixedUpdate()
     {
         if(owner)
@@ -13,13 +15,11 @@ public class Sniper : GunManager {
             RaycastHit2D redRayHit = Physics2D.Raycast(muzzle.transform.position, new Vector2(owner.transform.localScale.x, 0f), 50f, hitLayer);
             if(redRayHit.distance <= 0f)
             {
-                Debug.DrawRay(muzzle.transform.position, new Vector3(owner.transform.localScale.x, 0f, 0f) * 50f, Color.red);
-                //DrawLine(muzzle.transform.position, muzzle.transform.position + new Vector3(owner.transform.localScale.x, 0f, 0f) * 50f, Color.red, Time.fixedDeltaTime);
+                DrawLine(muzzle.transform.position, muzzle.transform.position + new Vector3(owner.transform.localScale.x, 0f, 0f) * 50f, aimRayColor, 0.03f, Time.fixedDeltaTime);
             }
             else
             {
-                Debug.DrawRay(muzzle.transform.position, new Vector3(owner.transform.localScale.x, 0f, 0f) * redRayHit.distance, Color.red);
-                //DrawLine(muzzle.transform.position, muzzle.transform.position + new Vector3(owner.transform.localScale.x, 0f, 0f) * redRayHit.distance, Color.red, 0.01f, Time.fixedDeltaTime);
+                DrawLine(muzzle.transform.position, muzzle.transform.position + new Vector3(owner.transform.localScale.x, 0f, 0f) * redRayHit.distance, aimRayColor, 0.03f, Time.fixedDeltaTime);
             }
         }
     }
