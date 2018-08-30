@@ -65,3 +65,5 @@ MonoBehaviour:
     type: 2}
   dustWave: {fileID: 1770651187451396, guid: 8986b6d0289ccb74d95a282dbeb5d19f, type: 2}
   critImpact: {fileID: 1419449028758556, guid: 21eb7a617ba855a419ae37d3d5904f83, type: 2}
+  bulletTrail: {fileID: 1945838007271698, guid: 04d0d76bad190d142a45c04fe0b536b8,
+    type: 2}

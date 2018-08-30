@@ -116,7 +116,7 @@ public class GunManager : MonoBehaviour {
         owner = ownedBy;
     }
 
-    public void Unequip()
+    public virtual void Unequip()
     {
         transform.parent = null;
         if(owner.tag == "Player")

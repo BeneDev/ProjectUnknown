@@ -28,6 +28,9 @@ public class GameManager : Singleton<GameManager> {
     [SerializeField] GameObject critImpact;
     Stack<GameObject> freeCritImpacts = new Stack<GameObject>();
 
+    [SerializeField] GameObject bulletTrail;
+    Stack<GameObject> freeBulletTrails= new Stack<GameObject>();
+
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -58,6 +61,9 @@ public class GameManager : Singleton<GameManager> {
 
             GameObject newCritImpact = Instantiate(critImpact, Vector3.zero, Quaternion.Euler(Vector3.zero), particleSystemParent);
             freeCritImpacts.Push(newCritImpact);
+
+            GameObject newBulletTrail = Instantiate(bulletTrail, Vector3.zero, Quaternion.Euler(Vector3.zero), particleSystemParent);
+            freeBulletTrails.Push(newBulletTrail);
         }
     }
 
@@ -78,6 +84,13 @@ public class GameManager : Singleton<GameManager> {
         StartCoroutine(GetParticleSystemBack(ps.GetComponent<ParticleSystem>().main, ps, freeBulletImpacts));
     }
 
+    public void GetBulletTrail(GameObject followObject)
+    {
+        ParticleSystem ps = freeBulletTrails.Pop().GetComponent<ParticleSystem>();
+        ps.Play();
+        StartCoroutine(GetFollowingParticleSystemBack(ps.main, ps.gameObject, freeBulletTrails, followObject));
+    }
+
     public void GetDustWave(Vector3 pos)
     {
         ParticleSystem ps = freeDustWaves.Pop().GetComponent<ParticleSystem>();
@@ -92,6 +105,16 @@ public class GameManager : Singleton<GameManager> {
         ps.gameObject.transform.position = pos;
         ps.Play();
         StartCoroutine(GetParticleSystemBack(ps.main, ps.gameObject, freeCritImpacts));
+    }
+
+    IEnumerator GetFollowingParticleSystemBack(ParticleSystem.MainModule main, GameObject ps, Stack<GameObject> stackToPush, GameObject objectToFollow)
+    {
+        for (float t = 0f; t < main.duration; t += Time.deltaTime)
+        {
+            ps.transform.position = objectToFollow.transform.position;
+            yield return new WaitForEndOfFrame();
+        }
+        stackToPush.Push(ps);
     }
 
     IEnumerator GetParticleSystemBack(ParticleSystem.MainModule main, GameObject ps, Stack<GameObject> stackToPush)
