@@ -207,9 +207,9 @@ MonoBehaviour:
   jumpHoldUpGain: 0.8
   veloYLimit: 1
   gravity: 2
-  dodgePower: 22
+  dodgePower: 28
   upwardsDodgePower: 10
-  dodgeCooldown: 0.2
+  dodgeCooldown: 0.1
   dust: {fileID: 198689627566858522}
   dustWave: {fileID: 0}
   landDustWave: {fileID: 0}

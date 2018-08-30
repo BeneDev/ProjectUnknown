@@ -39,8 +39,16 @@ public class CameraController : MonoBehaviour {
         {
             offset = new Vector3(player.transform.localScale.x * xOffset * 3f, offset.y, offset.z);
         }
-        targetPosition = player.transform.position + offset;
-		transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, camDelay);
+        if(player.IsGrounded)
+        {
+            targetPosition = player.transform.position + offset;
+            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, camDelay);
+        }
+        else
+        {
+            targetPosition = new Vector3(player.transform.position.x + offset.x, transform.position.y);
+            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, camDelay);
+        }
 	}
 
     void SetTimeWhenPlayerStoppedShooting(float time)

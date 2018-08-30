@@ -22,6 +22,14 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    public bool IsGrounded
+    {
+        get
+        {
+            return isGrounded;
+        }
+    }
+
     #region Fields
 
     public event System.Action OnShotFired;
