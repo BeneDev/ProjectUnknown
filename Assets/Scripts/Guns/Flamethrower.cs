@@ -17,6 +17,7 @@ public class Flamethrower : GunManager {
         base.Awake();
         flamesEmission = flames.emission;
         flamesEmission.enabled = false;
+        flames.gameObject.SetActive(false);
     }
 
     public override void Equip(GameObject ownedBy)
@@ -41,14 +42,22 @@ public class Flamethrower : GunManager {
             if (!ownerController.IsShooting)
             {
                 flamesEmission.enabled = false;
+                StartCoroutine(DisableFlamesAfterSeconds(flames.main.startLifetime.constantMax));
             }
         }
+    }
+
+    IEnumerator DisableFlamesAfterSeconds(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        flames.gameObject.SetActive(false);
     }
 
     protected override void Shoot()
     {
         if (flames)
         {
+            flames.gameObject.SetActive(true);
             if(!flamesEmission.enabled)
             {
                 flamesEmission.enabled = true;
