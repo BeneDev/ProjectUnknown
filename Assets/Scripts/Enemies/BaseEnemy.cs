@@ -15,6 +15,7 @@ public class BaseEnemy : MonoBehaviour {
     [SerializeField] float flashDuration = 0.1f;
     protected Shader shaderGUItext;
     protected Shader shaderSpritesDefault;
+    protected Shader normalShader;
 
     [SerializeField] protected Color flashUpColor;
 
@@ -47,7 +48,8 @@ public class BaseEnemy : MonoBehaviour {
         health = maxHealth;
         rend = GetComponent<SpriteRenderer>();
         shaderGUItext = Shader.Find("GUI/Text Shader");
-        shaderSpritesDefault = Shader.Find("Sprites/Default");
+        normalShader = Shader.Find("Sprites/Default");
+        shaderSpritesDefault = rend.material.shader;
         rb = GetComponent<Rigidbody2D>();
     }
 
