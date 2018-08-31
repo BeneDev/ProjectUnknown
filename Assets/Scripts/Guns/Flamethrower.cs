@@ -50,7 +50,13 @@ public class Flamethrower : GunManager {
     IEnumerator DisableFlamesAfterSeconds(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        flames.gameObject.SetActive(false);
+        if(ownerController)
+        {
+            if (!ownerController.IsShooting)
+            {
+                flames.gameObject.SetActive(false);
+            }
+        }
     }
 
     protected override void Shoot()
