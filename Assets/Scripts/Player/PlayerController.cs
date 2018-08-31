@@ -30,6 +30,14 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    public float HorizontalVelocity
+    {
+        get
+        {
+            return velocity.x;
+        }
+    }
+
     #region Fields
 
     public event System.Action OnShotFired;
