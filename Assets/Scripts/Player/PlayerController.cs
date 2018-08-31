@@ -147,9 +147,6 @@ public class PlayerController : MonoBehaviour {
         shaderGUItext = Shader.Find("GUI/Text Shader");
         normalShader = Shader.Find("Sprites/Default");
         shaderSpritesDefault = rend.material.shader;
-        //Player casts shadows now (Not working yet)
-        rend.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.TwoSided;
-        rend.receiveShadows = true;
     }
 
     private void FixedUpdate()

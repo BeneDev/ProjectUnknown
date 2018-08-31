@@ -55,20 +55,25 @@ public class GameManager : Singleton<GameManager> {
             freeSniperBullets.Push(newSniperBullet);
 
             GameObject newMuzzleFlash = Instantiate(muzzleFlash, Vector3.zero, Quaternion.Euler(Vector3.zero), particleSystemParent);
+            newMuzzleFlash.SetActive(false);
             freeMuzzleFlashs.Push(newMuzzleFlash);
         }
         for (int i = 0; i < maxParticles; i++)
         {
             GameObject newBulletImpact = Instantiate(bulletImpact, Vector3.zero, Quaternion.Euler(Vector3.zero), particleSystemParent);
+            newBulletImpact.SetActive(false);
             freeBulletImpacts.Push(newBulletImpact);
 
             GameObject newDustWave = Instantiate(dustWave, Vector3.zero, Quaternion.Euler(Vector3.zero), particleSystemParent);
+            newDustWave.SetActive(false);
             freeDustWaves.Push(newDustWave);
 
             GameObject newCritImpact = Instantiate(critImpact, Vector3.zero, Quaternion.Euler(Vector3.zero), particleSystemParent);
+            newCritImpact.SetActive(false);
             freeCritImpacts.Push(newCritImpact);
 
             GameObject newBulletTrail = Instantiate(bulletTrail, Vector3.zero, Quaternion.Euler(Vector3.zero), particleSystemParent);
+            newBulletTrail.SetActive(false);
             freeBulletTrails.Push(newBulletTrail);
         }
     }
@@ -76,6 +81,7 @@ public class GameManager : Singleton<GameManager> {
     public void GetBulletImpact(Vector3 pos, Vector3 upDir, int damage)
     {
         GameObject ps = freeBulletImpacts.Pop();
+        ps.SetActive(true);
         if(damage <= 10)
         {
             ps.transform.localScale = new Vector3(0.9f + (damage * 0.1f), 0.9f + (damage * 0.1f), 0.9f + (damage * 0.1f));
@@ -93,6 +99,7 @@ public class GameManager : Singleton<GameManager> {
     public void GetBulletTrail(GameObject followObject)
     {
         ParticleSystem ps = freeBulletTrails.Pop().GetComponent<ParticleSystem>();
+        ps.gameObject.SetActive(true);
         ps.Play();
         StartCoroutine(GetFollowingParticleSystemBack(ps.main, ps.gameObject, freeBulletTrails, followObject));
     }
@@ -100,6 +107,7 @@ public class GameManager : Singleton<GameManager> {
     public void GetDustWave(Vector3 pos)
     {
         ParticleSystem ps = freeDustWaves.Pop().GetComponent<ParticleSystem>();
+        ps.gameObject.SetActive(true);
         ps.gameObject.transform.position = pos;
         ps.Play();
         StartCoroutine(GetParticleSystemBack(ps.main, ps.gameObject, freeDustWaves));
@@ -108,6 +116,7 @@ public class GameManager : Singleton<GameManager> {
     public void GetCritImpact(Vector3 pos)
     {
         ParticleSystem ps = freeCritImpacts.Pop().GetComponent<ParticleSystem>();
+        ps.gameObject.SetActive(true);
         ps.gameObject.transform.position = pos;
         ps.Play();
         StartCoroutine(GetParticleSystemBack(ps.main, ps.gameObject, freeCritImpacts));
@@ -120,20 +129,23 @@ public class GameManager : Singleton<GameManager> {
             ps.transform.position = objectToFollow.transform.position;
             yield return new WaitForEndOfFrame();
         }
+        ps.SetActive(false);
         stackToPush.Push(ps);
     }
 
     public void GetMuzzleFlash(Vector3 pos)
     {
         ParticleSystem ps = freeMuzzleFlashs.Pop().GetComponent<ParticleSystem>();
+        ps.gameObject.SetActive(true);
         ps.gameObject.transform.position = pos;
         ps.Play();
         StartCoroutine(GetParticleSystemBack(ps.main, ps.gameObject, freeMuzzleFlashs));
     }
 
-    IEnumerator GetParticleSystemBack(ParticleSystem.MainModule main, GameObject ps, Stack<GameObject> stackToPush)
+    IEnumerator GetParticleSystemBack(ParticleSystem.MainModule main, GameObject ps, Stack<GameObject> stackToPush, bool staysActive = false)
     {
         yield return new WaitForSeconds(main.duration);
+        ps.SetActive(staysActive);
         stackToPush.Push(ps);
     }
 
