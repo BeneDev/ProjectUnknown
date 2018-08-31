@@ -22,7 +22,7 @@ public class CameraController : MonoBehaviour {
         player.OnLetGoOfFire += SetTimeWhenPlayerStoppedShooting;
 	}
 	
-	void Update () {
+	void FixedUpdate () {
         if(player.IsShooting && !isFightMode)
         {
             isFightMode = true;
@@ -39,7 +39,7 @@ public class CameraController : MonoBehaviour {
         {
             offset = new Vector3(player.transform.localScale.x * xOffset * 3f, offset.y, offset.z);
         }
-        if(player.IsGrounded)
+        if (player.IsGrounded)
         {
             targetPosition = player.transform.position + offset;
             transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, camDelay);
@@ -49,7 +49,7 @@ public class CameraController : MonoBehaviour {
             targetPosition = new Vector3(player.transform.position.x + offset.x, transform.position.y);
             transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, camDelay);
         }
-	}
+    }
 
     void SetTimeWhenPlayerStoppedShooting(float time)
     {
