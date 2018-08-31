@@ -10210,36 +10210,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 20976603359241322, guid: 57a2d67c6c85bc84d88cc9c737a52481,
-        type: 2}
-      propertyPath: m_BackGroundColor.r
-      value: 0.20754719
-      objectReference: {fileID: 0}
-    - target: {fileID: 20976603359241322, guid: 57a2d67c6c85bc84d88cc9c737a52481,
-        type: 2}
-      propertyPath: m_BackGroundColor.g
-      value: 0.20754719
-      objectReference: {fileID: 0}
-    - target: {fileID: 20976603359241322, guid: 57a2d67c6c85bc84d88cc9c737a52481,
-        type: 2}
-      propertyPath: m_BackGroundColor.b
-      value: 0.20754719
-      objectReference: {fileID: 0}
-    - target: {fileID: 20976603359241322, guid: 57a2d67c6c85bc84d88cc9c737a52481,
-        type: 2}
-      propertyPath: m_BackGroundColor.a
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 20976603359241322, guid: 57a2d67c6c85bc84d88cc9c737a52481,
-        type: 2}
-      propertyPath: orthographic
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114121339969317762, guid: 57a2d67c6c85bc84d88cc9c737a52481,
-        type: 2}
-      propertyPath: leaveFightModeTimer
-      value: 1.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57a2d67c6c85bc84d88cc9c737a52481, type: 2}
   m_IsPrefabAsset: 0

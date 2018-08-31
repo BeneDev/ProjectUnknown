@@ -20,8 +20,8 @@ public class Shotgun : GunManager {
                     newBullet.GetComponent<BulletController>().SetupBullet((float)(chanceToMiss / 100f), (int)((float)damage * critMultiplier), owner, knockbackStrength, knockbackDuration, true);
                 }
                 newBullet.transform.localScale = owner.transform.localScale;
-                GameManager.Instance.GetMuzzleFlash(muzzle.position);
             }
+            GameManager.Instance.GetMuzzleFlash(muzzle.position);
         }
     }
 }
