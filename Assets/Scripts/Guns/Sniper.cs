@@ -54,7 +54,7 @@ public class Sniper : GunManager {
                 GameManager.Instance.GetBulletTrail(newBullet);
             }
             newBullet.transform.localScale = owner.transform.localScale;
-            StartCoroutine(ChangeSpriteToShooting());
+            GameManager.Instance.GetMuzzleFlash(muzzle.position);
         }
     }
 }

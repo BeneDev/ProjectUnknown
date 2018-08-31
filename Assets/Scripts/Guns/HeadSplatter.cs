@@ -18,7 +18,7 @@ public class HeadSplatter : GunManager {
                 newBullet.GetComponent<BulletController>().SetupBullet((float)(chanceToMiss / 100f), (int)((float)damage * critMultiplier), owner, knockbackStrength, knockbackDuration, true);
             }
             newBullet.transform.localScale = owner.transform.localScale;
-            StartCoroutine(ChangeSpriteToShooting());
+            GameManager.Instance.GetMuzzleFlash(muzzle.position);
         }
     }
 }

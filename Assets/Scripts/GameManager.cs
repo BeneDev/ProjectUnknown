@@ -31,6 +31,9 @@ public class GameManager : Singleton<GameManager> {
     [SerializeField] GameObject bulletTrail;
     Stack<GameObject> freeBulletTrails= new Stack<GameObject>();
 
+    [SerializeField] GameObject muzzleFlash;
+    Stack<GameObject> freeMuzzleFlashs = new Stack<GameObject>();
+
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -50,6 +53,9 @@ public class GameManager : Singleton<GameManager> {
             GameObject newSniperBullet = Instantiate(sniperBullet, Vector3.zero, Quaternion.Euler(Vector3.zero), bulletParent);
             newSniperBullet.SetActive(false);
             freeSniperBullets.Push(newSniperBullet);
+
+            GameObject newMuzzleFlash = Instantiate(muzzleFlash, Vector3.zero, Quaternion.Euler(Vector3.zero), particleSystemParent);
+            freeMuzzleFlashs.Push(newMuzzleFlash);
         }
         for (int i = 0; i < maxParticles; i++)
         {
@@ -115,6 +121,14 @@ public class GameManager : Singleton<GameManager> {
             yield return new WaitForEndOfFrame();
         }
         stackToPush.Push(ps);
+    }
+
+    public void GetMuzzleFlash(Vector3 pos)
+    {
+        ParticleSystem ps = freeMuzzleFlashs.Pop().GetComponent<ParticleSystem>();
+        ps.gameObject.transform.position = pos;
+        ps.Play();
+        StartCoroutine(GetParticleSystemBack(ps.main, ps.gameObject, freeMuzzleFlashs));
     }
 
     IEnumerator GetParticleSystemBack(ParticleSystem.MainModule main, GameObject ps, Stack<GameObject> stackToPush)

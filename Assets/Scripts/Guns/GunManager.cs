@@ -35,8 +35,7 @@ public class GunManager : MonoBehaviour {
             return knockbackDuration;
         }
     }
-
-    [SerializeField] protected Sprite shootingSprite;
+    
     [SerializeField] protected int framesToShowShootingSprite = 3;
     protected Sprite standardSprite;
 
@@ -86,18 +85,8 @@ public class GunManager : MonoBehaviour {
                 newBullet.GetComponent<BulletController>().SetupBullet((float)(chanceToMiss / 100f), (int)((float)damage * critMultiplier), owner, knockbackStrength, knockbackDuration, true);
             }
             newBullet.transform.localScale = owner.transform.localScale;
-            StartCoroutine(ChangeSpriteToShooting());
+            GameManager.Instance.GetMuzzleFlash(muzzle.position);
         }
-    }
-
-    protected IEnumerator ChangeSpriteToShooting()
-    {
-        rend.sprite = shootingSprite;
-        for (int i = 0; i < framesToShowShootingSprite; i++)
-        {
-            yield return new WaitForEndOfFrame();
-        }
-        rend.sprite = standardSprite;
     }
 
     public virtual void Equip(GameObject ownedBy)
