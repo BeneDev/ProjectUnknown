@@ -146,7 +146,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47750bc315f1ade4fa5cc675cd6b440b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingSprite: {fileID: 21300002, guid: ae6ccadcf7e94784593def0cc5210b69, type: 3}
   framesToShowShootingSprite: 3
   shotDelay: 1.5
   numberOfShots: 1
@@ -177,7 +176,7 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 59f160de80bf9a648b3ca2817e1bcdc1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
