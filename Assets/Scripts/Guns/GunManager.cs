@@ -127,7 +127,10 @@ public class GunManager : MonoBehaviour {
         transform.localPosition = Vector3.zero;
         triggerColl.enabled = false;
         owner = ownedBy;
-        GameManager.Instance.GiveItemLightBack(ownLight);
+        if(ownLight)
+        {
+            GameManager.Instance.GiveItemLightBack(ownLight);
+        }
         CancelInvoke();
         ownLight = null;
     }
