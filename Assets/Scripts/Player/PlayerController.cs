@@ -44,6 +44,10 @@ public class PlayerController : MonoBehaviour {
 
     public event System.Action<float> OnLetGoOfFire;
 
+    public event System.Action<Vector3> OnCheckpointSet;
+
+    public event System.Action OnPlayerDied;
+
     [SerializeField] BoxCollider2D colliderDefiningRaycasts;
 
     struct PlayerRaycasts // To store the informations of raycasts around the player to calculate physics
@@ -71,7 +75,8 @@ public class PlayerController : MonoBehaviour {
     }
     PlayerState state = PlayerState.free;
 
-    [SerializeField] int health = 10;
+    [SerializeField] int maxHealth = 10;
+    int health;
 
     [SerializeField] float speed = 1f;
     [SerializeField] float speedWhileShooting = 1f;
@@ -97,9 +102,6 @@ public class PlayerController : MonoBehaviour {
 
     [SerializeField] ParticleSystem dust;
     ParticleSystem.EmissionModule dustEmission;
-
-    [SerializeField] ParticleSystem dustWave;
-    [SerializeField] ParticleSystem landDustWave;
 
     [SerializeField] GameObject gunHolder;
     [SerializeField] Transform gunAnchor;
@@ -147,6 +149,8 @@ public class PlayerController : MonoBehaviour {
         shaderGUItext = Shader.Find("GUI/Text Shader");
         normalShader = Shader.Find("Sprites/Default");
         shaderSpritesDefault = rend.material.shader;
+
+        health = maxHealth;
     }
 
     private void FixedUpdate()
@@ -247,6 +251,10 @@ public class PlayerController : MonoBehaviour {
                 state = PlayerState.dodging;
                 anim.SetTrigger("Dodge");
                 velocity.y = upwardsDodgePower * Time.fixedDeltaTime;
+            }
+            if(Input.GetButtonDown("SetRespawnPos") && isGrounded)
+            {
+                OnCheckpointSet(transform.position);
             }
         }
         if(state == PlayerState.dodging)
@@ -592,8 +600,12 @@ public class PlayerController : MonoBehaviour {
 
     void Die()
     {
-        print("died");
-        //Destroy(gameObject);
+        if(OnPlayerDied != null)
+        {
+            OnPlayerDied();
+            health = maxHealth;
+            velocity = Vector3.zero;
+        }
     }
 
     #endregion

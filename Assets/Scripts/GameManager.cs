@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager> {
 
+    PlayerController player;
+
     [SerializeField] Transform bulletParent;
     [SerializeField] int bulletInstantiationCount = 100;
 
@@ -34,9 +36,14 @@ public class GameManager : Singleton<GameManager> {
     [SerializeField] GameObject muzzleFlash;
     Stack<GameObject> freeMuzzleFlashs = new Stack<GameObject>();
 
+    Vector3 respawnPosition;
+
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        player.OnCheckpointSet += SetRespawnPosition;
+        player.OnPlayerDied += RespawnPlayer;
         for (int i = 0; i < bulletInstantiationCount; i++)
         {
             // Instantiate Rifle Bullet
@@ -76,6 +83,17 @@ public class GameManager : Singleton<GameManager> {
             newBulletTrail.SetActive(false);
             freeBulletTrails.Push(newBulletTrail);
         }
+    }
+
+    void SetRespawnPosition(Vector3 pos)
+    {
+        respawnPosition = pos;
+    }
+
+    void RespawnPlayer()
+    {
+        player.gameObject.transform.position = respawnPosition;
+        // TODO play animation and/or particle system and shit
     }
 
     public void GetBulletImpact(Vector3 pos, Vector3 upDir, int damage)
