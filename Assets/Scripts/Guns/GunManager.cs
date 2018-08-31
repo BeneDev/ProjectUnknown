@@ -65,10 +65,15 @@ public class GunManager : MonoBehaviour {
 
     protected GameObject owner;
 
+    int solidObjectsLayerNumber;
+
+    GameObject ownLight;
+
 	protected virtual void Awake () {
         rb = GetComponent<Rigidbody2D>();
         rend = GetComponent<SpriteRenderer>();
         standardSprite = rend.sprite;
+        solidObjectsLayerNumber = LayerMask.NameToLayer("SolidObjects");
 	}
 
     protected virtual void Shoot()
@@ -103,6 +108,8 @@ public class GunManager : MonoBehaviour {
         transform.localPosition = Vector3.zero;
         triggerColl.enabled = false;
         owner = ownedBy;
+        GameManager.Instance.GiveItemLightBack(ownLight);
+        ownLight = null;
     }
 
     public virtual void Unequip()
@@ -115,5 +122,13 @@ public class GunManager : MonoBehaviour {
         rb.bodyType = RigidbodyType2D.Dynamic;
         triggerColl.enabled = true;
         owner = null;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.layer == solidObjectsLayerNumber && !owner && !ownLight)
+        {
+            ownLight = GameManager.Instance.GetItemLight(transform.position);
+        }
     }
 }

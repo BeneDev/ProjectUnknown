@@ -36,6 +36,9 @@ public class GameManager : Singleton<GameManager> {
     [SerializeField] GameObject muzzleFlash;
     Stack<GameObject> freeMuzzleFlashs = new Stack<GameObject>();
 
+    [SerializeField] GameObject itemLight;
+    Stack<GameObject> freeItemLights = new Stack<GameObject>();
+
     Vector3 respawnPosition;
 
     private void Awake()
@@ -82,6 +85,10 @@ public class GameManager : Singleton<GameManager> {
             GameObject newBulletTrail = Instantiate(bulletTrail, Vector3.zero, Quaternion.Euler(Vector3.zero), particleSystemParent);
             newBulletTrail.SetActive(false);
             freeBulletTrails.Push(newBulletTrail);
+
+            GameObject newItemLight = Instantiate(itemLight, Vector3.zero, Quaternion.Euler(new Vector3(-90f, 0f, 0f)), particleSystemParent);
+            newItemLight.SetActive(false);
+            freeItemLights.Push(newItemLight);
         }
     }
 
@@ -120,6 +127,21 @@ public class GameManager : Singleton<GameManager> {
         ps.gameObject.SetActive(true);
         ps.Play();
         StartCoroutine(GetFollowingParticleSystemBack(ps.main, ps.gameObject, freeBulletTrails, followObject));
+    }
+
+    public GameObject GetItemLight(Vector3 pos)
+    {
+        ParticleSystem ps = freeItemLights.Pop().GetComponent<ParticleSystem>();
+        ps.gameObject.transform.position = new Vector3(pos.x, pos.y + 1f, -1f);
+        ps.gameObject.SetActive(true);
+        ps.Play();
+        return ps.gameObject;
+    }
+
+    public void GiveItemLightBack(GameObject ps)
+    {
+        ps.SetActive(false);
+        freeItemLights.Push(ps);
     }
 
     public void GetDustWave(Vector3 pos)

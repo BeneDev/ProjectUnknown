@@ -69,3 +69,4 @@ MonoBehaviour:
     type: 2}
   muzzleFlash: {fileID: 1045294735214408, guid: 0bac6f254090f2a4198acf2abf26a140,
     type: 2}
+  itemLight: {fileID: 1723984752129908, guid: ec1187abbbcb8d64783c0d9d055669a1, type: 2}
