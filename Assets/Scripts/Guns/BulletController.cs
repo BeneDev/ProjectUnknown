@@ -28,6 +28,13 @@ public class BulletController : MonoBehaviour {
 
     Vector3 velocity;
 
+    int solidObjectsLayer;
+
+    private void Awake()
+    {
+        solidObjectsLayer = LayerMask.NameToLayer("SolidObjects");
+    }
+
     private void OnEnable()
     {
         timeWhenShot = Time.realtimeSinceStartup;
@@ -53,8 +60,15 @@ public class BulletController : MonoBehaviour {
             {
                 GameManager.Instance.GetCritImpact(transform.position);
             }
+            else
+            {
+                GameManager.Instance.GetBulletImpact(transform.position, transform.position - collision.transform.position, damage, true);
+            }
         }
-        GameManager.Instance.GetBulletImpact(transform.position, transform.position - collision.transform.position, damage);
+        else if(collision.gameObject.layer == solidObjectsLayer)
+        {
+            GameManager.Instance.GetBulletImpact(transform.position, transform.position - collision.transform.position, damage, false);
+        }
         gameObject.SetActive(false);
     }
 

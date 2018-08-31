@@ -21,6 +21,9 @@ public class GameManager : Singleton<GameManager> {
     [SerializeField] Transform particleSystemParent;
     [SerializeField] int maxParticles = 30;
 
+    [SerializeField] GameObject bulletHitImpact;
+    Stack<GameObject> freeBulletHitImpacts = new Stack<GameObject>();
+
     [SerializeField] GameObject bulletImpact;
     Stack<GameObject> freeBulletImpacts = new Stack<GameObject>();
 
@@ -70,6 +73,10 @@ public class GameManager : Singleton<GameManager> {
         }
         for (int i = 0; i < maxParticles; i++)
         {
+            GameObject newBulletHitImpact = Instantiate(bulletHitImpact, Vector3.zero, Quaternion.Euler(Vector3.zero), particleSystemParent);
+            newBulletHitImpact.SetActive(false);
+            freeBulletHitImpacts.Push(newBulletHitImpact);
+
             GameObject newBulletImpact = Instantiate(bulletImpact, Vector3.zero, Quaternion.Euler(Vector3.zero), particleSystemParent);
             newBulletImpact.SetActive(false);
             freeBulletImpacts.Push(newBulletImpact);
@@ -103,22 +110,42 @@ public class GameManager : Singleton<GameManager> {
         // TODO play animation and/or particle system and shit
     }
 
-    public void GetBulletImpact(Vector3 pos, Vector3 upDir, int damage)
+    public void GetBulletImpact(Vector3 pos, Vector3 upDir, int damage, bool isHit)
     {
-        GameObject ps = freeBulletImpacts.Pop();
-        ps.SetActive(true);
-        if(damage <= 10)
+        if(isHit)
         {
-            ps.transform.localScale = new Vector3(0.9f + (damage * 0.1f), 0.9f + (damage * 0.1f), 0.9f + (damage * 0.1f));
+            GameObject ps = freeBulletHitImpacts.Pop();
+            ps.SetActive(true);
+            if (damage <= 110)
+            {
+                ps.transform.localScale = new Vector3(0.9f + (damage * 0.01f), 0.9f + (damage * 0.01f), 0.9f + (damage * 0.01f));
+            }
+            else
+            {
+                ps.transform.localScale = new Vector3(2f, 2f, 2f);
+            }
+            ps.transform.position = pos;
+            ps.transform.up = upDir;
+            ps.GetComponent<ParticleSystem>().Play();
+            StartCoroutine(GetParticleSystemBack(ps.GetComponent<ParticleSystem>().main, ps, freeBulletHitImpacts));
         }
         else
         {
-            ps.transform.localScale = new Vector3(2f, 2f, 2f);
+            GameObject ps = freeBulletImpacts.Pop();
+            ps.SetActive(true);
+            if (damage <= 110)
+            {
+                ps.transform.localScale = new Vector3(0.9f + (damage * 0.01f), 0.9f + (damage * 0.01f), 0.9f + (damage * 0.01f));
+            }
+            else
+            {
+                ps.transform.localScale = new Vector3(2f, 2f, 2f);
+            }
+            ps.transform.position = pos;
+            ps.transform.up = upDir;
+            ps.GetComponent<ParticleSystem>().Play();
+            StartCoroutine(GetParticleSystemBack(ps.GetComponent<ParticleSystem>().main, ps, freeBulletImpacts));
         }
-        ps.transform.position = pos;
-        ps.transform.up = upDir;
-        ps.GetComponent<ParticleSystem>().Play();
-        StartCoroutine(GetParticleSystemBack(ps.GetComponent<ParticleSystem>().main, ps, freeBulletImpacts));
     }
 
     public void GetBulletTrail(GameObject followObject)
