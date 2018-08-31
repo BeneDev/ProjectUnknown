@@ -157,6 +157,7 @@ MonoBehaviour:
   chanceToMiss: 70
   triggerColl: {fileID: 61627981225803052}
   muzzle: {fileID: 4746577389262318}
+  itemAppearRange: 40
 --- !u!212 &212735731430684922
 SpriteRenderer:
   m_ObjectHideFlags: 1

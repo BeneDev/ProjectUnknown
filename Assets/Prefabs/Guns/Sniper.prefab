@@ -157,6 +157,7 @@ MonoBehaviour:
   chanceToMiss: 5
   triggerColl: {fileID: 61556901800945208}
   muzzle: {fileID: 4588713968563994}
+  itemAppearRange: 40
   hitLayer:
     serializedVersion: 2
     m_Bits: 2560

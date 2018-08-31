@@ -68,13 +68,32 @@ public class GunManager : MonoBehaviour {
     int solidObjectsLayerNumber;
 
     GameObject ownLight;
+    [SerializeField] float itemAppearRange = 15f;
+
+    GameObject player;
+    Vector3 toPlayer;
 
 	protected virtual void Awake () {
         rb = GetComponent<Rigidbody2D>();
         rend = GetComponent<SpriteRenderer>();
         standardSprite = rend.sprite;
         solidObjectsLayerNumber = LayerMask.NameToLayer("SolidObjects");
+        player = GameObject.FindGameObjectWithTag("Player");
 	}
+
+    protected void ManageItemLight()
+    {
+        toPlayer = player.transform.position - transform.position;
+        if(toPlayer.magnitude > itemAppearRange && ownLight.activeSelf)
+        {
+            ownLight.SetActive(false);
+        }
+        else if(toPlayer.magnitude <= itemAppearRange && !ownLight.activeSelf)
+        {
+            ownLight.SetActive(true);
+            ownLight.GetComponent<ParticleSystem>().Play();
+        }
+    }
 
     protected virtual void Shoot()
     {
@@ -109,6 +128,7 @@ public class GunManager : MonoBehaviour {
         triggerColl.enabled = false;
         owner = ownedBy;
         GameManager.Instance.GiveItemLightBack(ownLight);
+        CancelInvoke();
         ownLight = null;
     }
 
@@ -129,6 +149,7 @@ public class GunManager : MonoBehaviour {
         if(collision.gameObject.layer == solidObjectsLayerNumber && !owner && !ownLight)
         {
             ownLight = GameManager.Instance.GetItemLight(transform.position);
+            InvokeRepeating("ManageItemLight", 0f, 1f);
         }
     }
 }
