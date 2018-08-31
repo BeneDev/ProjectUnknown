@@ -119,6 +119,7 @@ public class PlayerController : MonoBehaviour {
 
     [SerializeField] float flashDuration = 0.1f;
     private Shader shaderGUItext;
+    private Shader normalShader;
     private Shader shaderSpritesDefault;
 
     [SerializeField] Color flashUpColor;
@@ -144,7 +145,11 @@ public class PlayerController : MonoBehaviour {
         rend = GetComponent<SpriteRenderer>();
         dustEmission = dust.emission;
         shaderGUItext = Shader.Find("GUI/Text Shader");
-        shaderSpritesDefault = Shader.Find("Sprites/Default");
+        normalShader = Shader.Find("Sprites/Default");
+        shaderSpritesDefault = rend.material.shader;
+        //Player casts shadows now (Not working yet)
+        rend.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.TwoSided;
+        rend.receiveShadows = true;
     }
 
     private void FixedUpdate()
@@ -556,7 +561,7 @@ public class PlayerController : MonoBehaviour {
         isInvincible = true;
         yield return new WaitForSeconds(sec * 0.2f);
         // Let the enemy sprite flash up white
-        rend.material.shader = shaderSpritesDefault;
+        rend.material.shader = normalShader;
 
         for (int i = 0; i < 2; i++)
         {
@@ -566,7 +571,7 @@ public class PlayerController : MonoBehaviour {
             rend.color = Color.white;
             yield return new WaitForSeconds(sec * 0.1f);
         }
-
+        rend.material.shader = shaderSpritesDefault;
         isInvincible = false;
     }
 
