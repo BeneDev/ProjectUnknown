@@ -261,6 +261,24 @@ public class PlayerController : MonoBehaviour {
         {
             isInvincible = true;
             velocity.x = transform.localScale.x * dodgePower * Time.fixedDeltaTime;
+            if(input.Jump == 1 && isGrounded)
+            {
+                state = PlayerState.free;
+                isInvincible = false;
+                velocity = Vector3.zero;
+            }
+            //if (input.Jump == 1 && isGrounded)
+            //{
+            //    velocity = new Vector3(velocity.x * 0.5f, 0f);
+            //    anim.SetTrigger("JumpCancel");
+            //    state = PlayerState.free;
+            //    GameManager.Instance.GetDustWave(new Vector3(colliderDefiningRaycasts.bounds.center.x, colliderDefiningRaycasts.bounds.center.y - colliderDefiningRaycasts.bounds.extents.y));
+            //    velocity.y += jumpForce * Time.fixedDeltaTime;
+            //}
+            //if (input.Jump == 2 && !isGrounded)
+            //{
+            //    velocity.y += jumpHoldUpGain * Time.fixedDeltaTime;
+            //}
         }
         // Apply gravity
         if (!isGrounded)
@@ -343,12 +361,15 @@ public class PlayerController : MonoBehaviour {
 
     public void EndDodge()
     {
-        StartCoroutine(SlowDodgeDown(dodgeCooldown));
-        state = PlayerState.blocked;
+        if(state == PlayerState.dodging)
+        {
+            StartCoroutine(SlowDodgeDown(dodgeCooldown));
+        }
     }
 
     IEnumerator SlowDodgeDown(float seconds)
     {
+        if(state == PlayerState.free) { yield break; }
         float maxVelo = velocity.x;
         for(float t = 0; t < seconds; t += Time.fixedDeltaTime)
         {

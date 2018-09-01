@@ -199,7 +199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colliderDefiningRaycasts: {fileID: 61347851065816610}
-  health: 10
+  maxHealth: 10
   speed: 15
   speedWhileShooting: 8
   backwardsSpeed: 4
@@ -209,10 +209,8 @@ MonoBehaviour:
   gravity: 2
   dodgePower: 28
   upwardsDodgePower: 10
-  dodgeCooldown: 0.1
+  dodgeCooldown: 0.15
   dust: {fileID: 198689627566858522}
-  dustWave: {fileID: 0}
-  landDustWave: {fileID: 0}
   gunHolder: {fileID: 1793261868734130}
   gunAnchor: {fileID: 4043095858386720}
   gunDrag: 5
