@@ -9,31 +9,31 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1705589802513462}
+  m_RootGameObject: {fileID: 1251626564835742}
   m_IsPrefabAsset: 1
---- !u!1 &1705589802513462
+--- !u!1 &1251626564835742
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4478856246235090}
-  - component: {fileID: 212513806966042012}
-  - component: {fileID: 61581922842600414}
+  - component: {fileID: 4296832627103008}
+  - component: {fileID: 212313452696228406}
+  - component: {fileID: 61704320843014396}
   m_Layer: 9
-  m_Name: Sh_RightCenter
+  m_Name: underRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4478856246235090
+--- !u!4 &4296832627103008
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1705589802513462}
+  m_GameObject: {fileID: 1251626564835742}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -18, y: 6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -41,12 +41,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61581922842600414
+--- !u!61 &61704320843014396
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1705589802513462}
+  m_GameObject: {fileID: 1251626564835742}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -66,12 +66,12 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.89515054, y: 1.0026503}
   m_EdgeRadius: 0
---- !u!212 &212513806966042012
+--- !u!212 &212313452696228406
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1705589802513462}
+  m_GameObject: {fileID: 1251626564835742}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -101,7 +101,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -100
-  m_Sprite: {fileID: 21300010, guid: a6f990aec02c441439d47c4648694d37, type: 3}
+  m_Sprite: {fileID: 21300018, guid: e1101ec2a6a81614c84407eca854bd5f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
