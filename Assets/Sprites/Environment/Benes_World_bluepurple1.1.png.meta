@@ -1,34 +1,38 @@
 fileFormatVersion: 2
-guid: e1101ec2a6a81614c84407eca854bd5f
+guid: f8bc1837cbc05d042ab1d1c37c0486ee
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Benes World-bluepurple_0
-    21300002: Benes World-bluepurple_1
-    21300004: Benes World-bluepurple_2
-    21300006: Benes World-bluepurple_3
-    21300008: Benes World-bluepurple_4
-    21300010: Benes World-bluepurple_5
-    21300012: Benes World-bluepurple_6
-    21300014: Benes World-bluepurple_7
-    21300016: Benes World-bluepurple_8
-    21300018: Benes World-bluepurple_9
-    21300020: Benes World-bluepurple_10
-    21300022: Benes World-bluepurple_11
-    21300024: Benes World-bluepurple_12
-    21300026: Benes World-bluepurple_13
-    21300028: Benes World-bluepurple_14
-    21300030: Benes World-bluepurple_15
-    21300032: Benes World-bluepurple_16
-    21300034: Benes World-bluepurple_17
-    21300036: Benes World-bluepurple_18
-    21300038: Benes World-bluepurple_19
-    21300040: Benes World-bluepurple_20
-    21300042: Benes World-bluepurple_21
-    21300044: Benes World-bluepurple_22
-    21300046: Benes World-bluepurple_23
-    21300048: Benes World-bluepurple_24
-    21300050: Benes World-bluepurple_25
-    21300052: Benes World-bluepurple_26
+    21300000: topLeft
+    21300002: top
+    21300004: topRight
+    21300006: PlatTopLeft
+    21300008: PlatTop
+    21300010: PlatTopRight
+    21300012: botLeft
+    21300014: bot
+    21300016: botRight
+    21300018: PlatBotLeft
+    21300020: PlatBot
+    21300022: PlatBotRight
+    21300024: WallLeft
+    21300026: center
+    21300028: WallRight
+    21300030: toWallLeftTop
+    21300032: WallLeftTop
+    21300034: WallRightTop
+    21300036: toWallRightTop
+    21300038: toWallLeftBot
+    21300040: WallLeftBot
+    21300042: WallRightBot
+    21300044: toWallRightBot
+    21300046: Benes_World_bluepurple1.1_23
+    21300048: Benes_World_bluepurple1.1_24
+    21300050: Benes_World_bluepurple1.1_25
+    21300052: Benes_World_bluepurple1.1_26
+    21300054: Benes_World_bluepurple1.1_27
+    21300056: Benes_World_bluepurple1.1_28
+    21300058: Benes_World_bluepurple1.1_29
+    21300060: Benes_World_bluepurple1.1_30
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -133,7 +137,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Benes World-bluepurple_0
+      name: topLeft
       rect:
         serializedVersion: 2
         x: 16
@@ -147,13 +151,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2eaa769d9bf2cd34d9cd257b47f15bfc
+      spriteID: 1adb66cbe220f0441a4d38554f945034
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Benes World-bluepurple_1
+      name: top
       rect:
         serializedVersion: 2
         x: 32
@@ -167,13 +171,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d9098ea257eb6f0428009fcb1805adda
+      spriteID: 2cd7458472c0a00408dae3c8f07672d7
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Benes World-bluepurple_2
+      name: topRight
       rect:
         serializedVersion: 2
         x: 48
@@ -187,13 +191,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fa0bdb9f815f46b4d8dbf8f9f715bd0e
+      spriteID: 3a254c7d9f2fd1d429195e71ffcc46ca
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Benes World-bluepurple_3
+      name: PlatTopLeft
       rect:
         serializedVersion: 2
         x: 80
@@ -207,13 +211,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 34df27279daa16746bd0b0817fb7c17d
+      spriteID: 37e5ead32f62a0243b7a2def86f9341a
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Benes World-bluepurple_4
+      name: PlatTop
       rect:
         serializedVersion: 2
         x: 96
@@ -227,13 +231,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0453b071bfc8aeb4f8a08b2ff842bffe
+      spriteID: edc479a2ea21f8e46905b0f95257ea28
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Benes World-bluepurple_5
+      name: PlatTopRight
       rect:
         serializedVersion: 2
         x: 112
@@ -247,33 +251,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b1bb8b7877e2040438f4cf35b743a598
+      spriteID: 81c589a53c7a78f4cb505146f2bbc4bf
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Benes World-bluepurple_6
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 96
-        width: 16
-        height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3c6d90e250fa52e41af823966a27728b
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Benes World-bluepurple_7
+      name: botLeft
       rect:
         serializedVersion: 2
         x: 16
@@ -287,13 +271,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b3c5521fb21658446a5620a0a3dda375
+      spriteID: ae0b3d881637f1745aa331c1291adfda
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Benes World-bluepurple_8
+      name: bot
       rect:
         serializedVersion: 2
         x: 32
@@ -307,13 +291,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b21dc3846e1c93458e8e1bd47d6f71a
+      spriteID: 9ef2459273a26584f9d5d6fc66347a69
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Benes World-bluepurple_9
+      name: botRight
       rect:
         serializedVersion: 2
         x: 48
@@ -327,33 +311,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 512c0262bb52a21468087c77f8438b72
+      spriteID: 2b9aaef64ec00474982ad315c7ceaf42
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Benes World-bluepurple_10
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 96
-        width: 16
-        height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3c14f0b9d905b1245b77d09e1e54de7c
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Benes World-bluepurple_11
+      name: PlatBotLeft
       rect:
         serializedVersion: 2
         x: 80
@@ -367,13 +331,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c783f691e2a39a047a03b374e945949b
+      spriteID: 6b0fb2e7c03a0b648ac21cb9b85e371d
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Benes World-bluepurple_12
+      name: PlatBot
       rect:
         serializedVersion: 2
         x: 96
@@ -387,13 +351,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dff637fb62ee3b64a8a594654762c5f4
+      spriteID: ba0d8e4fc831eda419dc7c4ca8cf142d
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Benes World-bluepurple_13
+      name: PlatBotRight
       rect:
         serializedVersion: 2
         x: 112
@@ -407,17 +371,77 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 35fc8c4525f253041b073d4487d362e4
+      spriteID: 604dc9af195c010448f5834f7e63ee17
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Benes World-bluepurple_14
+      name: WallLeft
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 80
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76bbf1f16c70d7f498e06ac6c7597b7f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: center
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 80
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8236822a1a684f44aa6b2aae0f3f40e2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallRight
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 80
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbd7dfa9d6add8847872b3dd81ec1dc6
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: toWallLeftTop
       rect:
         serializedVersion: 2
         x: 0
-        y: 80
+        y: 64
         width: 16
         height: 16
       alignment: 7
@@ -427,17 +451,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dc50fe3a17204e14aa7ac7eb9f3e9c0a
+      spriteID: 581d7d4d61b403b49b9f9455cb8d6c14
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Benes World-bluepurple_15
+      name: WallLeftTop
       rect:
         serializedVersion: 2
         x: 16
-        y: 80
+        y: 64
         width: 16
         height: 16
       alignment: 7
@@ -447,37 +471,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 85294d5f1d80a564faab59cf3b8c2b7e
+      spriteID: 224421dc40016b84c91d229922008288
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Benes World-bluepurple_16
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 80
-        width: 16
-        height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 98cb10e334d1d2e45ac3a18c3de55b0d
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Benes World-bluepurple_17
+      name: WallRightTop
       rect:
         serializedVersion: 2
         x: 48
-        y: 80
+        y: 64
         width: 16
         height: 16
       alignment: 7
@@ -487,36 +491,16 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 17a4aefb2f42e6b4d8b3b8e6921c7951
+      spriteID: 9095ce140ce9ad44ebf20c7ff34de48b
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Benes World-bluepurple_18
+      name: toWallRightTop
       rect:
         serializedVersion: 2
         x: 64
-        y: 80
-        width: 16
-        height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bfa974122765df84cbf3681526a5c0d2
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Benes World-bluepurple_19
-      rect:
-        serializedVersion: 2
-        x: 16
         y: 64
         width: 16
         height: 16
@@ -527,17 +511,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 277295897f5b2914db4710016e01c976
+      spriteID: 5657b4a77f717ad44b72b4fb68a840ae
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Benes World-bluepurple_20
+      name: toWallLeftBot
       rect:
         serializedVersion: 2
-        x: 32
-        y: 64
+        x: 0
+        y: 48
         width: 16
         height: 16
       alignment: 7
@@ -547,33 +531,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 01f513b3ffa5b8f4aa9e6672a90c1d5b
+      spriteID: 0716d084095f1cc4b91b08f020849fec
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Benes World-bluepurple_21
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 64
-        width: 16
-        height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c0d894a8817decb4c8bd5032beb39b6a
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Benes World-bluepurple_22
+      name: WallLeftBot
       rect:
         serializedVersion: 2
         x: 16
@@ -587,33 +551,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 10ee131ce2ff1164e9f7eb567fb69963
+      spriteID: c27af93bd7bfa31449c67c94b8c9ad78
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Benes World-bluepurple_23
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 48
-        width: 16
-        height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c27486beb23931c4a89fbfdbc6c2063d
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Benes World-bluepurple_24
+      name: WallRightBot
       rect:
         serializedVersion: 2
         x: 48
@@ -627,13 +571,33 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b0c7d9badec48f6429e6ef784f3b2522
+      spriteID: 01b6d688e0d96024983730c135d3fe5a
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Benes World-bluepurple_25
+      name: toWallRightBot
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 48
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 375e9a99967b9834095bb2739abb0fa2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Benes_World_bluepurple1.1_23
       rect:
         serializedVersion: 2
         x: 16
@@ -647,13 +611,33 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 048084007f17e98468132b55f6cace58
+      spriteID: 70afff7513df8a442ac1ef892c27e4d5
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Benes World-bluepurple_26
+      name: Benes_World_bluepurple1.1_24
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b84cfc648ce25245a0e56cb4d879ffc
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Benes_World_bluepurple1.1_25
       rect:
         serializedVersion: 2
         x: 48
@@ -667,7 +651,107 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 03e726704bb58cd40a5fb275e80457d4
+      spriteID: e8cd57447dd300c41a211049901d8dea
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Benes_World_bluepurple1.1_26
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 16
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b35cdedd10e1a9a48861d00bf4b13192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Benes_World_bluepurple1.1_27
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 16
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0843c633d16fb05439f2eda0ce01fd92
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Benes_World_bluepurple1.1_28
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 16
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 854c37aa9378c0d49bc7d45d99ce1996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Benes_World_bluepurple1.1_29
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e302d5abb5ea3244bb862884a2eb126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Benes_World_bluepurple1.1_30
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35aed6ed99167504587011acca1afc5a
       vertices: []
       indices: 
       edges: []
@@ -675,7 +759,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 68c355530b6504d42a0b57eb176370c9
+    spriteID: 73af4aad49780fe4eaacc2fd2b38eb88
     vertices: []
     indices: 
     edges: []
