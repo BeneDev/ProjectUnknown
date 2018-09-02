@@ -88,11 +88,11 @@ public class BaseEnemy : MonoBehaviour {
     protected virtual void MoveAround()
     {
         speed = maxSpeed * patrolSpeedMultiplier;
-        if(transform.localScale.x < 0f && raycasts.right)
+        if(transform.localScale.x < 0f && raycasts.right || transform.localScale.x < 0f && !raycasts.downRight)
         {
             transform.localScale = new Vector3(1f, 1f, 1f);
         }
-        else if(transform.localScale.x > 0f && raycasts.left)
+        else if(transform.localScale.x > 0f && raycasts.left || transform.localScale.x > 0f && !raycasts.downLeft)
         {
             transform.localScale = new Vector3(-1f, 1f, 1f);
         }
@@ -101,7 +101,10 @@ public class BaseEnemy : MonoBehaviour {
     protected void UpdateRaycasts()
     {
         raycasts.left = Physics2D.Raycast((Vector2)coll.bounds.center + new Vector2(-coll.bounds.extents.x, -coll.bounds.extents.y * 0.5f), Vector2.left, 0.5f, collidingLayer);
-        raycasts.right = Physics2D.Raycast((Vector2)coll.bounds.center + new Vector2(coll.bounds.extents.x, -coll.bounds.extents.y * 0.5f), Vector2.right, 0.5f, collidingLayer);    }
+        raycasts.right = Physics2D.Raycast((Vector2)coll.bounds.center + new Vector2(coll.bounds.extents.x, -coll.bounds.extents.y * 0.5f), Vector2.right, 0.5f, collidingLayer);
+        raycasts.downLeft = Physics2D.Raycast((Vector2)coll.bounds.center + new Vector2(-coll.bounds.extents.x, -coll.bounds.extents.y), Vector2.down, 0.5f, collidingLayer);
+        raycasts.downRight = Physics2D.Raycast((Vector2)coll.bounds.center + new Vector2(coll.bounds.extents.x, -coll.bounds.extents.y), Vector2.down, 0.5f, collidingLayer);
+    }
 
     //private void OnDrawGizmos()
     //{
