@@ -361,28 +361,29 @@ public class PlayerController : MonoBehaviour {
 
     public void EndDodge()
     {
-        if(state == PlayerState.dodging)
-        {
-            StartCoroutine(SlowDodgeDown(dodgeCooldown));
-        }
+        StartCoroutine(SlowDodgeDown(dodgeCooldown));
     }
 
     IEnumerator SlowDodgeDown(float seconds)
     {
-        if(state == PlayerState.free) { yield break; }
+        if(state == PlayerState.free)
+        {
+            isInvincible = false;
+            yield break;
+        }
         float maxVelo = velocity.x;
         for(float t = 0; t < seconds; t += Time.fixedDeltaTime)
         {
             velocity.x = maxVelo * (1 - (t / seconds));
             yield return new WaitForEndOfFrame();
         }
-        isInvincible = false;
         for (float t = 0; t < seconds * 0.25f; t += Time.fixedDeltaTime)
         {
             velocity.x = input.Horizontal * (speed * 0.5f) * Time.fixedDeltaTime;
             yield return new WaitForEndOfFrame();
         }
         state = PlayerState.free;
+        isInvincible = false;
     }
 
     /// <summary>
