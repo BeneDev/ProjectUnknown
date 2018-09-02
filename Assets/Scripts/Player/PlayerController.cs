@@ -343,7 +343,14 @@ public class PlayerController : MonoBehaviour {
         // Checking for colliders to the sides
         if (isAgainstWall)
         {
-            velocity.x = 0f;
+            if(transform.localScale.x > 0f && input.Horizontal > 0f)
+            {
+                velocity.x = 0f;
+            }
+            else if(transform.localScale.x < 0f && input.Horizontal < 0f)
+            {
+                velocity.x = 0f;
+            }
         }
         
         // Make sure, the y velocity stays in the velocity limit
