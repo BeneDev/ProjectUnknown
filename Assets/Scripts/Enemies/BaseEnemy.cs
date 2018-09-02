@@ -35,6 +35,10 @@ public class BaseEnemy : MonoBehaviour {
     protected PlayerController player;
     protected Vector3 toPlayer;
 
+    protected float timeWhenLastSawPlayer;
+    [SerializeField] protected float timeToSearchForPlayer = 2f;
+    protected Vector3 lastPosPlayerSeen;
+
     [SerializeField] protected float sightReach = 15f;
 
     protected enum EnemyState

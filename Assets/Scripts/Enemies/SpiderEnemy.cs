@@ -35,12 +35,19 @@ public class SpiderEnemy : BaseEnemy {
             if(toPlayer.magnitude > sightReach)
             {
                 state = EnemyState.searchPlayer;
+                timeWhenLastSawPlayer = Time.realtimeSinceStartup;
+                lastPosPlayerSeen = player.transform.position;
             }
         }
         else if(state == EnemyState.searchPlayer)
         {
             //TODO make this state make the enemy look around to maybe search the player
-            state = EnemyState.patroling;
+            MoveTowards(lastPosPlayerSeen);
+            // if enemy is where player was last seen, make it look to the other direction, wait 1 sec, and turn again, wait 0.5 seconds and then go into patroling again
+            if(Time.realtimeSinceStartup >= timeWhenLastSawPlayer + timeToSearchForPlayer)
+            {
+                state = EnemyState.patroling;
+            }
         }
         transform.position += new Vector3(-transform.localScale.x * speed * Time.deltaTime, rb.velocity.y);
     }
