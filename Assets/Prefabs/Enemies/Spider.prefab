@@ -100,16 +100,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  speed: 6
+  maxSpeed: 7.5
+  patrolSpeedMultiplier: 0.75
   attack: 5
   knockBackStrength: 20
   knockBackDuration: 0.4
+  maxSpeedStamina: 6
+  exhaustionTime: 3
   flashDuration: 0.06
   flashUpColor: {r: 0.8301887, g: 0.8301887, b: 0.8301887, a: 1}
   collidingLayer:
     serializedVersion: 2
     m_Bits: 512
   coll: {fileID: 61934363386614934}
+  sightReach: 15
 --- !u!212 &212228895966469210
 SpriteRenderer:
   m_ObjectHideFlags: 1

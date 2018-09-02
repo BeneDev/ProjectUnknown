@@ -9,9 +9,14 @@ public class BaseEnemy : MonoBehaviour {
     protected int health;
     [SerializeField] protected float maxSpeed = 5f;
     protected float speed;
+    [Range(0, 1), SerializeField] protected float patrolSpeedMultiplier = 0.75f;
     [SerializeField] protected int attack = 3;
     [SerializeField] protected float knockBackStrength = 1f;
     [SerializeField] protected float knockBackDuration = 0.2f;
+
+    [SerializeField] protected float maxSpeedStamina = 5f;
+    [SerializeField] protected float exhaustionTime = 1.5f;
+    protected float exhaustionCounter = 0f;
 
     [SerializeField] float flashDuration = 0.1f;
     protected Shader shaderGUItext;
@@ -38,7 +43,8 @@ public class BaseEnemy : MonoBehaviour {
         foundPlayer,
         knockedBack,
         searchPlayer,
-        suspicious
+        suspicious,
+        exhausted
     }
     protected EnemyState state = EnemyState.patroling;
 
@@ -75,7 +81,7 @@ public class BaseEnemy : MonoBehaviour {
 
     protected virtual void MoveAround()
     {
-        speed = maxSpeed;
+        speed = maxSpeed * patrolSpeedMultiplier;
         if(transform.localScale.x < 0f && raycasts.right)
         {
             transform.localScale = new Vector3(1f, 1f, 1f);
@@ -113,6 +119,23 @@ public class BaseEnemy : MonoBehaviour {
         {
             speed = 0f;
         }
+    }
+
+    protected IEnumerator BeExhausted()
+    {
+        // TODO set animation to exhausted
+        for (float t = 0; t < exhaustionTime * 0.33333f; t += Time.deltaTime)
+        {
+            speed = maxSpeed * (1 - (t / (exhaustionTime * 0.33333f)));
+            yield return new WaitForEndOfFrame();
+        }
+        for (float t = 0; t < exhaustionTime * 0.66666f; t += Time.deltaTime)
+        {
+            speed = 0f;
+            yield return new WaitForEndOfFrame();
+        }
+        exhaustionCounter = 0f;
+        state = EnemyState.patroling;
     }
 
     public void TakeDamage(int damage, Vector2 knockback, float knockedBackDur, bool isCrit = false)
