@@ -71,7 +71,8 @@ public class PlayerController : MonoBehaviour {
     {
         free,
         blocked,
-        dodging
+        dodging,
+        dead
     }
     PlayerState state = PlayerState.free;
 
@@ -561,19 +562,22 @@ public class PlayerController : MonoBehaviour {
         if(!isInvincible)
         {
             health -= dmg;
-            // Flash up in white
-            rend.material.shader = shaderGUItext;
-            rend.color = Color.white;
-
-            velocity += knockback * Time.fixedDeltaTime;
-            FreezeFrames(freezeFrameDuration);
-            state = PlayerState.blocked;
-            anim.SetTrigger("KnockedBack");
-            StartCoroutine(SetBackToDefaultShader(flashDuration));
-            StartCoroutine(FreeAgainAfterSeconds(knockBackDuration));
             if (health <= 0)
             {
                 Die();
+            }
+            else
+            {
+                // Flash up in white
+                rend.material.shader = shaderGUItext;
+                rend.color = Color.white;
+
+                velocity += knockback * Time.fixedDeltaTime;
+                FreezeFrames(freezeFrameDuration);
+                state = PlayerState.blocked;
+                anim.SetTrigger("KnockedBack");
+                StartCoroutine(SetBackToDefaultShader(flashDuration));
+                StartCoroutine(FreeAgainAfterSeconds(knockBackDuration));
             }
         }
     }
@@ -622,11 +626,26 @@ public class PlayerController : MonoBehaviour {
 
     void Die()
     {
-        if(OnPlayerDied != null)
+        if(equippedGun)
+        {
+            equippedGun.Unequip();
+            equippedGun = null;
+        }
+        state = PlayerState.dead;
+        isInvincible = true;
+        health = maxHealth;
+        velocity = Vector3.zero;
+        anim.SetTrigger("Die");
+    }
+
+    public void Respawn()
+    {
+        if (OnPlayerDied != null)
         {
             OnPlayerDied();
-            health = maxHealth;
-            velocity = Vector3.zero;
+            isInvincible = false;
+            state = PlayerState.free;
+            anim.SetTrigger("WakeUp");
         }
     }
 

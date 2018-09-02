@@ -107,7 +107,6 @@ public class GameManager : Singleton<GameManager> {
     void RespawnPlayer()
     {
         player.gameObject.transform.position = respawnPosition;
-        // TODO play animation and/or particle system and shit
     }
 
     public void GetBulletImpact(Vector3 pos, Vector3 upDir, int damage, bool isHit)
