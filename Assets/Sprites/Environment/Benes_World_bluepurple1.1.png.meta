@@ -25,14 +25,14 @@ TextureImporter:
     21300040: WallLeftBot
     21300042: WallRightBot
     21300044: toWallRightBot
-    21300046: Benes_World_bluepurple1.1_23
-    21300048: Benes_World_bluepurple1.1_24
-    21300050: Benes_World_bluepurple1.1_25
-    21300052: Benes_World_bluepurple1.1_26
-    21300054: Benes_World_bluepurple1.1_27
-    21300056: Benes_World_bluepurple1.1_28
-    21300058: Benes_World_bluepurple1.1_29
-    21300060: Benes_World_bluepurple1.1_30
+    21300046: FadeTopLeft
+    21300048: FadeBot
+    21300050: FadeTopRight
+    21300052: FadeLeft
+    21300054: FadeCenter
+    21300056: FadeRight
+    21300058: FadeBotLeft
+    21300060: FadeBotRight
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -597,7 +597,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Benes_World_bluepurple1.1_23
+      name: FadeTopLeft
       rect:
         serializedVersion: 2
         x: 16
@@ -617,7 +617,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Benes_World_bluepurple1.1_24
+      name: FadeBot
       rect:
         serializedVersion: 2
         x: 32
@@ -637,7 +637,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Benes_World_bluepurple1.1_25
+      name: FadeTopRight
       rect:
         serializedVersion: 2
         x: 48
@@ -657,7 +657,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Benes_World_bluepurple1.1_26
+      name: FadeLeft
       rect:
         serializedVersion: 2
         x: 16
@@ -677,7 +677,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Benes_World_bluepurple1.1_27
+      name: FadeCenter
       rect:
         serializedVersion: 2
         x: 32
@@ -697,7 +697,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Benes_World_bluepurple1.1_28
+      name: FadeRight
       rect:
         serializedVersion: 2
         x: 48
@@ -717,7 +717,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Benes_World_bluepurple1.1_29
+      name: FadeBotLeft
       rect:
         serializedVersion: 2
         x: 16
@@ -737,7 +737,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Benes_World_bluepurple1.1_30
+      name: FadeBotRight
       rect:
         serializedVersion: 2
         x: 48
