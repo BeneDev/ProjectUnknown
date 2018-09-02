@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider2D))]
 public class BaseEnemy : MonoBehaviour {
 
     [SerializeField] protected int maxHealth = 5;
@@ -201,8 +200,13 @@ public class BaseEnemy : MonoBehaviour {
 
     protected virtual void Die()
     {
-        //player.GainExp(expToGive);
-        Destroy(gameObject);
+        // Set the enemy sprite to normal color again
+        rend.material.shader = shaderSpritesDefault;
+        rend.color = Color.white;
+        // TODO set trigger for dying animation
+        Destroy(rb);
+        Destroy(coll);
+        Destroy(this);
     }
 
     protected void OnTriggerStay2D(Collider2D collision)
