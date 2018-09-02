@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114326207730007776}
   - component: {fileID: 95622881288089452}
   - component: {fileID: 61347851065816610}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 4280955038784452}
   - component: {fileID: 198689627566858522}
   - component: {fileID: 199814271025742874}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Dust
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4043095858386720}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: GunAnchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4901299360366954}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: GunHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1030800020854368}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -16, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4901299360366954}
@@ -217,6 +217,7 @@ MonoBehaviour:
   collectItemRange: 1
   shakeDurWhenShotFired: 0.01
   freezeFrameDuration: 0.07
+  respawnInvincibilityDuration: 1
   flashDuration: 1
   flashUpColor: {r: 1, g: 1, b: 1, a: 0.19607843}
   gunLayer:

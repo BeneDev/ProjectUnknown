@@ -113,6 +113,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   coll: {fileID: 61934363386614934}
+  playerAndObjectsLayer:
+    serializedVersion: 2
+    m_Bits: 4608
+  timeToSearchForPlayer: 2
   sightReach: 15
 --- !u!212 &212228895966469210
 SpriteRenderer:

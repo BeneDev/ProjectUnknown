@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1898751727139692}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.01446, y: -2.96, z: -33.534626}
+  m_LocalPosition: {x: 9.01446, y: -1.96, z: -33.534626}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -100,16 +100,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
-  speed: 3
+  maxSpeed: 5
+  patrolSpeedMultiplier: 0.75
   attack: 2
   knockBackStrength: 20
   knockBackDuration: 0.1
+  maxSpeedStamina: 5
+  exhaustionTime: 1.5
   flashDuration: 0.1
   flashUpColor: {r: 1, g: 1, b: 1, a: 1}
   collidingLayer:
     serializedVersion: 2
     m_Bits: 512
   coll: {fileID: 61062349279292550}
+  playerAndObjectsLayer:
+    serializedVersion: 2
+    m_Bits: 4608
+  timeToSearchForPlayer: 2
+  sightReach: 15
 --- !u!212 &212720859202898834
 SpriteRenderer:
   m_ObjectHideFlags: 1

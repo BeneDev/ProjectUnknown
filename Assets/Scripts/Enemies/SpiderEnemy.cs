@@ -17,16 +17,20 @@ public class SpiderEnemy : BaseEnemy {
                 StartCoroutine(BeExhausted());
             }
         }
-        else
+        else if(exhaustionCounter > 0f)
         {
             exhaustionCounter -= Time.deltaTime / 2f;
         }
         if (state == EnemyState.patroling)
         {
             MoveAround();
-            if(toPlayer.magnitude < sightReach)
+            RaycastHit2D objectFound = Physics2D.Raycast(transform.position, transform.position + toPlayer, sightReach, playerAndObjectsLayer);
+            if(toPlayer.magnitude < sightReach && objectFound)
             {
-                state = EnemyState.foundPlayer;
+                if(objectFound.collider.gameObject.tag == "Player")
+                {
+                    state = EnemyState.foundPlayer;
+                }
             }
         }
         else if(state == EnemyState.foundPlayer)

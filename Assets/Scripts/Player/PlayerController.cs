@@ -628,6 +628,7 @@ public class PlayerController : MonoBehaviour {
 
     void Die()
     {
+        Time.timeScale = 0.5f;
         if(equippedGun)
         {
             equippedGun.Unequip();
@@ -642,6 +643,7 @@ public class PlayerController : MonoBehaviour {
 
     public void Respawn()
     {
+        Time.timeScale = 1f;
         if (OnPlayerDied != null)
         {
             OnPlayerDied();

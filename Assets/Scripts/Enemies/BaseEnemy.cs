@@ -35,6 +35,8 @@ public class BaseEnemy : MonoBehaviour {
     protected PlayerController player;
     protected Vector3 toPlayer;
 
+    [SerializeField] protected LayerMask playerAndObjectsLayer;
+
     protected float timeWhenLastSawPlayer;
     [SerializeField] protected float timeToSearchForPlayer = 2f;
     protected Vector3 lastPosPlayerSeen;
