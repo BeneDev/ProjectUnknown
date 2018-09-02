@@ -116,6 +116,8 @@ public class PlayerController : MonoBehaviour {
 
     [SerializeField] float freezeFrameDuration = 0.1f;
 
+    [SerializeField] float respawnInvincibilityDuration = 1f;
+
     LayerMask layersToCollideWith;
 
     bool letGoFired = false;
@@ -643,10 +645,16 @@ public class PlayerController : MonoBehaviour {
         if (OnPlayerDied != null)
         {
             OnPlayerDied();
-            isInvincible = false;
+            StartCoroutine(LooseInvincibilityAfterSeconds(respawnInvincibilityDuration));
             state = PlayerState.free;
             anim.SetTrigger("WakeUp");
         }
+    }
+
+    IEnumerator LooseInvincibilityAfterSeconds(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        isInvincible = false;
     }
 
     #endregion

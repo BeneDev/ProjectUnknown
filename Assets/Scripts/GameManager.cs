@@ -50,6 +50,7 @@ public class GameManager : Singleton<GameManager> {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         player.OnCheckpointSet += SetRespawnPosition;
         player.OnPlayerDied += RespawnPlayer;
+        respawnPosition = player.transform.position;
         for (int i = 0; i < bulletInstantiationCount; i++)
         {
             // Instantiate Rifle Bullet

@@ -7,7 +7,8 @@ public class BaseEnemy : MonoBehaviour {
 
     [SerializeField] protected int maxHealth = 5;
     protected int health;
-    [SerializeField] protected float speed = 5f;
+    [SerializeField] protected float maxSpeed = 5f;
+    protected float speed;
     [SerializeField] protected int attack = 3;
     [SerializeField] protected float knockBackStrength = 1f;
     [SerializeField] protected float knockBackDuration = 0.2f;
@@ -26,6 +27,11 @@ public class BaseEnemy : MonoBehaviour {
     [SerializeField] protected LayerMask collidingLayer;
     [SerializeField] protected BoxCollider2D coll;
 
+    protected PlayerController player;
+    protected Vector3 toPlayer;
+
+    [SerializeField] protected float sightReach = 15f;
+
     protected enum EnemyState
     {
         patroling,
@@ -40,6 +46,8 @@ public class BaseEnemy : MonoBehaviour {
     {
         public RaycastHit2D left;
         public RaycastHit2D right;
+        public RaycastHit2D downLeft;
+        public RaycastHit2D downRight;
     }
     protected EnemyRaycasts raycasts;
 
@@ -51,6 +59,8 @@ public class BaseEnemy : MonoBehaviour {
         normalShader = Shader.Find("Sprites/Default");
         shaderSpritesDefault = rend.material.shader;
         rb = GetComponent<Rigidbody2D>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        speed = maxSpeed;
     }
 
     protected virtual void Update()
@@ -60,10 +70,12 @@ public class BaseEnemy : MonoBehaviour {
         {
             MoveAround();
         }
+        transform.position += new Vector3(-transform.localScale.x * speed * Time.deltaTime, rb.velocity.y);
     }
 
     protected virtual void MoveAround()
     {
+        speed = maxSpeed;
         if(transform.localScale.x < 0f && raycasts.right)
         {
             transform.localScale = new Vector3(1f, 1f, 1f);
@@ -72,10 +84,9 @@ public class BaseEnemy : MonoBehaviour {
         {
             transform.localScale = new Vector3(-1f, 1f, 1f);
         }
-        transform.position += new Vector3(-transform.localScale.x * speed * Time.deltaTime, rb.velocity.y);
     }
 
-    void UpdateRaycasts()
+    protected void UpdateRaycasts()
     {
         raycasts.left = Physics2D.Raycast((Vector2)coll.bounds.center + new Vector2(-coll.bounds.extents.x, -coll.bounds.extents.y * 0.5f), Vector2.left, 0.5f, collidingLayer);
         raycasts.right = Physics2D.Raycast((Vector2)coll.bounds.center + new Vector2(coll.bounds.extents.x, -coll.bounds.extents.y * 0.5f), Vector2.right, 0.5f, collidingLayer);    }
@@ -88,7 +99,20 @@ public class BaseEnemy : MonoBehaviour {
 
     protected virtual void MoveTowards(Vector3 targetPos)
     {
-
+        Vector3 toTarget = targetPos - transform.position;
+        speed = maxSpeed;
+        if(toTarget.x > 1f && transform.localScale.x > 0f)
+        {
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+        }
+        else if(toTarget.x < -1f && transform.localScale.x < 0f)
+        {
+            transform.localScale = new Vector3(1f, 1f, 1f);
+        }
+        else if(toTarget.x > -1f && toTarget.x < 1f)
+        {
+            speed = 0f;
+        }
     }
 
     public void TakeDamage(int damage, Vector2 knockback, float knockedBackDur, bool isCrit = false)
@@ -103,7 +127,7 @@ public class BaseEnemy : MonoBehaviour {
         }
     }
 
-    IEnumerator GetKnockedBackForSeconds(float seconds, bool isCrit = false)
+    protected IEnumerator GetKnockedBackForSeconds(float seconds, bool isCrit = false)
     {
         state = EnemyState.knockedBack;
         if(!isCrit)
@@ -122,7 +146,7 @@ public class BaseEnemy : MonoBehaviour {
     /// </summary>
     /// <param name="sec"></param>
     /// <returns></returns>
-    IEnumerator SetBackToDefaultShader(float sec, bool isCrit)
+    protected IEnumerator SetBackToDefaultShader(float sec, bool isCrit)
     {
         if(!isCrit)
         {
@@ -149,7 +173,7 @@ public class BaseEnemy : MonoBehaviour {
         Destroy(gameObject);
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    protected void OnTriggerStay2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Player")
         {
