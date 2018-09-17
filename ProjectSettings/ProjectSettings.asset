@@ -619,7 +619,7 @@ PlayerSettings:
   apiCompatibilityLevel: 2
   cloudProjectId: cf1f0204-9c96-4821-b047-154628db742a
   projectName: ProjectTripleMachinegun
-  organizationId: simplehook
+  organizationId: simplehooks
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
